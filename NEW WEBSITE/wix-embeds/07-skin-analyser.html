@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --teal:       #0D3B4F;
+    --teal-mid:   #1A5068;
+    --gold:       #C9A96E;
+    --warm-white: #FDFAF6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--teal); }
+
+  .analyser {
+    background: var(--teal);
+    height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .analyser-content {
+    max-width: 860px;
+    padding: 3.5rem 2.5rem;
+    display: flex; flex-direction: column; align-items: flex-start;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold);
+    display: flex; align-items: center; gap: 0.7rem;
+    margin-bottom: 0.9rem;
+  }
+  .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.2vw, 3.4rem);
+    font-weight: 300; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--warm-white);
+  }
+  .section-title em { font-style: italic; font-weight: 400; }
+
+  .analyser-points {
+    list-style: none; margin: 1.75rem 0 2.5rem;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .analyser-points li {
+    display: flex; align-items: flex-start; gap: 0.85rem;
+    font-size: 0.9rem; line-height: 1.7; font-weight: 300;
+    color: rgba(248,244,238,0.75);
+  }
+  .analyser-points li::before {
+    content: ''; display: block; flex-shrink: 0;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); margin-top: 0.55rem;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    font-size: 0.76rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--warm-white); background: rgba(255,255,255,0.12);
+    padding: 0.95rem 2.1rem; border-radius: 2px;
+    text-decoration: none; border: 1px solid rgba(255,255,255,0.25);
+    transition: background 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .btn-primary:hover {
+    background: rgba(255,255,255,0.2); transform: translateY(-2px);
+  }
+
+  @media (max-width: 700px) {
+    .analyser-content { padding: 2.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+  <section class="analyser">
+    <div class="analyser-content">
+      <p class="eyebrow">Advanced Diagnostics</p>
+      <h2 class="section-title">Know Your <em>Skin</em></h2>
+      <ul class="analyser-points">
+        <li>With four specialised spectral imaging technologies, we perform an unprecedented deep dive into your skin's health and condition.</li>
+        <li>Tailor your skincare and treatments to your individual needs with data-driven precision.</li>
+        <li>A 3D skin analysis gives both you and Dr Smith a complete picture before any treatment begins.</li>
+      </ul>
+      <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" onclick="window.top.open(this.href,'_blank');return false;" class="btn-primary">
+        Book a Consultation
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+</body>
+</html>

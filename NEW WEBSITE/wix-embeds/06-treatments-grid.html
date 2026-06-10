@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --teal:       #0D3B4F;
+    --teal-mid:   #1A5068;
+    --teal-light: #2A7090;
+    --gold:       #C9A96E;
+    --cream:      #F5F1EB;
+    --warm-white: #FDFAF6;
+    --muted:      #6B7280;
+    --charcoal:   #2D3748;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); }
+
+  /* ── GRID VIEW ── */
+  .treatments {
+    padding: 7rem 5.5rem;
+    background: var(--cream);
+    position: relative;
+  }
+  .treatments::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.4), transparent);
+  }
+
+  .treatments-header {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: end; margin-bottom: 3.5rem;
+  }
+  .treatments-subhead {
+    font-size: 0.95rem; line-height: 1.75;
+    color: var(--muted); font-weight: 300;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold);
+    display: flex; align-items: center; gap: 0.7rem;
+    margin-bottom: 0.9rem;
+  }
+  .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.2vw, 3.4rem);
+    font-weight: 300; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--teal);
+  }
+  .section-title em { font-style: italic; font-weight: 400; }
+
+  .treatments-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(13,59,79,0.07);
+    border: 1.5px solid rgba(13,59,79,0.07);
+    border-radius: 4px; overflow: hidden;
+  }
+  .tx-card {
+    background: var(--warm-white);
+    padding: 2.25rem 1.75rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .tx-card:hover { background: var(--teal); }
+  .tx-card:hover .tx-icon { color: var(--gold); }
+  .tx-card:hover .tx-name { color: var(--warm-white); }
+  .tx-card:hover .tx-desc { color: rgba(248,244,238,0.65); }
+  .tx-card:hover .tx-link { color: var(--gold); }
+  .tx-card:hover .tx-arr { transform: translateX(4px); }
+
+  .tx-icon {
+    font-size: 1.3rem; color: var(--gold);
+    margin-bottom: 1.1rem;
+    transition: color 0.3s ease;
+  }
+  .tx-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 500;
+    color: var(--teal); margin-bottom: 0.6rem;
+    line-height: 1.2; transition: color 0.3s ease;
+  }
+  .tx-desc {
+    font-size: 0.85rem; line-height: 1.72; font-weight: 300;
+    color: #6B7280; margin-bottom: 1.4rem;
+    transition: color 0.3s ease;
+  }
+  .tx-link {
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal-light); text-decoration: none;
+    display: flex; align-items: center; gap: 0.4rem; font-weight: 500;
+    transition: color 0.3s ease;
+    background: none; border: none; cursor: pointer; font-family: inherit; padding: 0;
+  }
+  .tx-arr { transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1); display: inline-block; }
+
+  /* ── DETAIL VIEW ── */
+  .detail-view {
+    display: none;
+    background: var(--cream);
+    padding: 7rem 5.5rem;
+    position: relative;
+  }
+  .detail-view::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.4), transparent);
+  }
+  .detail-view.active { display: block; }
+
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--teal-light);
+    background: none; border: none; cursor: pointer;
+    font-family: inherit; padding: 0;
+    margin-bottom: 2.5rem;
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+  .back-btn:hover { color: var(--teal); gap: 0.8rem; }
+
+  .detail-hero {
+    background: var(--teal);
+    border-radius: 6px 6px 0 0;
+    padding: 3rem 2.5rem 2.5rem;
+    margin-bottom: 0;
+  }
+  .detail-eyebrow {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 0.5rem;
+  }
+  .detail-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 300; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--warm-white);
+  }
+  .detail-title em { font-style: italic; font-weight: 400; }
+
+  .detail-images-wrap { display: none; padding: 0 2.5rem; background: var(--warm-white); margin-top: 1.75rem; }
+  .detail-images-wrap.has-images { display: block; }
+  .detail-images-grid {
+    display: grid; gap: 0.75rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .detail-images-grid.single { grid-template-columns: 1fr; }
+  .detail-images-grid.three { grid-template-columns: repeat(3, 1fr); }
+  .detail-images-grid img {
+    width: 100%; aspect-ratio: 4/3;
+    object-fit: cover; border-radius: 3px; display: block;
+  }
+  .detail-images-caption {
+    font-size: 0.75rem; color: var(--muted); font-style: italic;
+    margin-top: 0.6rem; line-height: 1.6; padding-bottom: 1rem;
+  }
+
+  .detail-content {
+    background: var(--warm-white);
+    border-radius: 0 0 6px 6px;
+    padding: 2.5rem;
+  }
+
+  .detail-section { margin-bottom: 2rem; }
+  .detail-section:last-of-type { margin-bottom: 0; }
+
+  .detail-section-title {
+    font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .detail-section-title::after { content: ''; flex: 1; height: 1px; background: rgba(201,169,110,0.25); }
+
+  .detail-section-body {
+    font-size: 0.88rem; line-height: 1.8; color: var(--charcoal); font-weight: 300;
+  }
+  .detail-section-body p { margin-bottom: 0.6rem; }
+  .detail-section-body p:last-child { margin-bottom: 0; }
+  .detail-section-body ul { padding-left: 1.2rem; margin: 0.4rem 0; }
+  .detail-section-body li { margin-bottom: 0.35rem; }
+  .detail-section-body strong { font-weight: 500; color: var(--teal); }
+
+  .detail-divider { height: 1px; background: rgba(13,59,79,0.08); margin: 1.75rem 0; }
+
+  .detail-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    margin-top: 2.5rem;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--warm-white); background: var(--teal);
+    padding: 0.85rem 1.8rem; border-radius: 2px;
+    text-decoration: none; border: 1px solid var(--teal);
+    transition: background 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    font-family: 'DM Sans', sans-serif; cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--teal-mid); border-color: var(--teal-mid); transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal); background: transparent;
+    padding: 0.85rem 1.8rem; border-radius: 2px;
+    text-decoration: none; border: 1px solid rgba(13,59,79,0.25);
+    transition: border-color 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    font-family: 'DM Sans', sans-serif; cursor: pointer;
+  }
+  .btn-outline:hover { border-color: var(--teal); transform: translateY(-2px); }
+
+  @media (max-width: 1100px) {
+    .treatments { padding: 5rem 3rem; }
+    .detail-view { padding: 5rem 3rem; }
+  }
+  @media (max-width: 900px) {
+    .treatments { padding: 4rem 1.5rem; }
+    .treatments-header { grid-template-columns: 1fr; gap: 1rem; }
+    .treatments-grid { grid-template-columns: repeat(2, 1fr); }
+    .detail-view { padding: 3rem 1.5rem; }
+    .detail-hero { padding: 2rem 1.5rem; }
+    .detail-content { padding: 1.75rem 1.5rem; }
+    .detail-images-wrap { padding: 0 1.5rem; }
+    .detail-title { font-size: 1.9rem; }
+    .detail-actions { flex-direction: column; }
+    .detail-actions a { text-align: center; justify-content: center; }
+  }
+  @media (max-width: 560px) {
+    .treatments-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- GRID VIEW -->
+  <section class="treatments" id="grid-view">
+    <div class="treatments-header">
+      <div>
+        <p class="eyebrow">What We Offer</p>
+        <h2 class="section-title">Our <em>Treatments</em></h2>
+      </div>
+      <p class="treatments-subhead">
+        Our range of aesthetic treatments includes anti-wrinkle injections, fillers, skin boosters, polynucleotides, and PRP. Each treatment is carefully designed to enhance your natural beauty and boost your confidence.
+      </p>
+    </div>
+    <div class="treatments-grid">
+      <div class="tx-card" onclick="window.top.location.href='https://www.lsmithaesthetics.com/antiwrinkle'">
+        <div class="tx-icon">✦</div>
+        <h3 class="tx-name">Anti-Wrinkle</h3>
+        <p class="tx-desc">Anti-wrinkle injections are a popular treatment to reduce the appearance of fine lines and wrinkles, giving you a smoother and more youthful complexion.</p>
+        <button class="tx-link">Know More <span class="tx-arr">→</span></button>
+      </div>
+      <div class="tx-card" onclick="window.top.location.href='https://www.lsmithaesthetics.com/filler'">
+        <div class="tx-icon">◈</div>
+        <h3 class="tx-name">Fillers</h3>
+        <p class="tx-desc">Fillers are used to add volume to areas of the face that have lost elasticity, providing a plump and rejuvenated look for a more youthful appearance.</p>
+        <button class="tx-link">Know More <span class="tx-arr">→</span></button>
+      </div>
+      <div class="tx-card" onclick="window.top.location.href='https://www.lsmithaesthetics.com/skinbooster'">
+        <div class="tx-icon">◇</div>
+        <h3 class="tx-name">Skin Boosters</h3>
+        <p class="tx-desc">Skin boosters are designed to hydrate and nourish the skin from within, improving skin texture and elasticity for a radiant and glowing complexion.</p>
+        <button class="tx-link">Know More <span class="tx-arr">→</span></button>
+      </div>
+      <div class="tx-card" onclick="window.top.location.href='https://www.lsmithaesthetics.com/polynucleotides'">
+        <div class="tx-icon">◉</div>
+        <h3 class="tx-name">Polynucleotides</h3>
+        <p class="tx-desc">Poly-nucleotides are fragments of highly purified DNA that instruct your own skin cells to produce more collagen and elastin. Great results that improve over weeks.</p>
+        <button class="tx-link">Know More <span class="tx-arr">→</span></button>
+      </div>
+      <div class="tx-card" onclick="window.top.location.href='https://www.lsmithaesthetics.com/prf'">
+        <div class="tx-icon">❋</div>
+        <h3 class="tx-name">PRP &amp; PRF</h3>
+        <p class="tx-desc">Blood is taken from your arm and centrifuged down. The plasma is rich in growth factors to stimulate collagen and elastin in skin, and increase hair growth where lost.</p>
+        <button class="tx-link">Know More <span class="tx-arr">→</span></button>
+      </div>
+      <div class="tx-card" onclick="window.top.location.href='https://www.lsmithaesthetics.com/microneedling'">
+        <div class="tx-icon">⬡</div>
+        <h3 class="tx-name">Microneedling</h3>
+        <p class="tx-desc">Medical-grade microneedling using the Dermapen 4, one of the most advanced devices on the market. Can be combined with PRF, exosomes or polynucleotides for enhanced results.</p>
+        <button class="tx-link">Know More <span class="tx-arr">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL VIEW -->
+  <div class="detail-view" id="detail-view">
+    <button class="back-btn" onclick="closeDetail()">← Back to Treatments</button>
+    <div class="detail-hero">
+      <p class="detail-eyebrow" id="detail-eyebrow"></p>
+      <h2 class="detail-title" id="detail-title"></h2>
+    </div>
+    <div class="detail-images-wrap" id="detail-images-wrap">
+      <div class="detail-images-grid" id="detail-images-grid"></div>
+      <p class="detail-images-caption" id="detail-images-caption"></p>
+    </div>
+    <div class="detail-content">
+      <div id="detail-body"></div>
+      <div class="detail-actions">
+        <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" onclick="window.top.open(this.href,'_blank');return false;" class="btn-primary">Book Now →</a>
+        <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" onclick="window.top.open(this.href,'_blank');return false;" class="btn-outline">View Prices</a>
+      </div>
+      <button class="back-btn" onclick="closeDetail()" style="margin-top:2rem;">← Back to Treatments</button>
+    </div>
+  </div>
+
+<script>
+const TREATMENTS = {
+  antiwrinkle: {
+    eyebrow: 'Anti-Wrinkle Injections',
+    title: 'Anti-Wrinkle <em>Injections</em>',
+    images: ['https://static.wixstatic.com/media/0b63bc_0a789e786f98430e9e5fb70cb48076c0~mv2.png', 'https://static.wixstatic.com/media/0b63bc_5a43fb4ff1e141aa86937173d2da4535~mv2.jpg'],
+    imagesFit: ['cover', 'contain'],
+    imagesAlt: ['Anti-wrinkle injection treatment results by Dr Smith Aesthetics, Kennington South London', 'Botulinum toxin anti-wrinkle treatment before and after by Dr Smith Aesthetics London'],
+    imagesTitle: ['Anti-Wrinkle Injections – Dr Smith Aesthetics London', 'Anti-Wrinkle Before and After – Dr Smith Aesthetics'],
+    caption: '',
+    sections: [
+      { title: 'What is it?', body: `<ul><li>Anti-wrinkle injections target specific muscles to cause relaxation and hence prevent formation of static wrinkles.</li><li>It is a neurotoxin which acts on our nervous system to cause muscle paralysis.</li></ul>` },
+      { title: 'What does it do aesthetically?', body: `<ul><li>Can be used for a variety of reasons.</li><li>As a prescription medication, consultation with a prescriber face to face should be had first for assessment.</li><li>It can help to minimise fine lines by inhibiting muscle movement. This prevents dynamic lines becoming static lines. It can also help to soften static lines (wrinkles).</li><li>Common areas to target are forehead lines, frown lines and crow's feet. However there are many other muscles that can be targeted for a desired effect.</li><li>It is important to see a practitioner with a good knowledge of anatomy to avoid targeting the wrong muscle and hence an undesirable outcome.</li></ul>` },
+      { title: 'What brand do we use at Dr Smith Aesthetics?', body: `<ul><li>We use Allergan or Teoxane.</li><li>High quality, premium, well researched products, with reliable results.</li></ul>` },
+      { title: 'How is it administered?', body: `<ul><li>A consultation with assessment by Dr Smith and discussion about your areas of concern.</li><li>The product is administered with a small needle.</li><li>It is a quick treatment with minimal discomfort.</li></ul>` },
+      { title: 'What is the downtime / recovery?', body: `<ul><li>Minor red marks post treatment with skin blebs resolving within 1 hour.</li><li>Aftercare information is provided, but overall has minimal disruption to daily life.</li></ul>` },
+      { title: 'Results', body: `<ul><li>Full results seen at 14 days, with an optional review at this stage if needed.</li><li>Results last around 3–4 months (varies person to person).</li><li>Find out more with a consultation / contact us!</li></ul>` }
+    ]
+  },
+  fillers: {
+    eyebrow: 'Dermal Filler / Lip Filler',
+    title: 'Dermal Filler <em>/ Lip Filler</em>',
+    images: ['https://static.wixstatic.com/media/0b63bc_dcecef0fbfef4a7da7fd8e890c34bec6~mv2.png', 'https://static.wixstatic.com/media/0b63bc_d37978bb844a461bb54c21c8925a1346~mv2.png', 'https://static.wixstatic.com/media/0b63bc_d78cc967ad624392b9382d91f3fff4f1~mv2.png', 'https://static.wixstatic.com/media/0b63bc_b223a519cd09472083babdf0f4f9130c~mv2.png'],
+    imagesFit: 'contain',
+    imagesAlt: ['Jaw filler treatment results by Dr Smith Aesthetics, South London', 'Lip filler treatment results by Dr Smith Aesthetics, Kennington London', 'Chin filler dermal filler treatment results by Dr Smith Aesthetics London', 'Dermal filler natural results by Dr Smith Aesthetics London'],
+    imagesTitle: ['Jaw Filler Results – Dr Smith Aesthetics London', 'Lip Filler Results – Dr Smith Aesthetics London', 'Chin Filler Results – Dr Smith Aesthetics London', 'Dermal Filler Results – Dr Smith Aesthetics London'],
+    caption: 'Images: Filler used to enhance areas of concern, with natural looking results. 1: Jaw filler, 2: Lip filler, 3: Chin filler.',
+    sections: [
+      { title: 'What are they?', body: `<ul><li>Dermal fillers and lip fillers are made of cross-linked hyaluronic acid (HA).</li><li>Hyaluronic acid is naturally made in our body and holds on to water to keep our skin hydrated and plump.</li><li>Filler HA is cross-linked so it stays around in the body for longer (from 6 months to 2 years).</li><li>There are many different types of brand on the market, all varying in quality and consistency, hence it is important to go to an experienced practitioner for the right product.</li><li><strong>Note:</strong> Other types of dermal filler do exist, but the vast majority of "filler" is referring to HA filler. Always inform your practitioner if you have had filler previously.</li></ul>` },
+      { title: 'What do they do?', body: `<ul><li>Fillers are used to fill in areas that have lost volume over time and give a better shape to affected areas. Can be used to lift tissues, fill areas or mask lines.</li><li>Give a more plump and youthful appearance.</li><li>As we age, we lose muscle mass, fat pad density, skin becomes more lax and loose. As a result we get noticeable hollowed areas or tissues travel southward!</li><li>Fillers can be administered in most areas of the face and lips, but care is needed in specific areas.</li></ul>` },
+      { title: 'What fillers are available at Dr Smith Aesthetics?', body: `<ul><li>We use the Juvederm range.</li><li>High quality, high end product with great results.</li></ul>` },
+      { title: 'How is it administered?', body: `<ul><li>A consultation including assessment by Dr Smith and discussion about your concerns.</li><li>We then decide what is best for you and work together for an outcome that will leave you happy and confident.</li><li>Remember this is a journey, where natural looking results are best.</li></ul>` },
+      { title: 'What is the downtime / recovery?', body: `<ul><li>Some swelling over the next few days, depending on the treated area.</li><li>Depending on the area and technique, may be some redness, swelling and bruising for a few days.</li><li>Guaranteed direct contact to discuss any concerns post treatment.</li><li>Full discussion of benefits and risks are discussed on consultation.</li></ul>` },
+      { title: 'Results', body: `<ul><li>Filler results are instant, great for an instant confidence boost and correcting any concerns clients have.</li><li>After administration, assessment and further filler or enhancements can be made there and then.</li><li>Filler can be dissolved if required, but remember it is easier to add more than take away. Natural looking is best!</li><li>Compliments other treatments. Remember to also look after the skin on the outside!</li></ul>` }
+    ]
+  },
+  skinboosters: {
+    eyebrow: 'Skin Boosters',
+    title: '<em>Skin</em> Boosters',
+    images: ['https://static.wixstatic.com/media/0b63bc_8a44b8bdad9a4af1b93d550ed53d8dc9~mv2.png', 'https://static.wixstatic.com/media/0b63bc_0e47588560834e81b336f4c4a68327b9~mv2.jpg', 'https://static.wixstatic.com/media/0b63bc_37a02a9f13914684ba6c5505f88c9c68~mv2.png'],
+    imagesAlt: ['Profhilo skin booster treatment results by Dr Smith Aesthetics, South London', 'Skinvive injectable skin booster hydration treatment by Dr Smith Aesthetics Kennington', 'Skin booster glow and hydration results by Dr Smith Aesthetics London'],
+    imagesTitle: ['Profhilo Skin Booster – Dr Smith Aesthetics London', 'Skinvive Skin Booster – Dr Smith Aesthetics Kennington', 'Skin Booster Glow Results – Dr Smith Aesthetics London'],
+    caption: '',
+    sections: [
+      { title: 'What are they?', body: `<ul><li>Skin boosters are injectable treatments designed at improving skin hydration, health and overall appearance.</li><li>There are many different types on the market.</li></ul>` },
+      { title: 'What do they do?', body: `<ul><li>Contain hyaluronic acid (found naturally in our skin).</li><li>Less viscous than fillers due to their bonding structure.</li><li>Described as an injectable moisturiser, hyaluronic acid draws in water to help hydrate the skin to give a healthy glow.</li></ul>` },
+      { title: 'Where can they be used?', body: `<p>Usually on the face or neck.</p>` },
+      { title: 'What concerns do they target?', body: `<ul><li>Improve fine lines and wrinkles.</li><li>Improve overall skin health and glow.</li><li>Improve dehydrated looking skin to looking more hydrated and healthy.</li></ul>` },
+      { title: 'Which Skin Boosters?', body: `<p>At Dr Smith Aesthetics we use 2 skin boosters:</p><ul><li><strong>Profhilo</strong> — very popular currently as it contains the highest concentration of hyaluronic acid on the market. It can only be used on the lower 2/3rd of the face or neck.</li><li><strong>Skinvive (Juvederm)</strong> — Hyaluronic acid. It can be used anywhere including on the face, neck, hands and scar tissue.</li></ul><p style="margin-top:0.5rem">Depending on patient demographics, areas of concern and treatment plan, we can help choose the right one for you.</p>` },
+      { title: 'How is it given?', body: `<ul><li><strong>Skinvive</strong> — Multiple, small, superficial injections in the target area with a small needle (mesotherapy), resulting in small "blebs" under the skin. Numbing cream used prior.</li><li><strong>Profhilo</strong> — delivered with 5 specific injection points on each side of the face to maximise effect (no numbing cream required for this).</li></ul>` },
+      { title: 'What is the downtime / recovery?', body: `<ul><li>Mesotherapy/small bleb technique — small blebs can last a number of hours to a few days.</li><li>Possibility of having minor swelling and bruising for a few days.</li><li>Discuss which option is best with the practitioner if having a big event a few days post treatment.</li><li>Can have alongside other treatments such as anti-wrinkle injections, dermal fillers, PRP and polynucleotides.</li></ul>` },
+      { title: 'Treatment course', body: `<ul><li>Profhilo — 2x sessions, 3–4 weeks apart.</li><li>Skinvive — 1x session.</li><li>Can have 6 monthly maintenance treatments.</li></ul>` },
+      { title: 'Results', body: `<ul><li>Full results noticeable after a few weeks post treatment.</li><li>Results should last up to 9 months.</li><li>Great to combine with other treatments such as polynucleotides.</li></ul>` }
+    ]
+  },
+  polynucleotides: {
+    eyebrow: 'Polynucleotides',
+    title: '<em>Poly</em>nucleotides',
+    images: ['https://static.wixstatic.com/media/0b63bc_3233b0ad12c54b8f913e08e8c2c5deca~mv2.png'],
+    imagesAlt: ['Polynucleotides PDRN treatment before and after results by Dr Smith Aesthetics, Kennington London'],
+    imagesTitle: ['Polynucleotides Before and After – Dr Smith Aesthetics London'],
+    caption: 'Results after only 2 polynucleotides sessions',
+    sections: [
+      { title: 'What are they?', body: `<ul><li>"Poly" = long chains. "Nucleotides" = building blocks of DNA.</li><li>Highly purified DNA derived from salmon/trout. High purification makes them very safe to use.</li><li>At Dr Smith Aesthetics we use Plinest polynucleotides by Mastelli, used for many years in regenerative medicine with lots of scientific research behind it.</li></ul>` },
+      { title: 'What do they do?', body: `<ul><li>Target your own skin cells called fibroblasts to promote skin rejuvenation from within.</li><li>Fibroblasts are responsible for producing collagen and elastin, essential for skin structure, framework, wound healing and overall skin health. The more we age, the less efficient our fibroblast cells are, leading to the less desired effects of ageing.</li><li>Help regulate skin cells called melanocytes to help control pigmentation and help with uneven skin tone, dark circles or pigmentation under eyes.</li><li>Overall skin health and healing. Good for scars and inflammatory skin conditions such as rosacea or eczema. Give a healthy, glowing appearance.</li></ul>` },
+      { title: 'Where can they be used?', body: `<p>Pretty much anywhere!</p>` },
+      { title: 'What concerns do they target?', body: `<ul><li>Fine lines and wrinkles, increasing skin structural support with your own collagen, elastin and hyaluronic acid production.</li><li>Improve overall skin health and glow.</li><li>Under eye lines or puffiness, helping to tighten the under eye area.</li><li>Dark eye circles. Dark circles can be due to multiple factors, such as hollowing, thin skin, pigmentation. Polynucleotides can improve all of these.</li><li>Hair loss. Improves the skin environment to help stimulate hair growth as well as thicken current hair, great in combination with other treatments such as PRP.</li></ul>` },
+      { title: 'How is it given?', body: `<ul><li>Numbing cream is used to cover the target area to help numb the skin.</li><li>Multiple, small, superficial injections in the target area with a small needle (mesotherapy), resulting in small "blebs" under the skin.</li><li>Can also be given via a dermal cannula under the skin, less precise but covers a wide area with only a few injection sites.</li></ul>` },
+      { title: 'What is the downtime / recovery?', body: `<ul><li>Mesotherapy/small bleb technique — small blebs can last a number of hours.</li><li>Cannula technique is better if you have important events the next few days.</li><li>Possibility of having minor swelling and bruising for a few days.</li><li>Highly purified so very safe.</li><li>Can have alongside other treatments such as anti-wrinkle injections, dermal fillers, PRP and skin boosters.</li></ul>` },
+      { title: 'Treatment course', body: `<ul><li>Recommended treatment course: 3x treatments of the target area 2–4 weeks apart, followed by a 1x maintenance every 6–12 months.</li><li>Note: scalp polynucleotide recommended course — 4x treatments, spaced 1–2 weeks apart, followed by 4x treatments every 3 weeks apart.</li></ul>` },
+      { title: 'Results', body: `<ul><li>As they work at a cellular level, results are gradual rather than a quick fix. Can see results after 1st or 2nd treatment.</li><li>Great for patients who want a more natural approach rather than anti-wrinkle injections or fillers.</li><li>Work great with other treatments or alone.</li></ul>` }
+    ]
+  },
+  prprf: {
+    eyebrow: 'PRP and PRF',
+    title: 'PRP <em>and</em> PRF',
+    images: ['https://static.wixstatic.com/media/0b63bc_dc879e65556d43d0b150635001f445aa~mv2.jpg', 'https://static.wixstatic.com/media/0b63bc_7bdc211a2ba647718c32d9ebed775630~mv2.jpg', 'https://static.wixstatic.com/media/0b63bc_5d5d9c64e1c24758a752a68232c5a72e~mv2.jpg'],
+    imagesAlt: ['PRP platelet rich plasma treatment preparation by Dr Smith Aesthetics South London', 'PRF vampire facial platelet rich fibrin skin rejuvenation treatment by Dr Smith Aesthetics London', 'PRP PRF hair restoration and skin renewal treatment results by Dr Smith Aesthetics Kennington'],
+    imagesTitle: ['PRP Treatment – Dr Smith Aesthetics South London', 'PRF Vampire Facial – Dr Smith Aesthetics London', 'PRP Hair Restoration Results – Dr Smith Aesthetics Kennington'],
+    caption: '',
+    sections: [
+      { title: 'What is PRP?', body: `<ul><li>PRP stands for platelet rich plasma.</li><li>Blood is taken from the client and then spun down in a centrifuge to separate into different parts. The plasma is the straw coloured liquid which contains platelets.</li><li>These platelets have many growth factors with a multitude of benefits.</li><li>We aim to get a much greater concentration of platelets to maximise these benefits.</li><li>In the human body, when we sustain an injury, platelets are activated and release these growth factors which stimulate the inflammatory process and hence wound healing.</li><li>They promote collagen production, improve texture and promote healing.</li></ul>` },
+      { title: 'Why do we use it in aesthetics?', body: `<ul><li>PRP growth factors promote wound healing, new blood vessels, collagen and elastin production, increase fibroblast activity, hair growth and thickness as well as other benefits to promote great skin health and texture.</li><li>Overall, we get younger looking, healthier skin.</li><li>Great results to stimulate dormant hair cells and create an environment for new and thicker hair.</li></ul>` },
+      { title: 'How is it administered?', body: `<p>Firstly your blood is taken on the same day and then spun down in the centrifuge (takes around 10–15 minutes). It is important not to have a high fat containing meal 4 hours prior to your treatment.</p><p style="margin-top:0.5rem">There are a number of ways to administer PRP:</p><ul><li><strong>Microneedling</strong> — Your PRP is applied directly to your skin and then micro-needling is used to make many very small punctures in the skin to help the PRP penetrate all the skin layers.</li><li><strong>Mesotherapy</strong> — Your PRP is drawn up in a syringe and using a very small needle, it is injected very superficially. This can be done for the whole face, neck, on scars and in areas of hair loss/scalp.</li></ul>` },
+      { title: 'What is PRF?', body: `<ul><li>PRF (Platelet Rich Fibrin) is a newer, more advanced version of PRP.</li><li>PRP requires an anticoagulant to be mixed with your blood to prevent it clotting, which can inhibit the release of some growth factors.</li><li>With PRF, we do not use additives or anticoagulants, only your blood. The blood is spun slower and for longer to preserve platelets.</li><li>This ensures a high platelet count and a fibrin matrix to form, allowing for a slower, longer release of growth factors and hence better, longer lasting results.</li></ul>` },
+      { title: 'Why choose Dr Smith Aesthetics for PRF?', body: `<ul><li>PRP and PRF can be confusing to practitioners, let alone the general public.</li><li>There is not much standardisation with regards to centrifugation. What speed and how long are extremely important variables that can result in poor platelet counts and hence results.</li><li>As there are many variables that will affect the platelet concentration, we go by the latest research in order to produce the highest platelet concentration in our PRF.</li><li>Your practitioner should know these variables: what material the blood tubes are made from and why, what rotor type is used and why, what relative centrifugal force they are aiming for and why.</li></ul>` },
+      { title: 'What is the downtime / recovery?', body: `<ul><li>Minor red marks and mild swelling post treatment which can last around 1–24 hours.</li><li>Possibility of minor bruising which can last a few days to a week.</li></ul>` },
+      { title: 'Results', body: `<ul><li>It takes time for skin to produce collagen and for hair follicles to start growing again, so results are a gradual improvement rather than a quick fix. This is an investment in your long term goals that your older self will thank you for!</li><li>It is recommended to have minimum 3 treatments (hair 4–6) and then to have ongoing maintenance treatments to maintain results.</li><li>PRP results generally last around 3–6 months, with PRF results lasting longer.</li></ul>` }
+    ]
+  },
+  microneedling: {
+    eyebrow: 'Microneedling',
+    title: '<em>Micro</em>needling',
+    images: ['https://static.wixstatic.com/media/0b63bc_af9a7415edde49a4ab3eaf300b45e0c5~mv2.webp', 'https://static.wixstatic.com/media/0b63bc_8e993459d850461bb779fd64e79385c9~mv2.png'],
+    imagesFit: ['contain', 'cover'],
+    imagesAlt: ['Dermapen 4 microneedling device used at Dr Smith Aesthetics, Kennington South London', 'Microneedling collagen induction therapy treatment results by Dr Smith Aesthetics London'],
+    imagesTitle: ['Dermapen 4 Microneedling – Dr Smith Aesthetics London', 'Microneedling Results – Dr Smith Aesthetics London'],
+    caption: '',
+    sections: [
+      { title: 'What is microneedling?', body: `<ul><li>Microneedling creates thousands of tiny micro-channels in the skin using ultra-fine needles, triggering the skin's natural healing response.</li><li>This stimulates the production of new collagen and elastin, improving skin texture, tone, fine lines, scarring and overall skin quality.</li><li>At Dr Smith Aesthetics we use the <strong>Dermapen 4</strong>, one of the most advanced and clinically proven microneedling devices available. With 16 needles creating up to 1,920 micro-channels per second, it delivers precise, controlled results with minimal discomfort.</li></ul>` },
+      { title: 'Why Dermapen 4?', body: `<ul><li>Industry-leading technology trusted by clinicians worldwide.</li><li>Adjustable needle depth for precise, targeted treatment.</li><li>Clinically proven to improve a wide range of skin concerns.</li><li>Significantly more effective than dermarollers or lower-grade devices.</li></ul>` },
+      { title: 'What can it be combined with?', body: `<p>Microneedling can be enhanced by combining it with powerful serums applied during the treatment:</p><ul><li><strong>PRF (Platelet Rich Fibrin):</strong> your own growth factors applied during microneedling to accelerate healing and boost collagen production (Vampire Facial).</li><li><strong>Exosomes (Calecim® PTT-6):</strong> advanced growth factors and proteins for enhanced skin repair, brightening and rejuvenation.</li><li><strong>Polynucleotides (V-Tech):</strong> PDRN and exosome complex that targets deep skin renewal and regeneration.</li></ul>` },
+      { title: 'What concerns does it target?', body: `<ul><li>Fine lines and wrinkles</li><li>Uneven skin texture and tone</li><li>Acne scarring and other scarring</li><li>Pigmentation and sun damage</li><li>Dull, dehydrated skin</li><li>Hair loss (scalp microneedling with PRF)</li></ul>` },
+      { title: 'What is the downtime / recovery?', body: `<ul><li>Redness and mild sensitivity for 24–48 hours post treatment, similar to mild sunburn.</li><li>Skin may feel slightly dry or tight for a few days.</li><li>Avoid sun exposure and heavy makeup for 24 hours post treatment.</li><li>Aftercare guidance provided by Dr Smith.</li></ul>` },
+      { title: 'Results', body: `<ul><li>Skin improvement begins within a few weeks as new collagen forms.</li><li>Best results seen after a course of 3 sessions, 4 weeks apart.</li><li>Results continue to improve over 3–6 months as collagen remodelling continues.</li><li>Combining with PRF or exosomes significantly enhances and accelerates results.</li></ul>` }
+    ]
+  }
+};
+
+function openDetail(id) {
+  const t = TREATMENTS[id];
+  if (!t) return;
+
+  document.getElementById('detail-eyebrow').textContent = t.eyebrow;
+  document.getElementById('detail-title').innerHTML = t.title;
+
+  // Images
+  const imgWrap = document.getElementById('detail-images-wrap');
+  const imgGrid = document.getElementById('detail-images-grid');
+  const imgCaption = document.getElementById('detail-images-caption');
+  if (t.images && t.images.length) {
+    const cols = t.images.length === 1 ? 'single' : t.images.length === 3 ? 'three' : '';
+    imgGrid.className = 'detail-images-grid' + (cols ? ' ' + cols : '');
+    imgGrid.innerHTML = t.images.map((src, i) => {
+      const fit = Array.isArray(t.imagesFit) ? (t.imagesFit[i] || 'cover') : (t.imagesFit || 'cover');
+      const style = fit === 'contain' ? ' style="object-fit:contain;background:#F5F1EB"' : '';
+      const alt = Array.isArray(t.imagesAlt) && t.imagesAlt[i] ? t.imagesAlt[i] : `${t.eyebrow} treatment by Dr Smith Aesthetics South London`;
+      const title = Array.isArray(t.imagesTitle) && t.imagesTitle[i] ? ` title="${t.imagesTitle[i]}"` : '';
+      return `<img src="${src}" alt="${alt}"${title} loading="lazy"${style} />`;
+    }).join('');
+    imgCaption.textContent = t.caption || '';
+    imgCaption.style.display = t.caption ? 'block' : 'none';
+    imgWrap.classList.add('has-images');
+  } else {
+    imgGrid.innerHTML = '';
+    imgWrap.classList.remove('has-images');
+  }
+
+  let html = '';
+  t.sections.forEach((s, i) => {
+    if (i > 0) html += '<div class="detail-divider"></div>';
+    html += `<div class="detail-section"><p class="detail-section-title">${s.title}</p><div class="detail-section-body">${s.body}</div></div>`;
+  });
+  document.getElementById('detail-body').innerHTML = html;
+
+  document.getElementById('grid-view').style.display = 'none';
+  document.getElementById('detail-view').classList.add('active');
+
+  // Scroll iframe to top
+  window.scrollTo(0, 0);
+  window.parent.postMessage({ type: 'scrollToTop' }, '*');
+  notifyHeight();
+}
+
+function closeDetail() {
+  document.getElementById('detail-view').classList.remove('active');
+  document.getElementById('grid-view').style.display = '';
+  window.scrollTo(0, 0);
+  window.parent.postMessage({ type: 'scrollToTop' }, '*');
+  notifyHeight();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+
+function notifyHeight() {
+  setTimeout(() => {
+    window.parent.postMessage({ type: 'iframeHeight', height: document.body.scrollHeight }, '*');
+  }, 50);
+}
+window.addEventListener('load', notifyHeight);
+</script>
+</body>
+</html>

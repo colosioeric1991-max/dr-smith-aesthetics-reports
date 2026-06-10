@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --teal:       #0D3B4F;
+    --teal-mid:   #1A5068;
+    --teal-light: #2A7090;
+    --warm-white: #FDFAF6;
+    --gold:       #C9A96E;
+    --muted:      #6B7280;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--teal); }
+  h1 { font-family: 'Cormorant Garamond', serif; }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    height: 100vh;
+    min-height: 600px;
+    position: relative;
+    background: var(--warm-white);
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 4rem 60px 5.5rem;
+    position: relative; z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold);
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 30px; height: 1px; background: var(--gold);
+  }
+
+  .hero-heading {
+    font-size: clamp(2.8rem, 4.5vw, 5.2rem);
+    font-weight: 300; line-height: 1.06;
+    letter-spacing: -0.025em; color: var(--teal);
+    margin-bottom: 1.75rem;
+  }
+  .hero-heading em { font-style: italic; font-weight: 400; color: var(--teal-light); }
+
+  .hero-sub {
+    font-size: 1rem; font-weight: 300; line-height: 1.8;
+    color: #4A5568; max-width: 400px; margin-bottom: 2.75rem;
+  }
+
+  .hero-actions { display: flex; align-items: center; gap: 1.5rem; }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    font-size: 0.76rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--warm-white); background: var(--teal);
+    padding: 0.95rem 2.1rem; border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    box-shadow: 0 2px 0 rgba(13,59,79,0.3), 0 6px 24px rgba(13,59,79,0.18);
+  }
+  .btn-primary:hover {
+    background: var(--teal-mid); transform: translateY(-2px);
+    box-shadow: 0 4px 0 rgba(13,59,79,0.2), 0 10px 32px rgba(13,59,79,0.24);
+  }
+
+  .btn-ghost {
+    font-size: 0.76rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--teal); text-decoration: none;
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: gap 0.25s cubic-bezier(0.34,1.56,0.64,1), color 0.2s ease;
+  }
+  .btn-ghost:hover { gap: 0.9rem; color: var(--teal-mid); }
+
+  .hero-right {
+    position: relative; overflow: hidden;
+    background: var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+  }
+  .hero-video {
+    width: 100%; height: auto;
+    max-height: 85%;
+    border-radius: 4px;
+    display: block;
+    position: relative; z-index: 1;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+  }
+  .hero-right::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--warm-white) 0%, transparent 12%);
+    z-index: 2; pointer-events: none;
+  }
+
+  .hero-badge {
+    position: absolute; top: 2rem; left: 2rem; z-index: 3;
+    background: rgba(253,250,246,0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(201,169,110,0.35);
+    border-radius: 3px; padding: 1.1rem 1.4rem;
+    box-shadow: 0 8px 28px rgba(13,59,79,0.14);
+  }
+  .hero-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 300;
+    color: var(--teal); line-height: 1;
+  }
+  .hero-badge-label {
+    font-size: 0.7rem; letter-spacing: 0.1em;
+    color: var(--muted); margin-top: 0.2rem;
+  }
+
+
+  .mobile-only { display: none; }
+  .desktop-only { display: flex; }
+
+  @media (max-width: 1100px) {
+    .hero-left { padding: 60px 3rem 40px 3.5rem; }
+  }
+  @media (max-width: 900px) {
+    .mobile-only { display: flex; }
+    .desktop-only { display: none; }
+
+    .hero { grid-template-columns: 1fr; height: auto; min-height: auto; }
+    .hero-left { padding: 80px 1.5rem 2.5rem; }
+    .hero-right {
+      display: flex;
+      height: 420px;
+      padding: 0;
+    }
+    .hero-right::after { display: none; }
+    .hero-video { border-radius: 0; width: 100%; height: 100%; object-fit: cover; max-height: none; }
+    .hero-badge { display: none; }
+    .hero-heading { font-size: clamp(2.6rem, 11vw, 3.4rem); }
+    .hero-actions { flex-direction: column; gap: 0.85rem; }
+    .hero-actions a { width: 100%; text-align: center; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Medical Aesthetics · South London</p>
+      <h1 class="hero-heading">
+        Your Confidence,<br/>
+        <em>Our Priority</em>
+      </h1>
+      <p class="hero-sub">
+        Experienced medical doctor providing personalised aesthetic treatments in London. Science-led approach for naturally beautiful results, every time.
+      </p>
+      <div class="hero-actions">
+        <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" class="btn-primary">
+          Book Now
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <span class="btn-ghost desktop-only">Scroll to explore more ↓</span>
+        <a href="https://www.lsmithaesthetics.com/treatments" target="_blank" onclick="window.top.open(this.href,'_blank');return false;" class="btn-ghost mobile-only">Scroll to explore more ↓</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <video class="hero-video" controls playsinline>
+        <source src="https://video.wixstatic.com/video/0b63bc_776502c93d1f45e0b213fb49db1960fb/1080p/mp4/file.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-badge">
+        <div class="hero-badge-num">MBBS</div>
+        <div class="hero-badge-label">BSc (Hons) · GMC Registered</div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

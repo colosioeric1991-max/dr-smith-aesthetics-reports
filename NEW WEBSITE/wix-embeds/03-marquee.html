@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; }
+
+  .marquee {
+    background: #0D3B4F;
+    padding: 0.9rem 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 2.5rem;
+    animation: scroll 35s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    display: flex; align-items: center; gap: 1rem; flex-shrink: 0;
+    font-family: 'DM Sans', Arial, sans-serif;
+    font-size: 0.7rem; font-weight: 400; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(248,244,238,0.65);
+  }
+  .marquee-dot {
+    width: 3px; height: 3px; border-radius: 50%;
+    background: #C9A96E; flex-shrink: 0;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (max-width: 900px) {
+    .marquee-track { animation-duration: 18s; }
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="marquee-item"><span class="marquee-dot"></span>Anti-Wrinkle Injections</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Dermal Fillers</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Polynucleotides</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>PRP &amp; PRF</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Profhilo</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Skin Boosters</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Plasma Biofiller</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>3D Skin Analysis</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Microneedling</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Anti-Wrinkle Injections</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Dermal Fillers</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Polynucleotides</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>PRP &amp; PRF</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Profhilo</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Skin Boosters</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Plasma Biofiller</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>3D Skin Analysis</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Microneedling</div>
+    </div>
+  </div>
+</body>
+</html>

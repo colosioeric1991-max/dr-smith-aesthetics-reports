@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --teal:       #0D3B4F;
+    --teal-light: #2A7090;
+    --gold:       #C9A96E;
+    --warm-white: #FDFAF6;
+    --muted:      #6B7280;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); }
+
+  .location {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 660px;
+    height: 100%;
+  }
+
+  .location-map {
+    position: relative; overflow: hidden;
+  }
+  .location-map iframe {
+    width: 100%; height: 100%; border: 0; display: block;
+    filter: grayscale(20%) contrast(1.05);
+  }
+
+  .location-content {
+    padding: 6rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+    background: var(--warm-white);
+    position: relative;
+  }
+  .location-content::before {
+    content: ''; position: absolute;
+    left: 0; top: 12%; bottom: 12%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.5), transparent);
+  }
+
+  .eyebrow {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold);
+    display: flex; align-items: center; gap: 0.7rem;
+    margin-bottom: 0.9rem;
+  }
+  .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.2vw, 3.4rem);
+    font-weight: 300; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--teal);
+    margin-bottom: 1.75rem;
+  }
+  .section-title em { font-style: italic; font-weight: 400; }
+
+  .location-address {
+    font-size: 0.92rem; line-height: 1.9; font-weight: 300;
+    color: #4A5568;
+    margin-bottom: 2rem;
+  }
+
+  .location-hours-title {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 1rem;
+  }
+
+  .hours-grid {
+    display: flex; flex-direction: column; gap: 0.45rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .hour-row {
+    display: flex; justify-content: space-between;
+    font-size: 0.85rem; font-weight: 300;
+    color: #4A5568;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid rgba(13,59,79,0.07);
+  }
+  .hour-row:last-child { border-bottom: none; }
+
+  .hour-day { font-weight: 400; color: var(--teal); }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    font-size: 0.76rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--warm-white); background: var(--teal);
+    padding: 0.95rem 2.1rem; border-radius: 2px;
+    text-decoration: none; border: 1px solid var(--teal);
+    transition: background 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    width: fit-content;
+  }
+  .btn-primary:hover {
+    background: #1A5068; border-color: #1A5068;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 900px) {
+    .location { grid-template-columns: 1fr; height: auto; min-height: auto; }
+    .location-map { height: 320px; }
+    .location-content { padding: 3rem 1.5rem; }
+    .location-content::before { display: none; }
+  }
+</style>
+</head>
+<body>
+  <section class="location">
+    <div class="location-map">
+      <iframe
+        src="https://maps.google.com/maps?q=Ink+Beauty+Skin+Clinic,+341+Kennington+Road,+London+SE11+4QE&output=embed"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Dr Smith Aesthetics location">
+      </iframe>
+    </div>
+    <div class="location-content">
+      <p class="eyebrow">Find Us</p>
+      <h2 class="section-title">Kennington,<br/><em>South London</em></h2>
+      <p class="location-address">
+        Ink Beauty Skin Clinic<br/>
+        341 Kennington Road<br/>
+        London, SE11 4QE
+      </p>
+      <div class="location-hours">
+        <p class="location-hours-title">Opening Hours</p>
+        <div class="hours-grid">
+          <div class="hour-row"><span class="hour-day">Monday</span><span>10:30 – 18:00</span></div>
+          <div class="hour-row"><span class="hour-day">Tuesday</span><span>Variable</span></div>
+          <div class="hour-row"><span class="hour-day">Wednesday</span><span>Variable</span></div>
+          <div class="hour-row"><span class="hour-day">Thursday</span><span>10:30 – 18:00</span></div>
+          <div class="hour-row"><span class="hour-day">Friday</span><span>10:30 – 18:00</span></div>
+          <div class="hour-row"><span class="hour-day">Saturday</span><span>10:30 – 17:00</span></div>
+          <div class="hour-row"><span class="hour-day">Sunday</span><span>10:30 – 16:00</span></div>
+        </div>
+      </div>
+      <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" class="btn-primary">
+        Book Now
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+</body>
+</html>

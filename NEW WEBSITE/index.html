@@ -1,0 +1,2632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr Smith Aesthetics | London</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --teal:       #0D3B4F;
+      --teal-mid:   #1A5068;
+      --teal-light: #2A7090;
+      --cream:      #F5F1EB;
+      --warm-white: #FDFAF6;
+      --gold:       #C9A96E;
+      --gold-light: #E0C898;
+      --charcoal:   #1A1A1A;
+      --muted:      #6B7280;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
+
+    /* Subtle grain */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: 110px;
+      background: rgba(253,250,246,0.97);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(13,59,79,0.07), 0 4px 24px rgba(13,59,79,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(253,250,246,0.97);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(13,59,79,0.07), 0 4px 24px rgba(13,59,79,0.06);
+    }
+    .nav-logo img { height: 90px; width: auto; max-width: 340px; filter: drop-shadow(0 4px 12px rgba(13,59,79,0.15)); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2.25rem;
+    }
+    .nav-links a {
+      font-size: 0.76rem; font-weight: 500;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--teal); text-decoration: none;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute;
+      bottom: -3px; left: 0; right: 100%;
+      height: 1px; background: var(--gold);
+      transition: right 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .nav-links a:hover { color: var(--teal-mid); }
+    .nav-links a:hover::after { right: 0; }
+
+    .nav-book {
+      font-size: 0.74rem; font-weight: 500;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--warm-white) !important;
+      background: var(--teal);
+      padding: 0.6rem 1.5rem; border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+      box-shadow: 0 2px 12px rgba(13,59,79,0.22);
+    }
+    .nav-book::after { display: none !important; }
+    .nav-book:hover {
+      background: var(--teal-mid) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(13,59,79,0.28) !important;
+    }
+    .nav-book:active { transform: translateY(0); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 55% 45%;
+      position: relative;
+      background: var(--warm-white);
+    }
+
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 140px 4rem 80px 5.5rem;
+      position: relative; z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold);
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 30px; height: 1px; background: var(--gold);
+    }
+
+    .hero-heading {
+      font-size: clamp(3rem, 4.5vw, 5.2rem);
+      font-weight: 300; line-height: 1.06;
+      letter-spacing: -0.025em; color: var(--teal);
+      margin-bottom: 1.75rem;
+    }
+    .hero-heading em {
+      font-style: italic; font-weight: 400; color: var(--teal-light);
+    }
+
+    .hero-sub {
+      font-size: 1rem; font-weight: 300; line-height: 1.8;
+      color: #4A5568; max-width: 400px; margin-bottom: 2.75rem;
+    }
+
+    .hero-actions { display: flex; align-items: center; gap: 1.5rem; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: 0.76rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--warm-white); background: var(--teal);
+      padding: 0.95rem 2.1rem; border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+      box-shadow: 0 2px 0 rgba(13,59,79,0.3), 0 6px 24px rgba(13,59,79,0.18);
+    }
+    .btn-primary:hover {
+      background: var(--teal-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 0 rgba(13,59,79,0.2), 0 10px 32px rgba(13,59,79,0.24);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-ghost {
+      font-size: 0.76rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); text-decoration: none;
+      display: flex; align-items: center; gap: 0.5rem;
+      transition: gap 0.25s cubic-bezier(0.34,1.56,0.64,1), color 0.2s ease;
+    }
+    .btn-ghost:hover { gap: 0.9rem; color: var(--teal-mid); }
+
+    .hero-right {
+      position: relative; overflow: hidden;
+      background: var(--teal);
+    }
+    .hero-video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.75rem; color: rgba(255,255,255,0.5);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .hero-video-placeholder svg { opacity: 0.4; }
+    .hero-right::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right, var(--warm-white) 0%, transparent 15%),
+        linear-gradient(to top, rgba(13,59,79,0.5) 0%, transparent 55%);
+      z-index: 1;
+    }
+
+    .hero-badge {
+      position: absolute; bottom: 2.5rem; left: 2.5rem; z-index: 2;
+      background: rgba(253,250,246,0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(201,169,110,0.35);
+      border-radius: 3px; padding: 1.1rem 1.4rem;
+      box-shadow: 0 8px 28px rgba(13,59,79,0.14);
+    }
+    .hero-badge-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 300;
+      color: var(--teal); line-height: 1;
+    }
+    .hero-badge-label {
+      font-size: 0.7rem; letter-spacing: 0.1em;
+      color: var(--muted); margin-top: 0.2rem;
+    }
+
+    .hero-scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); z-index: 3;
+    }
+    .scroll-line {
+      width: 1px; height: 36px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+    /* ─── OBAGI BANNER ─── */
+    .obagi-banner {
+      background: var(--cream);
+      display: flex;
+      min-height: 260px;
+      border-top: 1px solid rgba(13,59,79,0.08);
+      border-bottom: 1px solid rgba(13,59,79,0.08);
+    }
+    .obagi-centre {
+      width: 100%;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; text-align: center;
+      padding: 2.5rem 2rem; gap: 0.6rem;
+    }
+    .obagi-logo-img {
+      width: 85%; max-width: 380px; height: auto; display: block;
+      mix-blend-mode: multiply;
+    }
+    .obagi-tagline {
+      font-size: 1rem; font-weight: 600; color: var(--teal);
+      margin-top: 0.4rem; font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-style: italic;
+    }
+    .obagi-sub {
+      font-size: 0.82rem; color: rgba(13,59,79,0.65); line-height: 1.6;
+      font-family: 'DM Sans', sans-serif; max-width: 260px;
+    }
+    .obagi-ctas {
+      display: flex; gap: 0.75rem; margin-top: 0.75rem; flex-wrap: wrap;
+      justify-content: center;
+    }
+    .obagi-btn-primary {
+      background: var(--teal); color: var(--warm-white);
+      padding: 0.6rem 1.4rem; font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase; border: 1.5px solid var(--teal);
+      font-family: 'DM Sans', sans-serif; cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+      text-decoration: none; display: inline-block;
+    }
+    .obagi-btn-primary:hover { background: transparent; color: var(--teal); transform: translateY(-2px); }
+    .obagi-btn-secondary {
+      background: transparent; color: var(--teal);
+      padding: 0.6rem 1.4rem; font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase; border: 1.5px solid var(--teal);
+      font-family: 'DM Sans', sans-serif; cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+      text-decoration: none; display: inline-block;
+    }
+    .obagi-btn-secondary:hover { background: var(--teal); color: var(--warm-white); transform: translateY(-2px); }
+    @media (max-width: 900px) {
+      .obagi-banner { grid-template-columns: 1fr; }
+      .obagi-img-left, .obagi-img-right { display: none; }
+      .obagi-centre { padding: 2.5rem 1.5rem; }
+    }
+
+    /* ─── MARQUEE ─── */
+    .marquee {
+      background: var(--teal); padding: 0.9rem 0; overflow: hidden;
+    }
+    .marquee-track {
+      display: flex; gap: 2.5rem;
+      animation: scroll 35s linear infinite; white-space: nowrap;
+    }
+    .marquee-item {
+      display: flex; align-items: center; gap: 1rem; flex-shrink: 0;
+      font-size: 0.7rem; font-weight: 400; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(248,244,238,0.65);
+    }
+    .marquee-dot {
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0;
+    }
+    @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ─── SHARED SECTION STYLES ─── */
+    .eyebrow {
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold);
+      display: flex; align-items: center; gap: 0.7rem;
+      margin-bottom: 0.9rem;
+    }
+    .eyebrow::before {
+      content: ''; width: 26px; height: 1px; background: var(--gold);
+    }
+    .section-title {
+      font-size: clamp(2.2rem, 3.2vw, 3.4rem);
+      font-weight: 300; line-height: 1.1;
+      letter-spacing: -0.02em; color: var(--teal);
+    }
+    .section-title em { font-style: italic; font-weight: 400; }
+
+    /* ─── INTRO STRIP ─── */
+    .intro-strip {
+      background: var(--cream);
+      padding: 4.5rem 5.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3rem;
+      border-top: 1px solid rgba(201,169,110,0.25);
+      border-bottom: 1px solid rgba(201,169,110,0.25);
+    }
+    .intro-block { padding: 0 1rem; }
+    .intro-block + .intro-block { border-left: 1px solid rgba(13,59,79,0.1); }
+    .intro-block h3 {
+      font-size: 1.3rem; font-weight: 500;
+      color: var(--teal); margin-bottom: 0.6rem; line-height: 1.2;
+    }
+    .intro-block p {
+      font-size: 0.88rem; line-height: 1.75;
+      color: var(--muted); font-weight: 300;
+    }
+    .intro-icon { font-size: 1.4rem; margin-bottom: 0.75rem; color: var(--gold); }
+
+    /* ─── ABOUT ─── */
+    .about {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 660px;
+    }
+    .about-img {
+      position: relative; overflow: hidden;
+      background: var(--teal);
+    }
+    .about-img img {
+      width: 100%; height: 100%; object-fit: contain; object-position: center bottom;
+    }
+    .about-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 70%, rgba(253,250,246,0.6));
+      pointer-events: none;
+    }
+    .about-content {
+      padding: 6rem 5rem; display: flex; flex-direction: column;
+      justify-content: center; background: var(--warm-white);
+      position: relative;
+    }
+    .about-content::before {
+      content: ''; position: absolute;
+      left: 0; top: 12%; bottom: 12%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.5), transparent);
+    }
+    .about-body {
+      font-size: 0.95rem; line-height: 1.85;
+      color: #4A5568; font-weight: 300;
+      margin: 1.5rem 0 0.75rem;
+    }
+    .about-credentials {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 1.2rem;
+      color: var(--teal-light); margin-top: 1.75rem;
+    }
+    .about-stats {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1.5rem; margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(13,59,79,0.1);
+    }
+    .stat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem; font-weight: 300;
+      color: var(--teal); line-height: 1;
+    }
+    .stat-l {
+      font-size: 0.72rem; letter-spacing: 0.09em;
+      color: var(--muted); margin-top: 0.3rem;
+    }
+
+    /* ─── TREATMENTS ─── */
+    .treatments {
+      padding: 7rem 5.5rem;
+      background: var(--cream);
+      position: relative;
+    }
+    .treatments::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(201,169,110,0.4), transparent);
+    }
+    .treatments-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: end; margin-bottom: 3.5rem;
+    }
+    .treatments-subhead {
+      font-size: 0.95rem; line-height: 1.75;
+      color: var(--muted); font-weight: 300;
+    }
+    .treatments-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1.5px;
+      background: rgba(13,59,79,0.07);
+      border: 1.5px solid rgba(13,59,79,0.07);
+      border-radius: 4px; overflow: hidden;
+    }
+    .tx-card {
+      background: var(--warm-white);
+      padding: 2.25rem 1.75rem;
+      transition: background 0.3s ease;
+      cursor: default;
+    }
+    .tx-card:hover { background: var(--teal); }
+    .tx-card:hover .tx-icon { color: var(--gold); }
+    .tx-card:hover .tx-name { color: var(--warm-white); }
+    .tx-card:hover .tx-desc { color: rgba(248,244,238,0.65); }
+    .tx-card:hover .tx-link { color: var(--gold-light); }
+    .tx-card:hover .tx-arr { transform: translateX(4px); }
+
+    .tx-icon {
+      font-size: 1.3rem; color: var(--gold);
+      margin-bottom: 1.1rem;
+      transition: color 0.3s ease;
+    }
+    .tx-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 500;
+      color: var(--teal); margin-bottom: 0.6rem;
+      line-height: 1.2; transition: color 0.3s ease;
+    }
+    .tx-desc {
+      font-size: 0.85rem; line-height: 1.72; font-weight: 300;
+      color: #6B7280; margin-bottom: 1.4rem;
+      transition: color 0.3s ease;
+    }
+    .tx-link {
+      font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--teal-light); text-decoration: none;
+      display: flex; align-items: center; gap: 0.4rem; font-weight: 500;
+      transition: color 0.3s ease;
+      background: none; border: none; cursor: pointer; font-family: inherit; padding: 0;
+    }
+    .tx-arr { transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1); display: inline-block; }
+
+    /* ─── TX MODAL ─── */
+    .tx-modal-overlay {
+      position: fixed; inset: 0; z-index: 10000;
+      background: rgba(8,30,42,0.75);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: flex-start; justify-content: center;
+      padding: 2rem 1.5rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+      overflow-y: auto;
+    }
+    .tx-modal-overlay.open { opacity: 1; pointer-events: all; }
+    .tx-modal-box {
+      background: var(--warm-white);
+      border-radius: 6px;
+      max-width: 700px; width: 100%;
+      position: relative;
+      box-shadow: 0 32px 100px rgba(8,30,42,0.35);
+      transform: translateY(20px);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      margin: auto;
+    }
+    .tx-modal-overlay.open .tx-modal-box { transform: translateY(0); }
+    .tx-modal-close {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      background: none; border: none; cursor: pointer;
+      font-size: 1.4rem; color: var(--muted); line-height: 1;
+      width: 2rem; height: 2rem;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; transition: background 0.2s, color 0.2s; z-index: 1;
+    }
+    .tx-modal-close:hover { background: rgba(13,59,79,0.08); color: var(--teal); }
+    .tx-modal-hero {
+      background: var(--teal);
+      padding: 3rem 2.5rem 2.5rem;
+      border-radius: 6px 6px 0 0;
+    }
+    .tx-modal-eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; margin-bottom: 0.5rem;
+    }
+    .tx-modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 300; line-height: 1.1;
+      letter-spacing: -0.02em; color: var(--warm-white);
+    }
+    .tx-modal-title em { font-style: italic; font-weight: 400; }
+    .tx-modal-image {
+      width: 100%; height: 260px; object-fit: cover;
+      display: block;
+    }
+    .tx-modal-images-wrap { display: none; padding: 0 2.5rem; margin-top: 1.75rem; }
+    .tx-modal-images-wrap.has-images { display: block; }
+    .tx-modal-images-grid { display: grid; gap: 0.75rem; grid-template-columns: repeat(2, 1fr); }
+    .tx-modal-images-grid.single { grid-template-columns: 1fr; }
+    .tx-modal-images-grid.three { grid-template-columns: repeat(3, 1fr); }
+    .tx-modal-images-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 3px; display: block; }
+    .tx-modal-images-caption { font-size: 0.75rem; color: var(--muted); font-style: italic; margin-top: 0.6rem; line-height: 1.6; }
+
+    .tx-modal-body { padding: 2.5rem; }
+    .tx-modal-section { margin-bottom: 2rem; }
+    .tx-modal-section:last-of-type { margin-bottom: 0; }
+    .tx-modal-section-title {
+      font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .tx-modal-section-title::after { content: ''; flex: 1; height: 1px; background: rgba(201,169,110,0.25); }
+    .tx-modal-section-body {
+      font-size: 0.88rem; line-height: 1.8; color: var(--charcoal); font-weight: 300;
+    }
+    .tx-modal-section-body p { margin-bottom: 0.6rem; }
+    .tx-modal-section-body p:last-child { margin-bottom: 0; }
+    .tx-modal-section-body ul { padding-left: 1.2rem; margin: 0.4rem 0; }
+    .tx-modal-section-body li { margin-bottom: 0.35rem; }
+    .tx-modal-section-body strong { font-weight: 500; color: var(--teal); }
+    .tx-modal-divider { height: 1px; background: rgba(13,59,79,0.08); margin: 1.75rem 0; }
+    .tx-modal-actions {
+      padding: 0 2.5rem 2.5rem;
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .tx-btn-primary {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--warm-white); background: var(--teal);
+      padding: 0.85rem 1.8rem; border-radius: 2px;
+      text-decoration: none; border: 1px solid var(--teal);
+      transition: background 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+      font-family: 'DM Sans', sans-serif; cursor: pointer;
+    }
+    .tx-btn-primary:hover { background: var(--teal-mid); border-color: var(--teal-mid); transform: translateY(-2px); }
+    .tx-btn-outline {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--teal); background: transparent;
+      padding: 0.85rem 1.8rem; border-radius: 2px;
+      text-decoration: none; border: 1px solid rgba(13,59,79,0.25);
+      transition: border-color 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+      font-family: 'DM Sans', sans-serif; cursor: pointer;
+    }
+    .tx-btn-outline:hover { border-color: var(--teal); transform: translateY(-2px); }
+
+    /* ─── 3D SKIN ANALYSER ─── */
+    .analyser {
+      background: var(--teal);
+    }
+
+    .analyser-content {
+      max-width: 860px; margin: 0 auto;
+      padding: 3.5rem 2.5rem; display: flex; flex-direction: column;
+      align-items: flex-start; background: var(--teal);
+    }
+    .analyser-content .eyebrow { color: var(--gold-light); }
+    .analyser-content .eyebrow::before { background: var(--gold-light); }
+    .analyser-content .section-title { color: var(--warm-white); }
+
+    .analyser-points {
+      list-style: none; margin: 1.75rem 0 2.5rem;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .analyser-points li {
+      display: flex; align-items: flex-start; gap: 0.85rem;
+      font-size: 0.9rem; line-height: 1.7; font-weight: 300;
+      color: rgba(248,244,238,0.75);
+    }
+    .analyser-points li::before {
+      content: ''; display: block; flex-shrink: 0;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); margin-top: 0.55rem;
+    }
+
+    /* ─── PRICES PREVIEW ─── */
+    .prices {
+      padding: 7rem 5.5rem; background: var(--warm-white);
+    }
+    .prices-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: end; margin-bottom: 3.5rem;
+    }
+    .prices-note {
+      font-size: 0.92rem; line-height: 1.75; font-weight: 300;
+      color: var(--muted);
+    }
+
+    /* ─── PRICE TABS ─── */
+    .price-tabs {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .price-tab {
+      padding: 0.5rem 1.2rem; border-radius: 100px;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.04em;
+      cursor: pointer; border: 1px solid rgba(13,59,79,0.18);
+      background: transparent; color: var(--teal);
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .price-tab:hover { background: rgba(13,59,79,0.06); }
+    .price-tab.active { background: var(--teal); color: #fff; border-color: var(--teal); }
+    .price-panel { display: none; }
+    .price-panel.active { display: block; }
+    .price-categories {
+      display: grid; grid-template-columns: 1fr; gap: 0;
+    }
+    .price-cat {
+      border: 1px solid rgba(13,59,79,0.1);
+      border-radius: 4px; overflow: hidden;
+      transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .price-cat:hover {
+      box-shadow: 0 8px 32px rgba(13,59,79,0.12);
+      transform: translateY(-3px);
+    }
+    .price-cat-head {
+      background: var(--teal); padding: 1.1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .price-cat-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 500; color: var(--warm-white);
+    }
+    .price-cat-icon { font-size: 1.1rem; color: var(--gold); }
+    .price-rows { padding: 0.25rem 0; }
+    .price-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.75rem 1.5rem;
+      border-bottom: 1px solid rgba(13,59,79,0.06);
+    }
+    .price-row:last-child { border-bottom: none; }
+    .price-row-name {
+      font-size: 0.85rem; color: var(--charcoal); font-weight: 400;
+    }
+    .price-row-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 500; color: var(--teal);
+    }
+    .price-row-time {
+      font-size: 0.72rem; color: var(--muted);
+      margin-top: 0.1rem;
+    }
+    .view-all {
+      margin-top: 2.5rem; text-align: center;
+    }
+
+    /* ─── READ MORE BUTTON ─── */
+    .price-row-right {
+      display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem;
+    }
+    .read-more-btn {
+      background: none; border: none; cursor: pointer; padding: 0;
+      font-size: 0.7rem; color: var(--gold); font-family: inherit;
+      letter-spacing: 0.04em; text-decoration: underline; text-underline-offset: 2px;
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+    .read-more-btn:hover { opacity: 1; }
+    .read-more-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+    .price-row-actions { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.25rem; }
+    .book-row-btn { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warm-white); background: var(--teal); padding: 0.28rem 0.7rem; border-radius: 2px; text-decoration: none; font-family: 'DM Sans', sans-serif; transition: background 0.2s ease, transform 0.15s cubic-bezier(0.34,1.56,0.64,1); white-space: nowrap; }
+    .book-row-btn:hover { background: var(--teal-mid, #1A5068); transform: translateY(-1px); }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(8,30,42,0.7); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem; opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-box {
+      background: var(--warm-white); border-radius: 6px;
+      max-width: 560px; width: 100%; max-height: 88vh; overflow-y: auto;
+      position: relative;
+      box-shadow: 0 24px 80px rgba(8,30,42,0.3), 0 4px 16px rgba(8,30,42,0.15);
+      transform: translateY(16px); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .modal-overlay.open .modal-box { transform: translateY(0); }
+    .modal-close {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      background: none; border: none; cursor: pointer;
+      font-size: 1.4rem; color: var(--muted); line-height: 1;
+      width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .modal-close:hover { background: rgba(13,59,79,0.08); color: var(--teal); }
+    .modal-close:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .modal-inner { padding: 2.5rem; }
+    .modal-eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; margin-bottom: 0.5rem;
+    }
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 500; color: var(--teal);
+      letter-spacing: -0.02em; margin-bottom: 0.5rem;
+    }
+    .modal-meta {
+      display: flex; gap: 1rem; margin-bottom: 1.75rem;
+      font-size: 0.82rem; color: var(--muted);
+    }
+    .modal-meta span { display: flex; align-items: center; gap: 0.3rem; }
+    .modal-divider {
+      height: 1px; background: rgba(13,59,79,0.1); margin: 1.5rem 0;
+    }
+    .modal-section-title {
+      font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--teal); font-weight: 600; margin-bottom: 0.75rem;
+    }
+    .modal-section-body {
+      font-size: 0.88rem; line-height: 1.75; color: var(--charcoal); font-weight: 300;
+    }
+    .modal-section-body ul { padding-left: 1.2rem; margin: 0.5rem 0; }
+    .modal-section-body li { margin-bottom: 0.4rem; }
+    .modal-section-body strong { font-weight: 500; color: var(--teal); }
+    .modal-book {
+      display: inline-flex; margin-top: 1.75rem;
+    }
+
+    /* ─── WHY ─── */
+    .why {
+      padding: 7rem 5.5rem;
+      background: var(--teal);
+      position: relative; overflow: hidden;
+    }
+    .why::before {
+      content: ''; position: absolute;
+      top: -25%; right: -8%;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,169,110,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .why-inner { position: relative; z-index: 1; }
+    .why-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: end; margin-bottom: 4rem;
+    }
+    .why .eyebrow { color: var(--gold-light); }
+    .why .eyebrow::before { background: var(--gold-light); }
+    .why .section-title { color: var(--warm-white); }
+    .why-sub {
+      font-size: 0.95rem; line-height: 1.78; font-weight: 300;
+      color: rgba(248,244,238,0.6);
+    }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 2px;
+      background: rgba(255,255,255,0.04); border-radius: 4px; overflow: hidden;
+    }
+    .why-item {
+      padding: 2.25rem 1.75rem;
+      background: rgba(248,244,238,0.03);
+      position: relative;
+      transition: background 0.3s ease;
+    }
+    .why-item:hover { background: rgba(248,244,238,0.07); }
+    .why-item::before {
+      content: attr(data-n);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem; font-weight: 300;
+      color: rgba(255,255,255,0.03);
+      position: absolute; top: 0.25rem; right: 0.75rem;
+      line-height: 1; pointer-events: none;
+    }
+    .why-dot {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(201,169,110,0.12);
+      border: 1px solid rgba(201,169,110,0.28);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.1rem; font-size: 1rem; color: var(--gold);
+    }
+    .why-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 500; color: var(--warm-white);
+      margin-bottom: 0.55rem; line-height: 1.2;
+    }
+    .why-desc {
+      font-size: 0.83rem; line-height: 1.72; font-weight: 300;
+      color: rgba(248,244,238,0.52);
+    }
+
+    /* ─── RESULTS ─── */
+    .results {
+      padding: 7rem 5.5rem; background: var(--cream);
+      position: relative;
+    }
+    .results::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(201,169,110,0.4), transparent);
+    }
+    .results-header { margin-bottom: 3rem; }
+    /* Slideshow */
+    .slideshow { position: relative; width: 100%; max-width: 360px; margin: 0 auto; user-select: none; }
+    .slides-track {
+      position: relative; width: 100%; aspect-ratio: 2/3;
+      max-width: 360px; margin: 0 auto;
+      overflow: hidden; border-radius: 4px;
+      background: rgba(13,59,79,0.06);
+    }
+    .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.55s ease; pointer-events: none; }
+    .slide.active { opacity: 1; pointer-events: auto; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .slides-track::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      z-index: 2; pointer-events: none;
+    }
+    .res-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+      background: rgba(253,250,246,0.92); border: 1px solid rgba(201,169,110,0.35);
+      color: var(--teal); width: 2.8rem; height: 2.8rem; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem;
+      box-shadow: 0 4px 16px rgba(13,59,79,0.12);
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .res-arrow:hover { background: var(--teal); border-color: var(--teal); color: var(--gold); transform: translateY(-50%) scale(1.08); }
+    .res-arrow-prev { left: -1.4rem; }
+    .res-arrow-next { right: -1.4rem; }
+    .res-dots { display: flex; justify-content: center; align-items: center; gap: 0.55rem; margin-top: 1.75rem; }
+    .res-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(13,59,79,0.2); cursor: pointer; border: none; padding: 0;
+      transition: background 0.25s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .res-dot.active { background: var(--gold); transform: scale(1.4); }
+    .res-counter {
+      text-align: center; margin-top: 1rem;
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    }
+    .results-note {
+      margin-top: 2rem; font-size: 0.78rem; font-weight: 300;
+      color: var(--muted); font-style: italic; text-align: center;
+    }
+
+    /* ─── CONTACT + SOCIAL ─── */
+    .map-strip { width: 100%; height: 380px; }
+    .map-strip iframe { width: 100%; height: 100%; border: 0; display: block; filter: grayscale(20%) contrast(1.05); }
+    .contact-section {
+      padding: 5rem 5.5rem; background: var(--teal);
+      position: relative; overflow: hidden;
+    }
+    .contact-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(201,169,110,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .contact-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .contact-right { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-info-card {
+      background: rgba(253,250,246,0.06); border: 1px solid rgba(201,169,110,0.2);
+      border-radius: 4px; padding: 1.5rem 1.75rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .contact-info-card svg { color: var(--gold); flex-shrink: 0; margin-top: 0.15rem; }
+    .contact-info-label {
+      font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.35rem;
+    }
+    .contact-info-value {
+      font-size: 0.88rem; font-weight: 300; line-height: 1.7;
+      color: rgba(253,250,246,0.8);
+    }
+    .contact-left .eyebrow { color: var(--gold); }
+    .contact-left .eyebrow::before { background: var(--gold); }
+    .contact-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 2.8vw, 3rem); font-weight: 300; line-height: 1.1;
+      letter-spacing: -0.02em; color: var(--warm-white); margin-bottom: 1.25rem;
+    }
+    .contact-heading em { font-style: italic; font-weight: 400; }
+    .contact-blurb {
+      font-size: 0.88rem; line-height: 1.8; font-weight: 300;
+      color: rgba(253,250,246,0.65); margin-bottom: 1.75rem;
+    }
+    .contact-detail {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.85rem; font-weight: 300; color: rgba(253,250,246,0.75);
+      margin-bottom: 2rem; text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-detail:hover { color: var(--gold); }
+    .contact-detail svg { color: var(--gold); flex-shrink: 0; }
+    .contact-btn {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--teal); background: var(--gold);
+      padding: 0.9rem 2rem; border-radius: 2px; text-decoration: none;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .contact-btn:hover { background: #d4b47a; transform: translateY(-2px); }
+    .contact-btn-outline {
+      background: transparent; color: var(--gold);
+      border: 1px solid rgba(201,169,110,0.5);
+    }
+    .contact-btn-outline:hover { background: rgba(201,169,110,0.12); transform: translateY(-2px); }
+    .contact-social-card {
+      display: flex; align-items: center; gap: 1.25rem;
+      background: rgba(253,250,246,0.06); border: 1px solid rgba(201,169,110,0.2);
+      border-radius: 4px; padding: 1rem 1.5rem; text-decoration: none;
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .contact-social-card:hover {
+      background: rgba(201,169,110,0.12); border-color: rgba(201,169,110,0.5);
+      transform: translateX(4px);
+    }
+    .contact-social-icon { color: var(--gold); flex-shrink: 0; }
+    .contact-social-text { display: flex; flex-direction: column; gap: 0.1rem; }
+    .contact-social-platform {
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .contact-social-handle {
+      font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; font-style: italic;
+      color: rgba(253,250,246,0.7);
+    }
+    .contact-social-arrow {
+      margin-left: auto; color: var(--gold); font-size: 0.9rem; opacity: 0.5;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .contact-social-card:hover .contact-social-arrow { transform: translateX(3px); opacity: 1; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--charcoal);
+      padding: 5rem 5.5rem 2.5rem;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem; margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-logo img {
+      height: 52px; width: auto;
+      filter: brightness(0) invert(1); opacity: 0.8;
+      margin-bottom: 1.1rem;
+    }
+    .footer-tagline {
+      font-size: 0.85rem; line-height: 1.72; font-weight: 300;
+      color: rgba(255,255,255,0.38); max-width: 240px;
+    }
+    .footer-socials { display: flex; gap: 0.65rem; margin-top: 1.6rem; }
+    .social-btn {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.85rem;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,169,110,0.07); }
+
+    .footer-col-title {
+      font-size: 0.67rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 1.2rem;
+    }
+    .footer-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .footer-list a {
+      font-size: 0.85rem; font-weight: 300;
+      color: rgba(255,255,255,0.5); text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .footer-list a:hover { color: var(--gold-light); }
+    .footer-list .muted-item {
+      font-size: 0.82rem; color: rgba(255,255,255,0.3); font-weight: 300;
+    }
+
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-copy { font-size: 0.76rem; color: rgba(255,255,255,0.22); font-weight: 300; }
+    .footer-legal { display: flex; gap: 1.75rem; }
+    .footer-legal a {
+      font-size: 0.76rem; color: rgba(255,255,255,0.22);
+      text-decoration: none; transition: color 0.2s ease;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.45); }
+
+    /* ─── HAMBURGER ─── */
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 6px;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--teal); border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ─── FADE UP ─── */
+    .fade-up {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+    .fade-up.in { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 120px 2.5rem 4rem; }
+      .hero-right { display: none; }
+      .intro-strip { padding: 3.5rem 2.5rem; grid-template-columns: 1fr; }
+      .intro-block + .intro-block { border-left: none; border-top: 1px solid rgba(13,59,79,0.1); padding-top: 1.5rem; }
+      .about { grid-template-columns: 1fr; }
+      .about-img { min-height: 380px; }
+      .about-content { padding: 4rem 2.5rem; }
+      .treatments { padding: 5rem 2.5rem; }
+      .treatments-header { grid-template-columns: 1fr; gap: 1.25rem; }
+      .treatments-grid { grid-template-columns: repeat(2,1fr); }
+      .analyser { grid-template-columns: 1fr; }
+      .analyser-img { min-height: 300px; }
+      .analyser-content { padding: 4rem 2.5rem; }
+      .prices { padding: 5rem 2.5rem; }
+      .prices-header { grid-template-columns: 1fr; gap: 1.25rem; }
+      .price-categories { grid-template-columns: 1fr; }
+      .why { padding: 5rem 2.5rem; }
+      .why-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .why-grid { grid-template-columns: repeat(2,1fr); }
+      .results { padding: 5rem 2.5rem; }
+      .res-arrow-prev { left: -0.8rem; }
+      .res-arrow-next { right: -0.8rem; }
+      .map-strip { height: 280px; }
+      .contact-section { padding: 3.5rem 1.5rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      footer { padding: 4rem 2.5rem 2rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      nav { padding: 0 1.75rem; }
+      .nav-links .hide-md { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .treatments-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .res-arrow-prev { left: -0.5rem; }
+      .res-arrow-next { right: -0.5rem; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
+      .about-stats { grid-template-columns: repeat(3,1fr); gap: 0.75rem; }
+      .hours-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; }
+    }
+
+    /* ─── MOBILE (≤ 640px) POLISH ─── */
+    @media (max-width: 640px) {
+      /* Nav */
+      nav { height: 70px; padding: 0 1.25rem; }
+      .nav-logo img { height: 52px; max-width: 220px; }
+      .nav-hamburger { display: flex; }
+
+      /* Mobile menu overlay */
+      .nav-links.open {
+        position: fixed; inset: 70px 0 0 0;
+        flex-direction: column; align-items: center; justify-content: center;
+        background: rgba(253,250,246,0.98); backdrop-filter: blur(20px);
+        gap: 2rem; z-index: 199;
+        animation: menuIn 0.25s ease;
+      }
+      .nav-links.open a { font-size: 1.2rem; }
+      .nav-links.open .nav-book { padding: 0.9rem 2.5rem; font-size: 1rem; }
+      @keyframes menuIn {
+        from { opacity: 0; transform: translateY(-8px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Hero */
+      .hero { min-height: auto; }
+      .hero-left { padding: 100px 1.5rem 3rem; }
+      .hero-heading { font-size: clamp(2.6rem, 11vw, 3.4rem); }
+      .hero-sub { font-size: 0.95rem; max-width: 100%; margin-bottom: 2rem; }
+      .hero-actions { flex-direction: column; gap: 0.85rem; }
+      .hero-actions a { width: 100%; text-align: center; justify-content: center; }
+      .hero-scroll-hint { display: none; }
+
+      /* Intro strip */
+      .intro-strip { padding: 2.5rem 1.5rem; gap: 1.25rem; align-items: start; }
+      .intro-block { padding: 0; }
+
+      /* About */
+      .about-content { padding: 2.5rem 1.5rem; }
+      .about-stats { gap: 0.5rem; }
+      .stat-num { font-size: 2rem; }
+
+      /* Treatments */
+      .treatments { padding: 3.5rem 1.5rem; }
+      .treatment-card { padding: 1.75rem 1.5rem; }
+
+      /* Prices */
+      .prices { padding: 3.5rem 1.5rem; }
+      .price-item { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
+      .price-val { font-size: 1.1rem; }
+
+      /* Why */
+      .why { padding: 3.5rem 1.5rem; }
+
+      /* Results */
+      .results { padding: 3.5rem 1.5rem; }
+
+      /* Contact */
+      .map-strip { height: 260px; }
+      .contact-section { padding: 3rem 1.25rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+
+      /* Footer */
+      footer { padding: 3rem 1.5rem 1.5rem; }
+      .footer-logo img { height: 48px; }
+
+      /* Section headings */
+      .section-title { font-size: clamp(2rem, 9vw, 2.8rem); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+      <img src="DrSmith_Aesthetics_Logo_Transparentpng.png" alt="Dr Smith Aesthetics" />
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#treatments" onclick="closeMenu()">Treatments</a>
+      <a href="#prices" onclick="closeMenu()">Price List</a>
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#contact" class="hide-md" onclick="closeMenu()">Contact</a>
+      <a href="https://www.lsmithaesthetics.com/gift-card" target="_blank" class="hide-md">Gift Card</a>
+      <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" class="nav-book">Book Now</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Medical Aesthetics · South London</p>
+      <h1 class="hero-heading">
+        Your Confidence,<br/>
+        <em>Our Priority</em>
+      </h1>
+      <p class="hero-sub">
+        Experienced medical doctor providing personalised aesthetic treatments in London. Science-led approach for naturally beautiful results, every time.
+      </p>
+      <div class="hero-actions">
+        <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" class="btn-primary">
+          Book Now
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#treatments" class="btn-ghost">Our Treatments →</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-video-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+        <span>Presentation Video</span>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-num">MBBS</div>
+        <div class="hero-badge-label">BSc (Hons) · GMC Registered</div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- OBAGI BANNER -->
+  <div class="obagi-banner">
+    <div class="obagi-centre">
+      <img src="OBAGI logo.png" alt="Obagi Medical" class="obagi-logo-img" />
+      <p class="obagi-tagline">Science backed skincare.</p>
+      <p class="obagi-sub">Unsure what your skin needs? Book a face to face consultation with Dr Smith.</p>
+      <div class="obagi-ctas">
+        <a href="https://drsmithaesthetics.cleverpatients.co.uk/-/login" target="_blank" rel="noopener noreferrer" class="obagi-btn-primary">Shop Now</a>
+        <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" rel="noopener noreferrer" class="obagi-btn-secondary">Book Consultation</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="marquee-item"><span class="marquee-dot"></span>Anti-Wrinkle Injections</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Dermal Fillers</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Polynucleotides</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>PRP &amp; PRF</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Profhilo</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Skin Boosters</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Plasma Biofiller</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>3D Skin Analysis</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Microneedling</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Anti-Wrinkle Injections</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Dermal Fillers</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Polynucleotides</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>PRP &amp; PRF</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Profhilo</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Skin Boosters</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Plasma Biofiller</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>3D Skin Analysis</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Microneedling</div>
+    </div>
+  </div>
+
+  <!-- INTRO STRIP -->
+  <div class="intro-strip">
+    <div class="intro-block fade-up">
+      <div class="intro-icon">🩺</div>
+      <h3>Medically Trained</h3>
+      <p>MBBS, BSc (Hons). NHS-trained doctor with specialist experience across a range of medical specialties before dedicating his practice to aesthetics.</p>
+    </div>
+    <div class="intro-block fade-up">
+      <div class="intro-icon">✦</div>
+      <h3>Natural Results</h3>
+      <p>Committed to personalised care and tailored treatments that enhance your natural beauty, ensuring every client feels confident and satisfied.</p>
+    </div>
+    <div class="intro-block fade-up">
+      <div class="intro-icon">◈</div>
+      <h3>Industry Educator</h3>
+      <p>Dr Smith teaches botox, filler and skin rejuvenation to doctors, nurses and other medical professionals at Cosmetic Courses, raising standards across the industry.</p>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-img">
+      <img src="https://static.wixstatic.com/media/0b63bc_15fbe58caa2c4bee998f087e8ce5ef44~mv2.png" alt="Dr Smith" />
+    </div>
+    <div class="about-content">
+      <p class="eyebrow">Meet Dr Smith</p>
+      <h2 class="section-title">MBBS, BSc <em>(Hons)</em></h2>
+      <p class="about-body">
+        After earning a degree in Biomedical Science and then subsequently completing a degree in Medicine, Dr Smith gained extensive experience working within the NHS as a doctor across a variety of specialties.
+      </p>
+      <p class="about-body" style="margin-top:0.75rem">
+        Recognising his passion for aesthetics, he has now dedicated himself to working with patients to help achieve their aesthetic goals. He is committed to providing personalised care and tailored treatments, ensuring that each client feels confident and satisfied with their results.
+      </p>
+      <p class="about-body" style="margin-top:0.75rem">
+        He runs his own aesthetics clinic in South London, whilst also teaching botox, filler and skin rejuvenation to doctors, nurses and other medical professionals.
+      </p>
+      <p class="about-credentials">Dr. Smith, MBBS BSc (Hons)</p>
+      <div class="about-stats">
+        <div>
+          <div class="stat-n">MBBS</div>
+          <div class="stat-l">Medical Degree</div>
+        </div>
+        <div>
+          <div class="stat-n">NHS</div>
+          <div class="stat-l">Trained Doctor</div>
+        </div>
+        <div>
+          <div class="stat-n">GMC</div>
+          <div class="stat-l">Registered</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TREATMENTS -->
+  <section class="treatments" id="treatments">
+    <div class="treatments-header fade-up">
+      <div>
+        <p class="eyebrow">What We Offer</p>
+        <h2 class="section-title">Our <em>Treatments</em></h2>
+      </div>
+      <p class="treatments-subhead">
+        Our range of aesthetic treatments includes anti-wrinkle injections, fillers, skin boosters, polynucleotides, and PRP. Each treatment is carefully designed to enhance your natural beauty and boost your confidence.
+      </p>
+    </div>
+
+    <div class="treatments-grid">
+      <div class="tx-card" onclick="openTxModal('antiwrinkle')">
+        <div class="tx-icon">✦</div>
+        <h3 class="tx-name">Anti-Wrinkle</h3>
+        <p class="tx-desc">Anti-wrinkle injections are a popular treatment to reduce the appearance of fine lines and wrinkles, giving you a smoother and more youthful complexion.</p>
+        <button class="tx-link">Know More <span class="tx-arr">→</span></button>
+      </div>
+      <div class="tx-card" onclick="openTxModal('fillers')">
+        <div class="tx-icon">◈</div>
+        <h3 class="tx-name">Fillers</h3>
+        <p class="tx-desc">Fillers are used to add volume to areas of the face that have lost elasticity, providing a plump and rejuvenated look for a more youthful appearance.</p>
+        <button class="tx-link">Know More <span class="tx-arr">→</span></button>
+      </div>
+      <div class="tx-card" onclick="openTxModal('skinboosters')">
+        <div class="tx-icon">◇</div>
+        <h3 class="tx-name">Skin Boosters</h3>
+        <p class="tx-desc">Skin boosters are designed to hydrate and nourish the skin from within, improving skin texture and elasticity for a radiant and glowing complexion.</p>
+        <button class="tx-link">Know More <span class="tx-arr">→</span></button>
+      </div>
+      <div class="tx-card" onclick="openTxModal('polynucleotides')">
+        <div class="tx-icon">◉</div>
+        <h3 class="tx-name">Polynucleotides</h3>
+        <p class="tx-desc">Poly-nucleotides are fragments of highly purified DNA that instruct your own skin cells to produce more collagen and elastin. Great results that improve over weeks.</p>
+        <button class="tx-link">Know More <span class="tx-arr">→</span></button>
+      </div>
+      <div class="tx-card" onclick="openTxModal('prprf')">
+        <div class="tx-icon">❋</div>
+        <h3 class="tx-name">PRP &amp; PRF</h3>
+        <p class="tx-desc">Blood is taken from your arm and centrifuged down. The plasma is rich in growth factors to stimulate collagen and elastin in skin, and increase hair growth where lost.</p>
+        <button class="tx-link">Know More <span class="tx-arr">→</span></button>
+      </div>
+      <div class="tx-card" onclick="openTxModal('microneedling')">
+        <div class="tx-icon">⬡</div>
+        <h3 class="tx-name">Microneedling</h3>
+        <p class="tx-desc">Medical-grade microneedling using the Dermapen 4 — one of the most advanced devices on the market. Can be combined with PRF, exosomes or polynucleotides for enhanced results.</p>
+        <button class="tx-link">Know More <span class="tx-arr">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TREATMENT OVERVIEW MODAL -->
+  <div class="tx-modal-overlay" id="tx-modal" onclick="if(event.target===this)closeTxModal()">
+    <div class="tx-modal-box">
+      <button class="tx-modal-close" onclick="closeTxModal()">✕</button>
+      <div class="tx-modal-hero">
+        <p class="tx-modal-eyebrow" id="tx-modal-eyebrow">Treatment</p>
+        <h2 class="tx-modal-title" id="tx-modal-title"></h2>
+      </div>
+      <div class="tx-modal-images-wrap" id="tx-modal-images-wrap">
+        <div class="tx-modal-images-grid" id="tx-modal-images-grid"></div>
+        <p class="tx-modal-images-caption" id="tx-modal-images-caption"></p>
+      </div>
+      <div class="tx-modal-body" id="tx-modal-body"></div>
+      <div class="tx-modal-actions">
+        <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" class="tx-btn-primary">Book Now →</a>
+        <a href="#prices" class="tx-btn-outline" onclick="closeTxModal()">View Prices</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3D SKIN ANALYSER -->
+  <section class="analyser">
+    <div class="analyser-content fade-up">
+      <p class="eyebrow">Advanced Diagnostics</p>
+      <h2 class="section-title">Know Your <em>Skin</em></h2>
+      <ul class="analyser-points">
+        <li>With four specialised spectral imaging technologies, we perform an unprecedented deep dive into your skin's health and condition.</li>
+        <li>Tailor your skincare and treatments to your individual needs with data-driven precision.</li>
+        <li>A 3D skin analysis gives both you and Dr Smith a complete picture before any treatment begins.</li>
+      </ul>
+      <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" class="btn-primary" style="width:fit-content">
+        Book a Consultation
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- PRICE LIST -->
+
+  <section class="prices" id="prices">
+    <div class="prices-header fade-up">
+      <div>
+        <p class="eyebrow">Transparent Pricing</p>
+        <h2 class="section-title">Price <em>List</em></h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1.5rem;align-items:flex-start">
+        <p class="prices-note">
+          Every treatment includes an initial consultation. If you prefer to book your consultation as a standalone appointment, the fee is fully redeemable against any treatment of your choice.
+        </p>
+        <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" class="btn-primary" style="display:inline-flex">
+          View Full Price List
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- WHY CHOOSE -->
+  <section class="why">
+    <div class="why-inner">
+      <div class="why-header fade-up">
+        <div>
+          <p class="eyebrow">Why Choose Us</p>
+          <h2 class="section-title">The <em>Dr Smith Aesthetics</em><br/>Difference</h2>
+        </div>
+        <p class="why-sub">
+          We believe aesthetic medicine should be safe, ethical, and deeply personal. Every aspect of your experience is designed to make you feel confident and cared for, from first consultation to aftercare.
+        </p>
+      </div>
+      <div class="why-grid fade-up">
+        <div class="why-item" data-n="01">
+          <div class="why-dot">🩺</div>
+          <h4 class="why-title">NHS-Trained Doctor</h4>
+          <p class="why-desc">MBBS, BSc (Hons) with extensive NHS experience across specialties, bringing a clinical standard of care to every aesthetic treatment.</p>
+        </div>
+        <div class="why-item" data-n="02">
+          <div class="why-dot">✦</div>
+          <h4 class="why-title">Natural Results</h4>
+          <p class="why-desc">An artistic approach dedicated to enhancing your individual features. Never overdone, always tailored to you.</p>
+        </div>
+        <div class="why-item" data-n="03">
+          <div class="why-dot">◈</div>
+          <h4 class="why-title">Industry Educator</h4>
+          <p class="why-desc">Dr Smith trains medical professionals at Cosmetic Courses, reflecting his deep expertise and commitment to raising industry standards.</p>
+        </div>
+        <div class="why-item" data-n="04">
+          <div class="why-dot">❋</div>
+          <h4 class="why-title">Personalised Care</h4>
+          <p class="why-desc">Thorough consultations, bespoke treatment plans, and full aftercare support. Your well-being comes first, always.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER RESULTS -->
+  <section class="results">
+    <div class="results-header fade-up">
+      <p class="eyebrow">Real Results</p>
+      <h2 class="section-title">Client <em>Transformations</em></h2>
+    </div>
+    <div class="slideshow">
+      <div class="slides-track" id="resSlidesTrack"></div>
+      <button class="res-arrow res-arrow-prev" id="resPrevBtn" aria-label="Previous">&#8592;</button>
+      <button class="res-arrow res-arrow-next" id="resNextBtn" aria-label="Next">&#8594;</button>
+    </div>
+    <div class="res-dots" id="resDots"></div>
+    <p class="res-counter" id="resCounter"></p>
+    <p class="results-note">Individual results may vary. All treatments performed by Dr Smith, MBBS BSc (Hons).</p>
+  </section>
+
+  <!-- SOCIAL MEDIA -->
+  <section class="social-section">
+    <p class="eyebrow">Stay Connected</p>
+    <h2 class="section-title">Follow <em>Dr Smith Aesthetics</em></h2>
+    <div class="social-cards fade-up">
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/drlsmithaesthetics/" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Instagram">
+        <div class="social-card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </div>
+        <p class="social-card-platform">Instagram</p>
+        <p class="social-card-handle">@drlsmithaesthetics</p>
+      </a>
+
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@drsmithaesthetics" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="TikTok">
+        <div class="social-card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+          </svg>
+        </div>
+        <p class="social-card-platform">TikTok</p>
+        <p class="social-card-handle">@drsmithaesthetics</p>
+      </a>
+
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/@drsmithaesthetics" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="YouTube">
+        <div class="social-card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+          </svg>
+        </div>
+        <p class="social-card-platform">YouTube</p>
+        <p class="social-card-handle">@drsmithaesthetics</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <div id="contact">
+    <div class="map-strip">
+      <iframe
+        src="https://maps.google.com/maps?q=Ink+Beauty+Skin+Clinic,+341+Kennington+Road,+London+SE11+4QE&output=embed"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Dr Smith Aesthetics location">
+      </iframe>
+    </div>
+    <div class="contact-section">
+      <div class="contact-inner">
+        <div class="contact-left fade-up">
+          <p class="eyebrow">Get In Touch</p>
+          <h2 class="contact-heading">Send Us a <em>Message</em></h2>
+          <p class="contact-blurb">Have a question about a treatment or want to book a consultation? We'd love to hear from you. We'll get back to you as soon as possible.</p>
+          <a href="mailto:info@lsmithaesthetics.com" class="contact-detail">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+            info@lsmithaesthetics.com
+          </a>
+          <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+            <a href="https://www.lsmithaesthetics.com/contact" target="_blank" class="contact-btn">Send Us a Message →</a>
+            <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" class="contact-btn contact-btn-outline">Book Now →</a>
+          </div>
+        </div>
+        <div class="contact-right fade-up">
+          <div class="contact-info-card">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <p class="contact-info-label">Location</p>
+              <p class="contact-info-value">Ink Beauty Skin Clinic<br/>341 Kennington Road<br/>London, SE11 4QE</p>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <div>
+              <p class="contact-info-label">Opening Hours</p>
+              <p class="contact-info-value">Mon / Thu / Fri — 10:30–18:00<br/>Saturday — 10:30–17:00<br/>Sunday — 10:30–16:00<br/>Tue / Wed — Variable</p>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+            <div>
+              <p class="contact-info-label">Email</p>
+              <p class="contact-info-value">info@lsmithaesthetics.com</p>
+            </div>
+          </div>
+          <a href="https://www.instagram.com/drlsmithaesthetics/" target="_blank" rel="noopener noreferrer" class="contact-social-card">
+            <div class="contact-social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </div>
+            <div class="contact-social-text">
+              <span class="contact-social-platform">Instagram</span>
+              <span class="contact-social-handle">@drlsmithaesthetics</span>
+            </div>
+            <span class="contact-social-arrow">→</span>
+          </a>
+          <a href="https://www.tiktok.com/@drsmithaesthetics" target="_blank" rel="noopener noreferrer" class="contact-social-card">
+            <div class="contact-social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+            </div>
+            <div class="contact-social-text">
+              <span class="contact-social-platform">TikTok</span>
+              <span class="contact-social-handle">@drsmithaesthetics</span>
+            </div>
+            <span class="contact-social-arrow">→</span>
+          </a>
+          <a href="https://www.youtube.com/@drsmithaesthetics" target="_blank" rel="noopener noreferrer" class="contact-social-card">
+            <div class="contact-social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+            </div>
+            <div class="contact-social-text">
+              <span class="contact-social-platform">YouTube</span>
+              <span class="contact-social-handle">@drsmithaesthetics</span>
+            </div>
+            <span class="contact-social-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <img src="Brand assets/DrSmith_Aesthetics_Logo_Square_Primary.jpg" alt="Dr Smith Aesthetics" />
+        </div>
+        <p class="footer-tagline">Experienced medical doctor providing personalised aesthetic treatments in South London.</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/drlsmithaesthetics/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@drsmithaesthetics" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="TikTok">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@drsmithaesthetics" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="YouTube">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Treatments</p>
+        <ul class="footer-list">
+          <li><a href="#treatments">Anti-Wrinkle</a></li>
+          <li><a href="#treatments">Fillers</a></li>
+          <li><a href="#treatments">Polynucleotides</a></li>
+          <li><a href="#treatments">PRP &amp; PRF</a></li>
+          <li><a href="#treatments">Profhilo</a></li>
+          <li><a href="#treatments">Skin Boosters</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Clinic</p>
+        <ul class="footer-list">
+          <li><a href="#about">About Dr Smith</a></li>
+          <li><a href="#prices">Price List</a></li>
+          <li><a href="https://www.lsmithaesthetics.com/gift-card" target="_blank">Gift Cards</a></li>
+          <li><a href="https://www.lsmithaesthetics.com/pricelist" target="_blank">Book Now</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-list">
+          <li><a href="mailto:info@lsmithaesthetics.com">info@lsmithaesthetics.com</a></li>
+          <li><a href="tel:07835959075">07835 959075</a></li>
+          <li class="muted-item" style="margin-top:0.5rem">Ink Beauty Skin Clinic</li>
+          <li class="muted-item">341 Kennington Road</li>
+          <li class="muted-item">London, SE11 4QE</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2024 Dr Smith Aesthetics. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="https://www.lsmithaesthetics.com/privacy-policy" target="_blank">Privacy Policy</a>
+        <a href="https://www.lsmithaesthetics.com/booking-policy" target="_blank">Booking Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- TREATMENT MODAL -->
+  <div class="modal-overlay" id="treatmentModal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+      <div class="modal-inner">
+        <p class="modal-eyebrow">Treatment Details</p>
+        <h3 class="modal-title" id="modal-title"></h3>
+        <div class="modal-meta" id="modal-meta"></div>
+        <div class="modal-divider"></div>
+        <p class="modal-section-title">Service Description</p>
+        <div class="modal-section-body" id="modal-desc"></div>
+        <div class="modal-divider"></div>
+        <p class="modal-section-title">Cancellation Policy</p>
+        <div class="modal-section-body" id="modal-policy"></div>
+        <div class="modal-divider"></div>
+        <p class="modal-section-title">Contact Details</p>
+        <div class="modal-section-body" id="modal-contact">
+          <p>Ink Beauty Skin Clinic, 341 Kennington Road, London SE11 4QE</p>
+          <p style="margin-top:0.4rem"><a href="tel:07835959075" style="color:var(--teal)">07835 959075</a></p>
+          <p style="margin-top:0.4rem"><a href="mailto:info@lsmithaesthetics.com" style="color:var(--teal)">info@lsmithaesthetics.com</a></p>
+        </div>
+        <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" class="btn-primary modal-book">
+          Book Now
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Treatment data
+    const TREATMENTS = {
+      'consultation': {
+        title: 'Aesthetic Consultation',
+        meta: [{ icon: '⏱', text: '30 min' }, { icon: '£', text: '£50 (redeemable)' }],
+        desc: `<p>A dedicated, face-to-face 30-minute consultation with Dr Smith to explore your aesthetic concerns and discuss the most suitable treatment options for you.</p>
+               <p style="margin-top:0.75rem">This appointment allows time to understand your goals, assess your features, and create a personalised treatment plan.</p>
+               <ul style="margin-top:0.75rem">
+                 <li>A consultation fee is required at booking.</li>
+                 <li>This fee is <strong>fully redeemable</strong> against any treatment carried out or booked on the same day.</li>
+                 <li>If no treatment is chosen on the day, the consultation fee is non-refundable.</li>
+               </ul>
+               <p style="margin-top:0.75rem; font-size:0.82rem; color:var(--muted)">Please note: This consultation covers aesthetic concerns only. If you have any medical symptoms or conditions, please contact your GP or another appropriate healthcare professional.</p>`,
+        policy: `<p><strong>£50 Consultation Fee</strong></p>
+                 <ul style="margin-top:0.5rem">
+                   <li><strong>Rescheduling:</strong> You may reschedule with more than 48 hours' notice. Changes within 48 hours require a new booking and a new consultation fee.</li>
+                   <li style="margin-top:0.4rem"><strong>Non-attendance / Late Arrival:</strong> Non-attendance or late arrival (where there is insufficient time to complete the consultation safely) will result in the appointment being marked as unattended. A new booking with a new £50 fee will be required.</li>
+                   <li style="margin-top:0.4rem"><strong>Refunds:</strong> The fee is redeemable against any treatment performed or booked on the same day. If no treatment is carried out, the £50 fee is non-refundable.</li>
+                   <li style="margin-top:0.4rem"><strong>Scope:</strong> Consultations are for aesthetic concerns only. For medical symptoms or health-related issues, please contact your GP.</li>
+                 </ul>`
+      },
+      'botox-1': {
+        title: 'Botox 1 Area',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£170' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p><strong>Areas:</strong> Frown lines (glabella) or Crow's feet (lateral canthal)</p>
+               <p style="margin-top:0.75rem"><strong>Important Information for Anti-Wrinkle (Botox) Treatment</strong></p>
+               <ul style="margin-top:0.5rem; line-height:1.8">
+                 <li><strong>Forehead Treatment:</strong> The forehead cannot be treated on its own. It must be combined with treatment of the glabella (frown lines) to ensure safe, balanced results and to reduce the risk of brow heaviness or brow drop. This is priced as 2 areas.</li>
+                 <li style="margin-top:0.4rem">The glabella (frown lines) and lateral canthal (crow's feet) areas can be treated on their own.</li>
+               </ul>
+               <p style="margin-top:0.75rem; font-size:0.82rem; color:var(--muted)">All treatments are performed by Dr Smith.</p>`
+      },
+      'botox-2': {
+        title: 'Botox 2 Areas',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£220' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p><strong>Areas:</strong> Any combination of two — Forehead, Crow's feet, or Frown lines</p>
+               <p style="margin-top:0.75rem">Free follow up review appointment to be made around 14 days post treatment.</p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'botox-3': {
+        title: 'Botox 3 Areas',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£260' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p><strong>Areas:</strong> All 3 — Forehead, Crow's feet, and Frown lines</p>
+               <p style="margin-top:0.75rem">Free follow up review appointment to be made around 14 days post treatment.</p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'brow-lift': {
+        title: 'Botox Brow Lift',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£220' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Carefully placed botox injections to help give a brow lift.</p>
+               <p style="margin-top:0.75rem">Free follow up review appointment to be made around 14 days post treatment.</p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'neck-bands': {
+        title: 'Neck / Platysmal Bands Botox',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£260' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Multiple small botox injections into the Platysmal muscle of the neck.</p>
+               <p style="margin-top:0.75rem"><strong>Platysmal Bands (Neck Bands) Treatment</strong></p>
+               <p style="margin-top:0.5rem">Platysmal bands, often seen as vertical lines in the neck, can become more noticeable with age as the underlying muscles become more active. Anti-wrinkle injections help relax these muscles, softening the appearance of the bands and creating a smoother, more rejuvenated neck profile. They can also create a tighter jawline look, as it releases the pull down of the muscle.</p>
+               <p style="margin-top:0.75rem; font-size:0.82rem; color:var(--muted)">All treatments are performed by Dr Smith.</p>`
+      },
+      'jaw-slimming': {
+        title: 'Jaw Slimming / Masseter Botox',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£270' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>For jaw slimming or tight masseter muscles / teeth grinding.</p>
+               <p style="margin-top:0.75rem">Botox injected into the masseter muscle on each side of the face. Free review appointment can be made for 14 days post treatment.</p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'underarm': {
+        title: 'Underarm Sweating',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£320' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>For excessive underarm sweating (Axillary hyperhidrosis).</p>
+               <p style="margin-top:0.75rem">Botox injected superficially with multiple small injections into both armpits. Botox helps reduce sweat gland activity and hence reduce excessive sweating. Price includes both sides.</p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'trapezius': {
+        title: 'Trapezius',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£380' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Botox to the Trapezius muscles for neck slimming.</p>
+               <p style="margin-top:0.75rem">Botox is carefully placed into the trapezius muscle ("Trap tox") on both sides of the neck. This can help with tension and posture whilst also giving a slimming effect, resulting in a more elongated and aesthetic neck.</p>
+               <p style="margin-top:0.5rem">Price includes both sides.</p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'botox-small-1': {
+        title: 'Small Area Botox x1',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£100' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p><strong>Areas:</strong> Lip flip, chin dimples, smokers lines, downturned mouth or "sad face"</p>
+               <p style="margin-top:0.75rem; font-weight:600; color:var(--teal)">Please read before booking:</p>
+               <p style="margin-top:0.4rem">Does NOT include standard areas of forehead, frown or crow's feet as these areas require a large dose of botox.</p>
+               <p style="margin-top:0.4rem">Small area botox is for one of the following: Lip flip, downturned smile, chin dimpling, gummy smile or smokers lines.</p>
+               <p style="margin-top:0.75rem">If you are unsure what to book, please contact us via the contact form or email.</p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'botox-small-2': {
+        title: 'Small Area Botox x2',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£120' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p><strong>Areas:</strong> Lip flip, chin dimples, smokers lines, downturned mouth or "sad face"</p>
+               <p style="margin-top:0.75rem; font-weight:600; color:var(--teal)">Please read before booking:</p>
+               <p style="margin-top:0.4rem">Does NOT include standard areas of forehead, frown or crow's feet as these areas require a large dose of botox.</p>
+               <p style="margin-top:0.4rem">This booking is for two of the following: Lip flip, downturned smile, chin dimpling, gummy smile or smokers lines.</p>
+               <p style="margin-top:0.75rem">If you are unsure what to book, please contact us via the contact form or email.</p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'pn-face': {
+        title: 'Polynucleotide – Face or Neck',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£280' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>1x session of face or neck polynucleotide treatment.</p>
+               <p style="margin-top:0.75rem">Plinest polynucleotides — premium, science and results-backed polynucleotides.</p>
+               <p style="margin-top:0.5rem">Improves dark circles, skin texture and increases collagen and elastin production for overall skin rejuvenation. Can be injected to target specific areas of the face or neck (for example an area of acne scarring) or generally around the face or neck.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Numbing cream applied prior to treatment.</li>
+                 <li>Recommended: 3 sessions, 3–4 weeks apart.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'pn-eye': {
+        title: 'Polynucleotide – Under Eye',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£280' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>1x session of under eye polynucleotide treatment.</p>
+               <p style="margin-top:0.75rem">Plinest polynucleotides — premium, science and results-backed polynucleotides.</p>
+               <p style="margin-top:0.5rem">Improves dark circles, skin texture and increases collagen and elastin production for overall skin rejuvenation.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Numbing cream applied prior to treatment.</li>
+                 <li>Recommended: 3 sessions, 3–4 weeks apart.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'pn-scalp': {
+        title: 'Polynucleotide – Scalp',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£280' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>1x session of scalp polynucleotide treatment.</p>
+               <p style="margin-top:0.75rem">Plinest polynucleotides — premium, science and results-backed polynucleotides.</p>
+               <p style="margin-top:0.5rem">Promotes and helps hair growth in areas of thinning or balding. Improves the environment of the skin to promote hair growth.</p>
+               <p style="margin-top:0.5rem">For best results for hair growth and thinning, should be combined with PRF injections.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Recommended: 4 sessions, 3–4 weeks apart.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'pn-bundle': {
+        title: 'Polynucleotide – 3x Session Bundle',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£765' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p><strong>Areas:</strong> Face, Neck, Under eyes or Scalp. Includes 3x sessions, 3–4 weeks apart.</p>
+               <p style="margin-top:0.75rem">Plinest polynucleotides — premium, science and results-backed polynucleotides.</p>
+               <p style="margin-top:0.5rem">Treatment is for 3x sessions of one area of polynucleotides, e.g. under eye treatment. If you are unsure, please message us or book a consultation — we will happily guide you as to what treatment is best.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Full amount must be paid on first treatment visit.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'pn-2areas': {
+        title: 'Polynucleotide – 2 Areas',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£450' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>1x session of polynucleotide treatment for two different areas (2x syringes). E.g. Face + under eye combined in one treatment session.</p>
+               <p style="margin-top:0.75rem">Plinest polynucleotides — premium, science and results-backed polynucleotides.</p>
+               <p style="margin-top:0.5rem">Improves dark circles, skin texture and increases collagen and elastin production for overall skin rejuvenation. Can be injected to target specific areas of the face or neck (for example an area of acne scarring) or generally around the face or neck.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Numbing cream applied prior to treatment.</li>
+                 <li>Recommended: 3 sessions, 3–4 weeks apart.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'prf-eye': {
+        title: 'PRF Under Eye Injections',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£240' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>1x PRF session — Platelet Rich Fibrin.</p>
+               <p style="margin-top:0.75rem">Your blood is taken on the day and spun down in our centrifuge. Your own platelet rich fibrin is full of growth factors and platelets. PRF is injected via mesotherapy (small superficial injections post numbing cream) technique to target specific areas of concern.</p>
+               <p style="margin-top:0.75rem"><strong>PRP vs PRF:</strong> PRF contains more platelets and growth factors which are released over a longer period of time to enhance results. We use PRF specific tubes, centrifuge rotor, speed and time to ensure the PRF is appropriately concentrated.</p>
+               <p style="margin-top:0.75rem">Promotes collagen and elastin — improves under eye wrinkles, puffiness and dark circles.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Recommended: 3 sessions, 3–4 weeks apart.</li>
+                 <li style="font-size:0.85rem; color:var(--muted)">Note: This is liquid PRF, not EZ-GEL/Plasma bio-gel.</li>
+               </ul>
+               <p style="margin-top:0.75rem; padding:0.75rem; background:rgba(201,169,110,0.08); border-left:3px solid var(--gold); border-radius:4px">
+                 <strong>Optional Add-On:</strong> Calecim® Eye Lifting Cream — powered by PTT-6 technology with stem-cell-derived growth factors, proteins and collagen-activating exosomes to firm, smooth and rejuvenate the under-eye area.<br>
+                 <span style="color:var(--teal); font-weight:500">£100 with this treatment</span> <span style="color:var(--muted); text-decoration:line-through; font-size:0.85rem">normally £115</span>
+               </p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'prf-eye-bundle': {
+        title: 'PRF Under Eye Bundle (3x)',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£650' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>3x PRF sessions — Platelet Rich Fibrin.</p>
+               <p style="margin-top:0.75rem">Your blood is taken on the day and spun down in our centrifuge. Your own platelet rich fibrin is full of growth factors and platelets. PRF is injected via mesotherapy (small superficial injections post numbing cream) technique to target specific areas of concern.</p>
+               <p style="margin-top:0.75rem"><strong>PRP vs PRF:</strong> PRF contains more platelets and growth factors which are released over a longer period of time to enhance results. We use PRF specific tubes, centrifuge rotor, speed and time to ensure the PRF is appropriately concentrated.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Recommended: 3 sessions, 2–4 weeks apart.</li>
+                 <li>Treatment package of 3x individual sessions — save money compared to buying individually.</li>
+                 <li><strong>Payment of bundle must be paid in full on first visit.</strong></li>
+                 <li style="font-size:0.85rem; color:var(--muted)">Note: This is liquid PRF, not PRF gel/Bio-gel.</li>
+               </ul>
+               <p style="margin-top:0.75rem; padding:0.75rem; background:rgba(201,169,110,0.08); border-left:3px solid var(--gold); border-radius:4px">
+                 <strong>Optional Add-On:</strong> Calecim® Eye Lifting Cream — PTT-6 technology with stem-cell-derived growth factors, proteins and collagen-activating exosomes.<br>
+                 <span style="color:var(--teal); font-weight:500">£100 with this treatment</span> <span style="color:var(--muted); text-decoration:line-through; font-size:0.85rem">normally £115</span>
+               </p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'prf-face': {
+        title: 'PRF Face / Neck / Hands Injections',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£240' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>1x PRF session — Platelet Rich Fibrin.</p>
+               <p style="margin-top:0.75rem">Your blood is taken on the day and spun down in our centrifuge. Your own platelet rich fibrin is full of growth factors and platelets. PRF is injected via mesotherapy (small superficial injections post numbing cream) technique to target specific areas of concern.</p>
+               <p style="margin-top:0.75rem"><strong>PRP vs PRF:</strong> PRF contains more platelets and growth factors which are released over a longer period of time to enhance results. We use PRF specific tubes, centrifuge rotor, speed and time to ensure the PRF is appropriately concentrated.</p>
+               <p style="margin-top:0.75rem">Promotes collagen and elastin — improves wrinkles and overall skin health.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Recommended: 3 sessions, 2–4 weeks apart.</li>
+                 <li style="font-size:0.85rem; color:var(--muted)">Note: This is liquid PRF, not PRF gel/Bio-gel.</li>
+               </ul>
+               <p style="margin-top:0.75rem; padding:0.75rem; background:rgba(201,169,110,0.08); border-left:3px solid var(--gold); border-radius:4px">
+                 <strong>Optional Add-On:</strong> Calecim® PTT-6 Recovery Cream — enriched with stem-cell-derived proteins, growth factors and exosomes to support healing and maintain post-procedure benefits.<br>
+                 <span style="color:var(--teal); font-weight:500">£70 with this treatment</span> <span style="color:var(--muted); text-decoration:line-through; font-size:0.85rem">normally £95</span>
+               </p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'prf-scalp': {
+        title: 'PRF Scalp Injections',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£250' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>1x PRF session — Platelet Rich Fibrin.</p>
+               <p style="margin-top:0.75rem">Your blood is taken on the day and spun down in our centrifuge. Your own platelet rich fibrin is full of growth factors and platelets. PRF is injected via mesotherapy (small superficial injections post numbing cream) technique to target specific areas of concern.</p>
+               <p style="margin-top:0.75rem"><strong>PRP vs PRF:</strong> PRF contains more platelets and growth factors which are released over a longer period of time to enhance results. We use PRF specific tubes, centrifuge rotor, speed and time to ensure the PRF is appropriately concentrated.</p>
+               <p style="margin-top:0.75rem">Promotes hair growth and improves areas of baldness where the hair follicle is present but not active. Improves hair thickness and overall health.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Recommended: 3–6 sessions, 2–4 weeks apart.</li>
+                 <li style="font-size:0.85rem; color:var(--muted)">Note: This is liquid PRF, not EZGel or Plasma Biofiller.</li>
+               </ul>
+               <div style="margin-top:0.75rem; padding:0.75rem; background:rgba(201,169,110,0.08); border-left:3px solid var(--gold); border-radius:4px">
+                 <p><strong>Optional Add-On 1:</strong> Calecim® Advanced Hair System — a 6-week serum enriched with stem-cell-derived growth factors, proteins and exosomes to support hair follicle regeneration, scalp health, volume, density and long-term hair quality.<br>
+                 <span style="color:var(--teal); font-weight:500">£240 with this treatment</span></p>
+                 <p style="margin-top:0.5rem"><strong>Optional Add-On 2:</strong> 1x Polynucleotide Hair Treatment — regenerative therapy rich in growth factors and bioactive proteins to stimulate hair follicles and support thicker, stronger hair.<br>
+                 <span style="color:var(--teal); font-weight:500">£190 with this treatment</span></p>
+               </div>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'prf-scalp-bundle': {
+        title: 'PRF Hair / Scalp Bundle (3x)',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£690' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>3x PRF sessions — Platelet Rich Fibrin.</p>
+               <p style="margin-top:0.75rem">Your blood is taken on the day and spun down in our centrifuge. Your own platelet rich fibrin is full of growth factors and platelets.</p>
+               <p style="margin-top:0.75rem"><strong>PRP vs PRF:</strong> PRF contains more platelets and growth factors which are released over a longer period of time to enhance results. We use PRF specific tubes, centrifuge rotor, speed and time to ensure the PRF is appropriately concentrated.</p>
+               <p style="margin-top:0.75rem">PRF is injected via mesotherapy technique to target specific areas of concern. Promotes hair growth and thicker hair where the hair follicle is no longer active.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Recommended: 3–6 sessions, 2–4 weeks apart.</li>
+                 <li>Treatment package of 3x individual sessions — save money compared to buying individually.</li>
+                 <li><strong>Payment of bundle must be paid in full on first visit.</strong></li>
+                 <li style="font-size:0.85rem; color:var(--muted)">Note: This is liquid PRF, not EZGel or Plasma Biofiller.</li>
+               </ul>
+               <div style="margin-top:0.75rem; padding:0.75rem; background:rgba(201,169,110,0.08); border-left:3px solid var(--gold); border-radius:4px">
+                 <p><strong>Optional Add-On 1:</strong> Calecim® Advanced Hair System — a 6-week serum enriched with stem-cell-derived growth factors, proteins and exosomes.<br>
+                 <span style="color:var(--teal); font-weight:500">£240 with this treatment</span></p>
+                 <p style="margin-top:0.5rem"><strong>Optional Add-On 2:</strong> 1x Polynucleotide Hair Treatment — regenerative therapy to stimulate hair follicles and support thicker, stronger hair.<br>
+                 <span style="color:var(--teal); font-weight:500">£190 with this treatment</span></p>
+               </div>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'prf-micro': {
+        title: 'PRF Microneedling (Vampire Facial)',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£220' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>1x PRF Microneedling session.</p>
+               <p style="margin-top:0.75rem">PRF (Platelet-Rich Fibrin) is created using a small sample of your own blood, taken on the day and processed in a specialised centrifuge. This produces a concentrate rich in platelets, growth factors and healing cells. The PRF is then combined with microneedling and applied across the face to enhance skin regeneration.</p>
+               <p style="margin-top:0.75rem">This treatment is an excellent option when PRF is needed for a larger area such as the full face, compared to targeted PRF injections used for specific concerns.</p>
+               <p style="margin-top:0.75rem"><strong>PRP vs PRF:</strong> PRF contains a higher concentration of platelets and growth factors, released more slowly over time for stronger, longer-lasting results. We use PRF-specific tubes and carefully controlled centrifuge settings to ensure optimal concentration and quality.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Stimulates collagen and elastin</li>
+                 <li>Improves fine lines, wrinkles and overall skin quality</li>
+                 <li>Supports brighter, healthier, rejuvenated skin</li>
+                 <li>Recommended: 3 sessions, 4 weeks apart, followed by maintenance as needed.</li>
+               </ul>
+               <p style="margin-top:0.75rem; padding:0.75rem; background:rgba(201,169,110,0.08); border-left:3px solid var(--gold); border-radius:4px">
+                 <strong>Optional Add-On:</strong> Calecim® PTT-6 Recovery Cream — stem-cell-derived proteins, growth factors and exosomes to support healing and maintain post-procedure benefits.<br>
+                 <span style="color:var(--teal); font-weight:500">£70 with this treatment</span> <span style="color:var(--muted); text-decoration:line-through; font-size:0.85rem">normally £95</span>
+               </p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">All treatments are performed by Dr Smith.</p>`
+      },
+      'prf-micro-bundle': {
+        title: 'PRF Microneedling (Vampire Facial) x3',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£590' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>3x PRF Microneedling bundle.</p>
+               <p style="margin-top:0.75rem">PRF (Platelet-Rich Fibrin) is created using a small sample of your own blood, taken on the day and processed in a specialised centrifuge. This produces a concentrate rich in platelets, growth factors and healing cells. The PRF is then combined with microneedling and applied across the face to enhance skin regeneration.</p>
+               <p style="margin-top:0.75rem"><strong>PRP vs PRF:</strong> PRF contains a higher concentration of platelets and growth factors, released more slowly over time for stronger, longer-lasting results. We use PRF-specific tubes and carefully controlled centrifuge settings.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Stimulates collagen and elastin</li>
+                 <li>Improves fine lines, wrinkles and overall skin quality</li>
+                 <li>Supports brighter, healthier, rejuvenated skin</li>
+                 <li>Recommended: 3 sessions, 4 weeks apart.</li>
+                 <li><strong>Payment for bundle must be paid in full on first session.</strong></li>
+               </ul>
+               <p style="margin-top:0.75rem; padding:0.75rem; background:rgba(201,169,110,0.08); border-left:3px solid var(--gold); border-radius:4px">
+                 <strong>Optional Add-On:</strong> Calecim® PTT-6 Recovery Cream — stem-cell-derived proteins, growth factors and exosomes to support healing and maintain post-procedure benefits.<br>
+                 <span style="color:var(--teal); font-weight:500">£70 with this treatment</span> <span style="color:var(--muted); text-decoration:line-through; font-size:0.85rem">normally £95</span>
+               </p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'prf-face-bundle': {
+        title: 'PRF Face / Neck / Hands Bundle (3x)',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£600' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>3x PRF sessions — Platelet Rich Fibrin.</p>
+               <p style="margin-top:0.75rem">Your blood is taken on the day and spun down in our centrifuge. Your own platelet rich fibrin is full of growth factors and platelets.</p>
+               <p style="margin-top:0.75rem"><strong>PRP vs PRF:</strong> PRF contains more platelets and growth factors which are released over a longer period of time to enhance results. We use PRF specific tubes, centrifuge rotor, speed and time to ensure the PRF is appropriately concentrated.</p>
+               <p style="margin-top:0.75rem">PRF is injected via mesotherapy technique to target specific areas of concern. Promotes collagen and elastin — improves wrinkles and overall skin health.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Recommended: 3 sessions, 2–4 weeks apart.</li>
+                 <li>Treatment package of 3x individual sessions — save money compared to buying individually.</li>
+                 <li><strong>Payment of bundle must be paid in full on first visit.</strong></li>
+                 <li style="font-size:0.85rem; color:var(--muted)">Note: This is liquid PRF, not PRF gel/Bio-gel.</li>
+               </ul>
+               <p style="margin-top:0.75rem; padding:0.75rem; background:rgba(201,169,110,0.08); border-left:3px solid var(--gold); border-radius:4px">
+                 <strong>Optional Add-On:</strong> Calecim® PTT-6 Recovery Cream — enriched with stem-cell-derived proteins, growth factors and exosomes to support healing and maintain post-procedure benefits.<br>
+                 <span style="color:var(--teal); font-weight:500">£70 with this treatment</span> <span style="color:var(--muted); text-decoration:line-through; font-size:0.85rem">normally £95</span>
+               </p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'prf-exosome': {
+        title: 'PRF + Exosome Microneedling x3 Sessions',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£850' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>3x sessions of PRF microneedling with application of Calecim® PTT-6 Exosome Serum.</p>
+               <p style="margin-top:0.75rem">This premium programme combines PRF microneedling and Calecim® PTT-6 Serum for enhanced skin repair, improved texture, and long-lasting radiance.</p>
+               <p style="margin-top:0.75rem">A small sample of your blood is processed in a specialised centrifuge to create Platelet-Rich Fibrin (PRF) — rich in platelets, growth factors and healing cells. This is applied during microneedling across the face and enhanced with Calecim® PTT-6 Serum, containing proteins, exosomes and growth factors from ethically sourced stem cells.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Improves fine lines, wrinkles and skin laxity</li>
+                 <li>Brightens dull or uneven skin tone</li>
+                 <li>Enhances texture and smoothness</li>
+                 <li>Supports stronger, healthier, more youthful-looking skin</li>
+                 <li>Recommended: 3 sessions, approximately 4 weeks apart.</li>
+                 <li><strong>Payment for bundle must be paid in full on first session.</strong></li>
+               </ul>
+               <p style="margin-top:0.75rem; padding:0.75rem; background:rgba(201,169,110,0.08); border-left:3px solid var(--gold); border-radius:4px">
+                 <strong>Optional Add-On:</strong> Calecim® PTT-6 Recovery Cream — stem-cell-derived proteins, growth factors and exosomes to support healing at home.<br>
+                 <span style="color:var(--teal); font-weight:500">£70 with this package</span> <span style="color:var(--muted); text-decoration:line-through; font-size:0.85rem">normally £95</span>
+               </p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">All treatments are performed by Dr Smith.</p>`
+      },
+      'plasma': {
+        title: 'Plasma Biofiller',
+        meta: [{ icon: '⏱', text: '1 hr 30 min' }, { icon: '£', text: '£480' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>1x Plasma Biofiller session.</p>
+               <p style="margin-top:0.75rem">Plasma Biofiller is an advanced regenerative treatment using your own blood to create a plasma-based solution rich in platelets and growth factors. When injected into the skin, it provides a subtle volume effect for a few weeks, while primarily working to stimulate natural collagen production and long-term skin regeneration.</p>
+               <p style="margin-top:0.5rem">This treatment is ideal for improving texture, firmness and elasticity over time. It is not a traditional dermal filler, but a natural rejuvenation therapy.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Uses your own plasma to encourage collagen and elastin production</li>
+                 <li>Smooths fine lines and wrinkles</li>
+                 <li>Enhances skin firmness, tone and elasticity</li>
+                 <li>Promotes natural, long-lasting rejuvenation</li>
+                 <li>Generally 2–3 treatments advised, 1–2 months apart.</li>
+               </ul>
+               <div style="margin-top:0.75rem; padding:0.75rem; background:rgba(201,169,110,0.08); border-left:3px solid var(--gold); border-radius:4px">
+                 <p><strong>Optional Add-On 1:</strong> Calecim® PTT-6 Recovery Cream.<br><span style="color:var(--teal); font-weight:500">£70 with this treatment</span> <span style="color:var(--muted); text-decoration:line-through; font-size:0.85rem">normally £95</span></p>
+                 <p style="margin-top:0.5rem"><strong>Optional Add-On 2:</strong> Calecim® Eye Lifting Cream.<br><span style="color:var(--teal); font-weight:500">£100 with this treatment</span> <span style="color:var(--muted); text-decoration:line-through; font-size:0.85rem">normally £115</span></p>
+               </div>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">All treatments are performed by Dr Smith.</p>`
+      },
+      'plasma-x2': {
+        title: 'Plasma Biofiller x2 Sessions',
+        meta: [{ icon: '⏱', text: '1 hr 30 min' }, { icon: '£', text: '£900' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>2x Plasma Biofiller sessions.</p>
+               <p style="margin-top:0.75rem">Plasma Biofiller is an advanced regenerative treatment using your own blood to create a plasma-based solution rich in platelets and growth factors. When injected into the skin, it provides a subtle volume effect for a few weeks, while primarily working to stimulate natural collagen production and long-term skin regeneration.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Uses your own plasma to encourage collagen and elastin production</li>
+                 <li>Smooths fine lines and wrinkles</li>
+                 <li>Enhances skin firmness, tone and elasticity</li>
+                 <li>Generally 2–3 treatments advised, 1–2 months apart.</li>
+               </ul>
+               <div style="margin-top:0.75rem; padding:0.75rem; background:rgba(201,169,110,0.08); border-left:3px solid var(--gold); border-radius:4px">
+                 <p><strong>Optional Add-On 1:</strong> Calecim® PTT-6 Recovery Cream.<br><span style="color:var(--teal); font-weight:500">£70 with this treatment</span> <span style="color:var(--muted); text-decoration:line-through; font-size:0.85rem">normally £95</span></p>
+                 <p style="margin-top:0.5rem"><strong>Optional Add-On 2:</strong> Calecim® Eye Lifting Cream.<br><span style="color:var(--teal); font-weight:500">£100 with this treatment</span> <span style="color:var(--muted); text-decoration:line-through; font-size:0.85rem">normally £115</span></p>
+               </div>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">All treatments are performed by Dr Smith.</p>`
+      },
+      'exosome': {
+        title: 'Exosome Microneedling Session (Calecim®)',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£260' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>1x Calecim® PTT-6 Serum (Exosomes / growth factors) microneedling session.</p>
+               <p style="margin-top:0.75rem">Medical-grade microneedling is performed across the face to stimulate collagen production and improve skin texture. Immediately afterwards, Calecim® PTT-6 Serum is applied. The microchannels created during microneedling allow the serum's powerful regenerative ingredients to penetrate deeply, accelerating healing and enhancing results.</p>
+               <p style="margin-top:0.75rem">Calecim® PTT-6 Serum contains proteins, growth factors and exosomes derived from ethically sourced umbilical cord lining stem cells.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Improves fine lines and early wrinkles</li>
+                 <li>Enhances texture, tone and overall skin quality</li>
+                 <li>Supports brighter, healthier, more radiant skin</li>
+                 <li>Reduces signs of stress, dullness and mild laxity</li>
+               </ul>
+               <p style="margin-top:0.75rem; padding:0.75rem; background:rgba(201,169,110,0.08); border-left:3px solid var(--gold); border-radius:4px">
+                 <strong>Optional Add-On:</strong> Calecim® PTT-6 Recovery Cream to support healing and maintain post-procedure benefits.<br>
+                 <span style="color:var(--teal); font-weight:500">£70 with this treatment</span> <span style="color:var(--muted); text-decoration:line-through; font-size:0.85rem">normally £95</span>
+               </p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">All treatments are performed by Dr Smith.</p>`
+      },
+      'vtech': {
+        title: 'V-Tech Exosome PDRN Microneedling',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£230' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>1x Microneedling session with the advanced V-Tech system (Exosomes + PDRN).</p>
+               <p style="margin-top:0.75rem">Microneedling creates small passageways for the solution to penetrate the skin for best effect.</p>
+               <p style="margin-top:0.75rem"><strong>V-Tech solution contains:</strong></p>
+               <ul style="margin-top:0.5rem; line-height:1.8">
+                 <li>2% High molecular weight polynucleotide</li>
+                 <li>Synthetic Exosomes</li>
+                 <li>Peptides</li>
+                 <li>Vegetable Stem Cells</li>
+               </ul>
+               <p style="margin-top:0.75rem">Improves the overall health of the skin's structure (ECM) and the signs of ageing, wrinkles, dehydration and overall skin health, in combination with the benefits of microneedling.</p>
+               <p style="margin-top:0.5rem">Recommended course: 3 treatments, 3–5 weeks apart, followed by regular maintenance as required.</p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'vtech-bundle': {
+        title: 'V-Tech Exosome PDRN Microneedling x3',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£600' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>3x Microneedling sessions with the advanced V-Tech system (Exosomes + PDRN).</p>
+               <p style="margin-top:0.75rem">Microneedling creates small passageways for the solution to penetrate the skin for best effect.</p>
+               <p style="margin-top:0.75rem"><strong>V-Tech solution contains:</strong></p>
+               <ul style="margin-top:0.5rem; line-height:1.8">
+                 <li>2% High molecular weight polynucleotide</li>
+                 <li>Synthetic Exosomes</li>
+                 <li>Peptides</li>
+                 <li>Vegetable Stem Cells</li>
+               </ul>
+               <p style="margin-top:0.75rem">Improves the overall health of the skin's structure (ECM) and the signs of ageing, wrinkles, dehydration and overall skin health, in combination with the benefits of microneedling.</p>
+               <p style="margin-top:0.5rem">Recommended course: 3 treatments, 3–5 weeks apart, followed by regular maintenance as required.</p>
+               <p style="margin-top:0.5rem"><strong>Bundle is for 3x separate treatment sessions. Payment in full required during first session.</strong></p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'plasma-x3': {
+        title: 'Plasma Biofiller x3 Sessions',
+        meta: [{ icon: '⏱', text: '1 hr 30 min' }, { icon: '£', text: '£1,300' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>3x Plasma Biofiller sessions.</p>
+               <p style="margin-top:0.75rem">Plasma Biofiller is an advanced regenerative treatment using your own blood to create a plasma-based solution rich in platelets and growth factors. When injected into the skin, it provides a subtle volume effect for a few weeks, while primarily working to stimulate natural collagen production and long-term skin regeneration.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Uses your own plasma to encourage collagen and elastin production</li>
+                 <li>Smooths fine lines and wrinkles</li>
+                 <li>Enhances skin firmness, tone and elasticity</li>
+                 <li>Generally 2–3 treatments advised, 1–2 months apart.</li>
+               </ul>
+               <div style="margin-top:0.75rem; padding:0.75rem; background:rgba(201,169,110,0.08); border-left:3px solid var(--gold); border-radius:4px">
+                 <p><strong>Optional Add-On 1:</strong> Calecim® PTT-6 Recovery Cream.<br><span style="color:var(--teal); font-weight:500">£70 with this treatment</span> <span style="color:var(--muted); text-decoration:line-through; font-size:0.85rem">normally £95</span></p>
+                 <p style="margin-top:0.5rem"><strong>Optional Add-On 2:</strong> Calecim® Eye Lifting Cream.<br><span style="color:var(--teal); font-weight:500">£100 with this treatment</span> <span style="color:var(--muted); text-decoration:line-through; font-size:0.85rem">normally £115</span></p>
+               </div>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">All treatments are performed by Dr Smith.</p>`
+      },
+      'profhilo': {
+        title: 'Profhilo Face or Neck',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£240' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Skin rejuvenation and hydration with Hyaluronic Acid — injectable moisturiser.</p>
+               <p style="margin-top:0.75rem">Profhilo is a skin booster using different length chains of hyaluronic acid to attract water into the skin and create a hydrated, dewy and youthful glow. Helps with skin hydration, texture and face or neck crepiness.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Recommended course: 2 treatments, 3–4 weeks apart, followed by maintenance.</li>
+                 <li>See Profhilo Bundle for a saving compared to buying separately.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'profhilo-bundle': {
+        title: 'Profhilo Face or Neck Bundle (2x)',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£420' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Skin rejuvenation and hydration with Hyaluronic Acid — 2x separate sessions.</p>
+               <p style="margin-top:0.75rem">Profhilo is a skin booster using different length chains of hyaluronic acid to attract water into the skin and create a hydrated, dewy and youthful glow. Helps with skin texture, hydration and crepiness of the face or neck.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Recommended course: 2 treatments, 3–4 weeks apart, followed by maintenance.</li>
+                 <li>Bundle — cheaper than buying separately. Must be paid in full on first visit.</li>
+                 <li>This is a 2x bundle — 2 separate sessions of Profhilo spaced a few weeks apart.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'profhilo-structura': {
+        title: 'Profhilo Structura',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£280' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Deeper hydration and structural support.</p>
+               <p style="margin-top:0.75rem">Profhilo Structura is designed with a slightly higher concentration of hyaluronic acid than Profhilo and is delivered with a cannula, rather than a needle, to specific areas of the face. Profhilo targets hydration and overall skin quality, whilst Profhilo Structura works on the deeper layers of the skin to give hydration and structural support — good for sagging skin and volume loss.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Recommended course: 1–2 sessions (patient dependent), with 6-monthly maintenance.</li>
+                 <li style="font-size:0.85rem; color:var(--muted)">Note: This is not the same as dermal fillers.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'profhilo-structura-bundle': {
+        title: 'Profhilo Structura Bundle (2x)',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£520' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Deeper hydration and structural support — 2x separate sessions.</p>
+               <p style="margin-top:0.75rem">Profhilo Structura is designed with a slightly higher concentration of hyaluronic acid than Profhilo and is delivered with a cannula, rather than a needle, to specific areas of the face. Works on the deeper layers of the skin to give hydration and structural support — good for sagging skin and volume loss.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>This is a 2x bundle — 2 separate sessions of Profhilo Structura spaced a few weeks apart.</li>
+                 <li style="font-size:0.85rem; color:var(--muted)">Note: This is not the same as dermal fillers.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'teoxane': {
+        title: 'Teoxane Redensity 1',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£220' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Skin rejuvenation and hydration.</p>
+               <p style="margin-top:0.75rem">Teoxane Redensity 1 is a skin booster containing hyaluronic acid that attracts water into the skin and creates a hydrated, dewy and youthful glow. It also contains a mixture of amino acids, vitamins and minerals which aid in collagen and elastin production, hydration and glow.</p>
+               <p style="margin-top:0.5rem">Can be used on the face, neck, décolletage and back of the hands.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Treatment is for 1ml/syringe. For an extra 1ml per treatment (e.g. 2mls for whole face), an extra £90 per session can be added.</li>
+                 <li>Recommended course: 3 sessions, 3–4 weeks apart.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'skinvive': {
+        title: 'Skinvive (x2 Syringes)',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£450' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Skin rejuvenation and hydration with Hyaluronic Acid injections.</p>
+               <p style="margin-top:0.75rem">Skinvive by Juvederm is a skin booster with hyaluronic acid to attract and retain water into the skin and create a hydrated, dewy and youthful glow. It increases the amount of aquaporins to increase transport of water and glycerin in the skin, giving great hydration.</p>
+               <p style="margin-top:0.5rem">Can be used for cheeks, peri-oral (around the mouth), neck, décolletage and hands.</p>
+               <p style="margin-top:0.75rem"><strong>Guide to syringes per area:</strong></p>
+               <ul style="margin-top:0.5rem; line-height:1.8">
+                 <li>Cheeks — 2x syringes</li>
+                 <li>Peri-oral (around the mouth) + chin — 2x syringes</li>
+                 <li>Neck — 2x syringes</li>
+                 <li>Décolletage — 1x syringe</li>
+                 <li>Hands — 2–3x syringes</li>
+               </ul>
+               <p style="margin-top:0.75rem">This treatment package is for 2x syringes. Any extra syringe per treatment session is charged at an additional £120.</p>
+               <p style="margin-top:0.5rem">Recommended: 1x session, with maintenance 6–9 monthly.</p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'sunekos-bundle': {
+        title: 'Sunekos 1200 + Performa Bundle',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£640' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Sunekos 1200 + Sunekos Performa, followed by 2x sessions of Performa (3 treatment sessions total).</p>
+               <p style="margin-top:0.75rem">Sunekos is a patented injectable treatment containing hyaluronic acid and a specific set of amino acids in a specific ratio, designed to enhance and rejuvenate the skin's extracellular matrix (ECM — the support structure of cells). This enables cells to work to their best ability and has a longer-lasting effect compared to treatments that act on the cell alone.</p>
+               <p style="margin-top:0.5rem">Targets signs of ageing — skin laxity, structure, fine lines and wrinkles, pigmentation and under-eye. Can be used on the face, neck, décolleté and hands.</p>
+               <p style="margin-top:0.75rem"><strong>Recommended course:</strong></p>
+               <ul style="margin-top:0.5rem; line-height:1.8">
+                 <li>Deeper wrinkles / volume loss: Sunekos 1200 + Performa for first session, followed by 2–3 sessions of Performa a few weeks apart.</li>
+                 <li>Under eye or finer wrinkles: 3x sessions of Sunekos Performa a few weeks apart.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'sunekos-3x': {
+        title: 'Sunekos Performa Bundle (3x)',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£590' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>3x Sunekos Performa sessions.</p>
+               <p style="margin-top:0.75rem">Sunekos is a patented injectable treatment containing hyaluronic acid and a specific set of amino acids in a specific ratio, designed to enhance and rejuvenate the skin's extracellular matrix (ECM). Targets signs of ageing — skin laxity, structure, fine lines and wrinkles, pigmentation and under-eye. Can be used on the face, neck, décolleté and hands.</p>
+               <p style="margin-top:0.75rem"><strong>Recommended course:</strong></p>
+               <ul style="margin-top:0.5rem; line-height:1.8">
+                 <li>Deeper wrinkles / volume loss: Sunekos 1200 + Performa for first session, followed by 2–3 sessions of Performa a few weeks apart.</li>
+                 <li>Under eye or finer wrinkles: 3x sessions of Sunekos Performa a few weeks apart.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'teoxane-bundle': {
+        title: 'Teoxane Redensity 1 Bundle (3x)',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£595' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>3x sessions of skin rejuvenation and hydration.</p>
+               <p style="margin-top:0.75rem">Teoxane Redensity 1 is a skin booster containing hyaluronic acid that attracts water into the skin and creates a hydrated, dewy and youthful glow. Also contains amino acids, vitamins and minerals which aid in collagen and elastin production, hydration and glow.</p>
+               <p style="margin-top:0.5rem">Can be used on the face, neck, décolletage and back of the hands.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Treatment is for 1ml/syringe. For an extra 1ml per treatment, an extra £90 per session can be added.</li>
+                 <li>Recommended course: 3 sessions, 3–4 weeks apart.</li>
+                 <li>This bundle is for 3x separate sessions.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'harmonyca': {
+        title: 'HArmonyCA',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£680' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Biostimulator and hyaluronic acid combination treatment for natural lifting and rejuvenation.</p>
+               <p style="margin-top:0.75rem">HArmonyCA is a unique injectable treatment that combines hyaluronic acid with calcium hydroxyapatite — a powerful biostimulator that stimulates your own collagen and elastin production. The result is immediate volumisation and hydration alongside long-term skin tightening and structural improvement.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Ideal for mild to moderate volume loss, skin laxity and overall facial rejuvenation.</li>
+                 <li>Results are gradual and continue to improve over several months as collagen is produced.</li>
+                 <li>A consultation is included to discuss the areas to be treated and the results we aim to achieve.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'lip-filler-half': {
+        title: 'Lip Filler 0.5ml / 0.7ml',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£190' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Subtle lip enhancement using 0.5ml or 0.7ml of premium hyaluronic acid filler.</p>
+               <p style="margin-top:0.75rem">A consultation is included to discuss the results we aim to achieve. Ideal for clients looking for a very natural enhancement — adding a small amount of volume, improving lip shape or definition without a dramatic change.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Brands used are Juvederm or Teoxane.</li>
+                 <li>Suitable for first-time filler patients or those wanting a conservative result.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'lip-filler-1ml': {
+        title: 'Lip Filler (1ml)',
+        meta: [{ icon: '⏱', text: '1 hr' }, { icon: '£', text: '£260' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Full 1ml lip enhancement using premium hyaluronic acid filler.</p>
+               <p style="margin-top:0.75rem">A consultation is included to discuss the results we aim to achieve. 1ml is the standard amount used for lip filler, providing a natural but noticeable enhancement to volume, shape and definition.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Brands used are Juvederm or Teoxane.</li>
+                 <li>Results typically last 6–12 months depending on the individual.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'cheek-filler': {
+        title: 'Cheek Filler',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£260' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Cheek augmentation and contouring using premium hyaluronic acid filler.</p>
+               <p style="margin-top:0.75rem">A consultation is included to discuss the results we aim to achieve. Cheek filler can restore volume lost through ageing, create higher cheekbones or improve overall facial balance and symmetry.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Price is per syringe (1ml–1.2ml syringes). Brands used are Juvederm or Teoxane.</li>
+                 <li>Any additional 1ml filler priced at an extra £160.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'temple-filler': {
+        title: 'Temple Filler',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£260' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Temple volumisation using premium hyaluronic acid filler.</p>
+               <p style="margin-top:0.75rem">A consultation is included to discuss the results we aim to achieve. Temple hollowing is a key sign of facial ageing that is often overlooked. Restoring volume to the temples creates a more youthful, lifted appearance and improves overall facial proportion.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Price is per syringe (1ml–1.2ml syringes). Brands used are Juvederm or Teoxane.</li>
+                 <li>Any additional 1ml filler priced at an extra £160.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'nasolabial-filler': {
+        title: 'Nasolabial Filler',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£260' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Softening of nasolabial folds (smile lines) using premium hyaluronic acid filler.</p>
+               <p style="margin-top:0.75rem">A consultation is included to discuss the results we aim to achieve. Nasolabial folds are the lines that run from the sides of the nose to the corners of the mouth. Filler placed carefully in this area softens these lines for a refreshed, natural appearance.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Price is per syringe (1ml–1.2ml syringes). Brands used are Juvederm or Teoxane.</li>
+                 <li>Any additional 1ml filler priced at an extra £160.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'marionette': {
+        title: 'Marionette / Mouth Lines',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£260' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Treatment of marionette lines and mouth corner lines using premium hyaluronic acid filler.</p>
+               <p style="margin-top:0.75rem">A consultation is included to discuss the results we aim to achieve. Marionette lines run downward from the corners of the mouth and can give a downturned or sad appearance. Filler softens these lines and restores a more positive, rested expression.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Price is per syringe (1ml–1.2ml syringes). Brands used are Juvederm or Teoxane.</li>
+                 <li>Any additional 1ml filler priced at an extra £160.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'chin-filler': {
+        title: 'Chin Filler',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£260' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Chin augmentation and projection using premium hyaluronic acid filler.</p>
+               <p style="margin-top:0.75rem">A consultation is included to discuss the results we aim to achieve. Chin filler can improve facial balance and profile, create more chin projection or help define the jawline. It is often combined with jaw filler for a more comprehensive result.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Price is per syringe (1ml–1.2ml syringes). Brands used are Juvederm or Teoxane.</li>
+                 <li>Any additional 1ml filler priced at an extra £160.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'jaw-filler': {
+        title: 'Jaw Filler',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£260' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Premium filler for jaw augmentation and definition.</p>
+               <p style="margin-top:0.75rem">A consultation is included to discuss the results we aim to achieve. Jaw filler is very important in giving a more defined and sharp facial aesthetic. It can be used to enhance a masculine jawline or give a more defined feminine jawline.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Generally a minimum of 3ml are required to achieve a noticeable result, with augmentation of the chin also likely required.</li>
+                 <li>Price is per syringe (1ml–1.2ml syringes). Brands used are Juvederm or Teoxane.</li>
+                 <li>Any additional 1ml filler priced at an extra £160.</li>
+               </ul>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      },
+      'filler-dissolving': {
+        title: 'Filler Dissolving',
+        meta: [{ icon: '⏱', text: '45 min' }, { icon: '£', text: '£190' }, { icon: '📍', text: 'Kennington Road' }],
+        desc: `<p>Elective hyaluronic acid filler dissolving using hyaluronidase enzyme.</p>
+               <p style="margin-top:0.75rem">Consultation included. This treatment dissolves existing hyaluronic acid filler using hyaluronidase — an enzyme that breaks down hyaluronic acid naturally and safely.</p>
+               <ul style="margin-top:0.75rem; line-height:1.8">
+                 <li>Some fillers or a build-up of filler over time can require more than one dissolving session to ensure the filler is fully dissolved.</li>
+                 <li>Any extra dissolving treatment sessions are priced at an extra £90.</li>
+               </ul>
+               <p style="margin-top:0.5rem">Please email or complete the online form to contact us if you have any questions or queries.</p>
+               <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--muted)">Treatment carried out by Dr Smith.</p>`
+      }
+    };
+
+    const DEFAULT_POLICY = `<p><strong>£50 Consultation Fee</strong></p>
+                            <ul style="margin-top:0.75rem; line-height:1.8">
+                              <li><strong>Rescheduling:</strong> You may reschedule with more than 48 hours' notice. Changes within 48 hours require a new booking and a new consultation fee.</li>
+                              <li style="margin-top:0.5rem"><strong>Non-attendance / Late Arrival:</strong> Non-attendance or late arrival (where there is insufficient time to complete the consultation safely) will result in the appointment being marked as unattended. A new booking with a new £50 fee will be required.</li>
+                              <li style="margin-top:0.5rem"><strong>Refunds:</strong> The fee is redeemable against any treatment performed or booked on the same day. If no treatment is carried out, the £50 fee is non-refundable.</li>
+                              <li style="margin-top:0.5rem"><strong>Scope:</strong> Consultations are for aesthetic concerns only. For medical symptoms or health-related issues, please contact your GP.</li>
+                            </ul>`;
+
+    const DEFAULT_DESC = `<p>Full treatment details coming soon. Book a consultation with Dr Smith to discuss this treatment and find out if it's right for you.</p>`;
+
+    // Modal logic
+    const modal = document.getElementById('treatmentModal');
+    const modalClose = document.getElementById('modalClose');
+
+    function openModal(id) {
+      const t = TREATMENTS[id];
+      document.getElementById('modal-title').textContent = t ? t.title : document.querySelector(`[data-id="${id}"]`).closest('.price-row').querySelector('.price-row-name').textContent;
+      const metaEl = document.getElementById('modal-meta');
+      if (t && t.meta) {
+        metaEl.innerHTML = t.meta.map(m => `<span>${m.icon} ${m.text}</span>`).join('');
+      } else {
+        const row = document.querySelector(`[data-id="${id}"]`).closest('.price-row');
+        const time = row.querySelector('.price-row-time').textContent;
+        const price = row.querySelector('.price-row-amount').textContent;
+        metaEl.innerHTML = `<span>⏱ ${time}</span><span>£ ${price}</span>`;
+      }
+      document.getElementById('modal-desc').innerHTML = t ? t.desc : DEFAULT_DESC;
+      document.getElementById('modal-policy').innerHTML = (t && t.policy) ? t.policy : DEFAULT_POLICY;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.read-more-btn').forEach(btn => {
+      btn.addEventListener('click', () => openModal(btn.dataset.id));
+    });
+
+    // Inject Book Now buttons next to every Read more button
+    document.querySelectorAll('.price-row-right').forEach(function(right) {
+      var readBtn = right.querySelector('.read-more-btn');
+      if (!readBtn) return;
+      var actions = document.createElement('div');
+      actions.className = 'price-row-actions';
+      actions.appendChild(readBtn);
+      var bookBtn = document.createElement('a');
+      bookBtn.className = 'book-row-btn';
+      bookBtn.href = 'https://www.lsmithaesthetics.com/pricelist?category=e783933b-70c9-4daa-a454-92cc68479d3b';
+      bookBtn.target = '_blank';
+      bookBtn.rel = 'noopener noreferrer';
+      bookBtn.innerHTML = 'Book <span style="font-size:0.8em">→</span>';
+      actions.appendChild(bookBtn);
+      right.appendChild(actions);
+    });
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeTxModal(); } });
+
+    // ── Treatment overview modals ──
+    const TX_TREATMENTS = {
+      antiwrinkle: {
+        eyebrow: 'Anti-Wrinkle Injections',
+        title: 'Anti-Wrinkle <em>Injections</em>',
+        images: ['https://static.wixstatic.com/media/0b63bc_0a789e786f98430e9e5fb70cb48076c0~mv2.png', 'https://static.wixstatic.com/media/0b63bc_5a43fb4ff1e141aa86937173d2da4535~mv2.jpg'],
+        imagesFit: ['cover', 'contain'],
+        caption: '',
+        sections: [
+          { title: 'What is it?', body: `<ul><li>Anti-wrinkle injections target specific muscles to cause relaxation and hence prevent formation of static wrinkles.</li><li>It is a neurotoxin which acts on our nervous system to cause muscle paralysis.</li></ul>` },
+          { title: 'What does it do aesthetically?', body: `<ul><li>Can be used for a variety of reasons.</li><li>As a prescription medication — consultation with a prescriber face to face should be had first for assessment.</li><li>It can help to minimise fine lines by inhibiting muscle movement. This prevents dynamic lines becoming static lines. It can also help to soften static lines (wrinkles).</li><li>Common areas to target are forehead lines, frown lines and crow's feet. However there are many other muscles that can be targeted for a desired effect.</li><li>It is important to see a practitioner with a good knowledge of anatomy to avoid targeting the wrong muscle and hence an undesirable outcome.</li></ul>` },
+          { title: 'What brand do we use at Dr Smith Aesthetics?', body: `<ul><li>We use Allergan or Teoxane.</li><li>High quality, premium, well researched products, with reliable results.</li></ul>` },
+          { title: 'How is it administered?', body: `<ul><li>A consultation with assessment by Dr Smith and discussion about your areas of concern.</li><li>The product is administered with a small needle.</li><li>It is a quick treatment with minimal discomfort.</li></ul>` },
+          { title: 'What is the downtime / recovery?', body: `<ul><li>Minor red marks post treatment with skin blebs resolving within 1 hour.</li><li>Aftercare information is provided, but overall has minimal disruption to daily life.</li></ul>` },
+          { title: 'Results', body: `<ul><li>Full results seen at 14 days — with an optional review at this stage if needed.</li><li>Results last around 3–4 months (varies person to person).</li><li>Find out more with a consultation / contact us!</li></ul>` }
+        ]
+      },
+      fillers: {
+        eyebrow: 'Dermal Filler / Lip Filler',
+        title: 'Dermal Filler <em>/ Lip Filler</em>',
+        images: ['https://static.wixstatic.com/media/0b63bc_dcecef0fbfef4a7da7fd8e890c34bec6~mv2.png', 'https://static.wixstatic.com/media/0b63bc_d37978bb844a461bb54c21c8925a1346~mv2.png', 'https://static.wixstatic.com/media/0b63bc_d78cc967ad624392b9382d91f3fff4f1~mv2.png', 'https://static.wixstatic.com/media/0b63bc_b223a519cd09472083babdf0f4f9130c~mv2.png'],
+        imagesFit: 'contain',
+        caption: 'Images: Filler used to enhance areas of concern, with natural looking results. 1: Jaw filler, 2: Lip filler, 3: Chin filler.',
+        sections: [
+          { title: 'What are they?', body: `<ul><li>Dermal fillers and lip fillers are made of cross-linked hyaluronic acid (HA).</li><li>Hyaluronic acid is naturally made in our body and holds on to water to keep our skin hydrated and plump.</li><li>Filler HA is cross-linked so it stays around in the body for longer (from 6 months to 2 years).</li><li>There are many different types of brand on the market, all varying in quality and consistency — hence it is important to go to an experienced practitioner for the right product.</li><li><strong>Note:</strong> Other types of dermal filler do exist, but the vast majority of "filler" is referring to HA filler — always inform your practitioner if you have had filler previously.</li></ul>` },
+          { title: 'What do they do?', body: `<ul><li>Fillers are used to fill in areas that have lost volume over time and give a better shape to affected areas. Can be used to lift tissues, fill areas or mask lines.</li><li>Give a more plump and youthful appearance.</li><li>As we age, we lose muscle mass, fat pad density, skin becomes more lax and loose. As a result we get noticeable hollowed areas or tissues travel southward!</li><li>Fillers can be administered in most areas of the face and lips, but care is needed in specific areas.</li></ul>` },
+          { title: 'What fillers are available at Dr Smith Aesthetics?', body: `<ul><li>We use the Juvederm range.</li><li>High quality, high end product with great results.</li></ul>` },
+          { title: 'How is it administered?', body: `<ul><li>A consultation including assessment by Dr Smith and discussion about your concerns.</li><li>We then decide what is best for you and work together for an outcome that will leave you happy and confident.</li><li>Remember this is a journey, where natural looking results are best.</li></ul>` },
+          { title: 'What is the downtime / recovery?', body: `<ul><li>Some swelling over the next few days — depending on the treated area.</li><li>Depending on the area and technique — may be some redness, swelling and bruising for a few days.</li><li>Guaranteed direct contact to discuss any concerns post treatment.</li><li>Full discussion of benefits and risks are discussed on consultation.</li></ul>` },
+          { title: 'Results', body: `<ul><li>Filler results are instant — great for an instant confidence boost and correcting any concerns clients have.</li><li>After administration, assessment and further filler or enhancements can be made there and then.</li><li>Filler can be dissolved if required, but remember it is easier to add more than take away. Natural looking is best!</li><li>Compliments other treatments — remember to also look after the skin on the outside!</li></ul>` }
+        ]
+      },
+      skinboosters: {
+        eyebrow: 'Skin Boosters',
+        title: '<em>Skin</em> Boosters',
+        images: ['https://static.wixstatic.com/media/0b63bc_8a44b8bdad9a4af1b93d550ed53d8dc9~mv2.png', 'https://static.wixstatic.com/media/0b63bc_0e47588560834e81b336f4c4a68327b9~mv2.jpg', 'https://static.wixstatic.com/media/0b63bc_37a02a9f13914684ba6c5505f88c9c68~mv2.png'],
+        caption: '',
+        sections: [
+          { title: 'What are they?', body: `<ul><li>Skin boosters are injectable treatments designed at improving skin hydration, health and overall appearance.</li><li>There are many different types on the market.</li></ul>` },
+          { title: 'What do they do?', body: `<ul><li>Contain hyaluronic acid (found naturally in our skin).</li><li>Less viscous than fillers due to their bonding structure.</li><li>Described as an injectable moisturiser — hyaluronic acid draws in water to help hydrate the skin to give a healthy glow.</li></ul>` },
+          { title: 'Where can they be used?', body: `<p>Usually on the face or neck.</p>` },
+          { title: 'What concerns do they target?', body: `<ul><li>Improve fine lines and wrinkles.</li><li>Improve overall skin health and glow.</li><li>Improve dehydrated looking skin to looking more hydrated and healthy.</li></ul>` },
+          { title: 'Which Skin Boosters?', body: `<p>At Dr Smith Aesthetics we use 2 skin boosters:</p><ul><li><strong>Profhilo</strong> — very popular currently as it contains the highest concentration of hyaluronic acid on the market. It can only be used on the lower 2/3rd of the face or neck.</li><li><strong>Skinvive (Juvederm)</strong> — Hyaluronic acid. It can be used anywhere including on the face, neck, hands and scar tissue.</li></ul><p style="margin-top:0.5rem">Depending on patient demographics, areas of concern and treatment plan — we can help choose the right one for you.</p>` },
+          { title: 'How is it given?', body: `<ul><li><strong>Skinvive</strong> — Multiple, small, superficial injections in the target area with a small needle (mesotherapy), resulting in small "blebs" under the skin — numbing cream used prior.</li><li><strong>Profhilo</strong> — delivered with 5 specific injection points on each side of the face to maximise effect (no numbing cream required for this).</li></ul>` },
+          { title: 'What is the downtime / recovery?', body: `<ul><li>Mesotherapy/small bleb technique — small blebs can last a number of hours to a few days.</li><li>Possibility of having minor swelling and bruising for a few days.</li><li>Discuss which option is best with the practitioner if having a big event a few days post treatment.</li><li>Can have alongside other treatments such as anti-wrinkle injections, dermal fillers, PRP and polynucleotides.</li></ul>` },
+          { title: 'Treatment course', body: `<ul><li>Profhilo — 2x sessions, 3–4 weeks apart.</li><li>Skinvive — 1x session.</li><li>Can have 6 monthly maintenance treatments.</li></ul>` },
+          { title: 'Results', body: `<ul><li>Full results noticeable after a few weeks post treatment.</li><li>Results should last up to 9 months.</li><li>Great to combine with other treatments such as polynucleotides.</li></ul>` }
+        ]
+      },
+      polynucleotides: {
+        eyebrow: 'Polynucleotides',
+        title: '<em>Poly</em>nucleotides',
+        images: ['https://static.wixstatic.com/media/0b63bc_3233b0ad12c54b8f913e08e8c2c5deca~mv2.png'],
+        caption: 'Results after only 2 polynucleotides sessions',
+        sections: [
+          { title: 'What are they?', body: `<ul><li>"Poly" = long chains. "Nucleotides" = building blocks of DNA.</li><li>Highly purified DNA derived from salmon/trout — high purification makes them very safe to use.</li><li>At Dr Smith Aesthetics we use Plinest polynucleotides by Mastelli — used for many years in regenerative medicine with lots of scientific research behind it.</li></ul>` },
+          { title: 'What do they do?', body: `<ul><li>Target your own skin cells called fibroblasts to promote skin rejuvenation from within.</li><li>Fibroblasts are responsible for producing collagen and elastin — essential for skin structure, framework, wound healing and overall skin health. The more we age, the less efficient our fibroblast cells are — leading to the less desired effects of ageing.</li><li>Help regulate skin cells called melanocytes to help control pigmentation and help with uneven skin tone — dark circles or pigmentation under eyes.</li><li>Overall skin health and healing — good for scars and inflammatory skin conditions such as rosacea or eczema. Give a healthy, glowing appearance.</li></ul>` },
+          { title: 'Where can they be used?', body: `<p>Pretty much anywhere!</p>` },
+          { title: 'What concerns do they target?', body: `<ul><li>Fine lines and wrinkles — increase skin structural support with increasing your own collagen, elastin and hyaluronic acid production.</li><li>Improve overall skin health and glow.</li><li>Under eye lines or puffiness — help to tighten the under eye area.</li><li>Dark eye circles — dark circles can be due to multiple factors, such as hollowing, thin skin, pigmentation. Polynucleotides can improve all of these.</li><li>Hair loss — improved the skin environment to help stimulate hair growth as well as thicken current hair — great in combination with other treatments such as PRP.</li></ul>` },
+          { title: 'How is it given?', body: `<ul><li>Numbing cream is used to cover the target area to help numb the skin.</li><li>Multiple, small, superficial injections in the target area with a small needle (mesotherapy), resulting in small "blebs" under the skin.</li><li>Can also be given via a dermal cannula under the skin — less precise but covers a wide area with only a few injection sites.</li></ul>` },
+          { title: 'What is the downtime / recovery?', body: `<ul><li>Mesotherapy/small bleb technique — small blebs can last a number of hours.</li><li>Cannula technique is better if you have important events the next few days.</li><li>Possibility of having minor swelling and bruising for a few days.</li><li>Highly purified so very safe.</li><li>Can have alongside other treatments such as anti-wrinkle injections, dermal fillers, PRP and skin boosters.</li></ul>` },
+          { title: 'Treatment course', body: `<ul><li>Recommended treatment course: 3x treatments of the target area 2–4 weeks apart, followed by a 1x maintenance every 6–12 months.</li><li>Note: scalp polynucleotide recommended course — 4x treatments, spaced 1–2 weeks apart, followed by 4x treatments every 3 weeks apart.</li></ul>` },
+          { title: 'Results', body: `<ul><li>As they work at a cellular level, results are gradual, rather than a quick fix — can see results after 1st or 2nd treatment.</li><li>Great for patients who want a more natural approach rather than anti-wrinkle injections or fillers.</li><li>Work great with other treatments or alone.</li></ul>` }
+        ]
+      },
+      prprf: {
+        eyebrow: 'PRP and PRF',
+        title: 'PRP <em>and</em> PRF',
+        images: ['https://static.wixstatic.com/media/0b63bc_dc879e65556d43d0b150635001f445aa~mv2.jpg', 'https://static.wixstatic.com/media/0b63bc_7bdc211a2ba647718c32d9ebed775630~mv2.jpg', 'https://static.wixstatic.com/media/0b63bc_5d5d9c64e1c24758a752a68232c5a72e~mv2.jpg'],
+        caption: '',
+        sections: [
+          { title: 'What is PRP?', body: `<ul><li>PRP stands for platelet rich plasma.</li><li>Blood is taken from the client and then spun down in a centrifuge to separate into different parts. The plasma is the straw coloured liquid which contains platelets.</li><li>These platelets have many growth factors. These growth factors have a multitude of benefits.</li><li>We aim to get a much greater concentration of platelets to maximise these benefits.</li><li>In the human body, when we sustain an injury, platelets are activated and release these growth factors which stimulate the inflammatory process and hence wound healing.</li><li>They promote collagen production, improve texture and promote healing.</li></ul>` },
+          { title: 'Why do we use it in aesthetics?', body: `<ul><li>PRP growth factors promote wound healing, new blood vessels, collagen and elastin production, increase fibroblast activity, hair growth and thickness as well as other benefits to promote great skin health and texture.</li><li>Overall, we get younger looking, healthier skin.</li><li>Great results to stimulate dormant hair cells and create an environment for new and thicker hair.</li></ul>` },
+          { title: 'How is it administered?', body: `<p>Firstly your blood is taken on the same day and then spun down in the centrifuge (takes around 10–15 minutes). It is important not to have a high fat containing meal 4 hours prior to your treatment.</p><p style="margin-top:0.5rem">There are a number of ways to administer PRP:</p><ul><li><strong>Microneedling</strong> — Your PRP is applied directly to your skin and then micro-needling is used to make many very small punctures in the skin to help the PRP penetrate all the skin layers.</li><li><strong>Mesotherapy</strong> — Your PRP is drawn up in a syringe and using a very small needle, it is injected very superficially. This can be done for the whole face, neck, on scars and in areas of hair loss/scalp.</li></ul>` },
+          { title: 'What is PRF?', body: `<ul><li>PRF — Platelet Rich Fibrin — is a newer, more advanced version of PRP.</li><li>PRP requires an anticoagulant to be mixed with your blood to prevent it clotting — this can inhibit the release of some growth factors.</li><li>With PRF, we do not use additives or anticoagulants, only your blood. The blood is spun slower and for longer to preserve platelets.</li><li>This all ensures a high platelet count and a fibrin matrix to form — allowing for a slower, longer release of growth factors — and hence better, longer lasting results.</li></ul>` },
+          { title: 'Why choose Dr Smith Aesthetics for PRF?', body: `<ul><li>PRP and PRF can be confusing to practitioners, let alone the general public.</li><li>There is not much standardisation with regards to centrifugation — what speed and how long — these are extremely important variables that can result in poor platelet counts and hence results.</li><li>As there are many variables that will affect the platelet concentration, we go by the latest research in order to produce the highest platelet concentration in our PRF.</li><li>Your practitioner should know these variables: what material the blood tubes are made from and why, what rotor type is used and why, what relative centrifugal force they are aiming for and why — all questions they should be able to answer if they are up to date with the latest research.</li></ul>` },
+          { title: 'What is the downtime / recovery?', body: `<ul><li>Minor red marks and mild swelling post treatment which can last around 1–24 hours.</li><li>Possibility of minor bruising which can last a few days to a week.</li></ul>` },
+          { title: 'Results', body: `<ul><li>It takes time for skin to produce collagen and for hair follicles to start growing again — therefore results are a gradual improvement, rather than a quick fix. This is an investment on your long term goals that your older self will thank you for!</li><li>It is recommended to have minimum 3 treatments (hair 4–6) and then to have ongoing maintenance treatments to maintain results.</li><li>PRP results generally last around 3–6 months, with PRF results lasting longer.</li></ul>` }
+        ]
+      },
+      microneedling: {
+        eyebrow: 'Microneedling',
+        title: '<em>Micro</em>needling',
+        images: ['https://static.wixstatic.com/media/0b63bc_af9a7415edde49a4ab3eaf300b45e0c5~mv2.webp', 'https://static.wixstatic.com/media/0b63bc_8e993459d850461bb779fd64e79385c9~mv2.png'],
+        imagesFit: ['contain', 'cover'],
+        caption: '',
+        sections: [
+          { title: 'What is microneedling?', body: `<ul><li>Microneedling creates thousands of tiny micro-channels in the skin using ultra-fine needles, triggering the skin's natural healing response.</li><li>This stimulates the production of new collagen and elastin — improving skin texture, tone, fine lines, scarring and overall skin quality.</li><li>At Dr Smith Aesthetics we use the <strong>Dermapen 4</strong> — one of the most advanced and clinically proven microneedling devices available. With 16 needles creating up to 1,920 micro-channels per second, it delivers precise, controlled results with minimal discomfort.</li></ul>` },
+          { title: 'Why Dermapen 4?', body: `<ul><li>Industry-leading technology trusted by clinicians worldwide.</li><li>Adjustable needle depth for precise, targeted treatment.</li><li>Clinically proven to improve a wide range of skin concerns.</li><li>Significantly more effective than dermarollers or lower-grade devices.</li></ul>` },
+          { title: 'What can it be combined with?', body: `<p>Microneedling can be enhanced by combining it with powerful serums applied during the treatment:</p><ul><li><strong>PRF (Platelet Rich Fibrin)</strong> — your own growth factors applied during microneedling to accelerate healing and boost collagen production (Vampire Facial).</li><li><strong>Exosomes (Calecim® PTT-6)</strong> — advanced growth factors and proteins for enhanced skin repair, brightening and rejuvenation.</li><li><strong>Polynucleotides (V-Tech)</strong> — PDRN and exosome complex that targets deep skin renewal and regeneration.</li></ul>` },
+          { title: 'What concerns does it target?', body: `<ul><li>Fine lines and wrinkles</li><li>Uneven skin texture and tone</li><li>Acne scarring and other scarring</li><li>Pigmentation and sun damage</li><li>Dull, dehydrated skin</li><li>Hair loss (scalp microneedling with PRF)</li></ul>` },
+          { title: 'What is the downtime / recovery?', body: `<ul><li>Redness and mild sensitivity for 24–48 hours post treatment — similar to mild sunburn.</li><li>Skin may feel slightly dry or tight for a few days.</li><li>Avoid sun exposure and heavy makeup for 24 hours post treatment.</li><li>Aftercare guidance provided by Dr Smith.</li></ul>` },
+          { title: 'Results', body: `<ul><li>Skin improvement begins within a few weeks as new collagen forms.</li><li>Best results seen after a course of 3 sessions, 4 weeks apart.</li><li>Results continue to improve over 3–6 months as collagen remodelling continues.</li><li>Combining with PRF or exosomes significantly enhances and accelerates results.</li></ul>` }
+        ]
+      }
+    };
+
+    function openTxModal(id) {
+      const t = TX_TREATMENTS[id];
+      if (!t) return;
+      document.getElementById('tx-modal-eyebrow').textContent = t.eyebrow;
+      document.getElementById('tx-modal-title').innerHTML = t.title;
+      // Images
+      const imgWrap = document.getElementById('tx-modal-images-wrap');
+      const imgGrid = document.getElementById('tx-modal-images-grid');
+      const imgCaption = document.getElementById('tx-modal-images-caption');
+      if (t.images && t.images.length) {
+        const cols = t.images.length === 1 ? 'single' : t.images.length === 3 ? 'three' : '';
+        imgGrid.className = 'tx-modal-images-grid' + (cols ? ' ' + cols : '');
+        imgGrid.innerHTML = t.images.map((src, i) => {
+          const fit = Array.isArray(t.imagesFit) ? (t.imagesFit[i] || 'cover') : (t.imagesFit || 'cover');
+          const style = fit === 'contain' ? ' style="object-fit:contain;background:#F5F1EB"' : '';
+          return `<img src="${src}" alt="${t.eyebrow} ${i+1}" loading="lazy"${style} />`;
+        }).join('');
+        imgCaption.textContent = t.caption || '';
+        imgCaption.style.display = t.caption ? 'block' : 'none';
+        imgWrap.classList.add('has-images');
+      } else {
+        imgGrid.innerHTML = '';
+        imgWrap.classList.remove('has-images');
+      }
+      let html = '';
+      t.sections.forEach((s, i) => {
+        if (i > 0) html += '<div class="tx-modal-divider"></div>';
+        html += `<div class="tx-modal-section"><p class="tx-modal-section-title">${s.title}</p><div class="tx-modal-section-body">${s.body}</div></div>`;
+      });
+      document.getElementById('tx-modal-body').innerHTML = html;
+      document.getElementById('tx-modal').classList.add('open');
+      document.getElementById('tx-modal').scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeTxModal() {
+      document.getElementById('tx-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ── Results Slideshow ──
+    const RES_IMAGES = [
+      'Before%20%20After/Chin%20filler.png',
+      'Before%20%20After/Lip%20filler.png',
+      'Before%20%20After/Lip%20filler%202.png',
+      'Before%20%20After/Lip%20filler%203.png',
+      'Before%20%20After/Lip%20filler%204.png',
+      'Before%20%20After/Tear%20trough%20filler.png',
+      'Before%20%20After/Tear%20trough%20filler%202.png',
+      'Before%20%20After/Tear%20trough%20filler%203.png',
+    ];
+    (function() {
+      const track = document.getElementById('resSlidesTrack');
+      const dotsEl = document.getElementById('resDots');
+      const counterEl = document.getElementById('resCounter');
+      let cur = 0, autoT = null;
+      RES_IMAGES.forEach((src, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'slide' + (i === 0 ? ' active' : '');
+        const img = document.createElement('img');
+        img.src = src; img.alt = 'Result ' + (i + 1); img.draggable = false;
+        slide.appendChild(img); track.appendChild(slide);
+      });
+      RES_IMAGES.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'res-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => { goRes(i); resetResAuto(); });
+        dotsEl.appendChild(dot);
+      });
+      function updateRes() {
+        track.querySelectorAll('.slide').forEach((s,i) => s.classList.toggle('active', i===cur));
+        dotsEl.querySelectorAll('.res-dot').forEach((d,i) => d.classList.toggle('active', i===cur));
+        counterEl.textContent = (cur+1) + ' / ' + RES_IMAGES.length;
+      }
+      function goRes(n) { cur = (n + RES_IMAGES.length) % RES_IMAGES.length; updateRes(); }
+      function startResAuto() { autoT = setInterval(() => goRes(cur+1), 4500); }
+      function resetResAuto() { clearInterval(autoT); startResAuto(); }
+      document.getElementById('resPrevBtn').addEventListener('click', () => { goRes(cur-1); resetResAuto(); });
+      document.getElementById('resNextBtn').addEventListener('click', () => { goRes(cur+1); resetResAuto(); });
+      let tx = 0;
+      track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - tx;
+        if (Math.abs(dx) > 40) { goRes(cur + (dx < 0 ? 1 : -1)); resetResAuto(); }
+      });
+      updateRes(); startResAuto();
+    })();
+
+    // Sticky nav
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Fade up on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+    // Show more / less for All Services
+    function toggleAllServices() {
+      const more = document.getElementById('all-services-more');
+      const btn = document.getElementById('show-more-btn');
+      const expanded = more.style.display !== 'none';
+      more.style.display = expanded ? 'none' : 'block';
+      btn.textContent = expanded ? 'Show all treatments ↓' : 'Show less ↑';
+    }
+
+    // Price list tabs
+    function showPriceTab(id, btn) {
+      document.querySelectorAll('.price-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.price-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('panel-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    // Hamburger menu
+    function toggleMenu() {
+      const links = document.getElementById('navLinks');
+      const btn = document.getElementById('hamburger');
+      links.classList.toggle('open');
+      btn.classList.toggle('open');
+      document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+    }
+    function closeMenu() {
+      const links = document.getElementById('navLinks');
+      const btn = document.getElementById('hamburger');
+      links.classList.remove('open');
+      btn.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --teal:       #0D3B4F;
+    --teal-mid:   #1A5068;
+    --gold:       #C9A96E;
+    --cream:      #F5F1EB;
+    --warm-white: #FDFAF6;
+    --muted:      #6B7280;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); }
+
+  .pl-header {
+    background: var(--cream);
+    padding: 5rem 5.5rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle radial glow */
+  .pl-header::after {
+    content: '';
+    position: absolute;
+    top: -40%; right: -10%;
+    width: 55%; height: 180%;
+    background: radial-gradient(ellipse at center, rgba(201,169,110,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Gold top line */
+  .pl-header::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.5), transparent);
+  }
+
+  .inner {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: end;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold);
+    display: flex; align-items: center; gap: 0.7rem;
+    margin-bottom: 0.9rem;
+  }
+  .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.6rem, 4vw, 4rem);
+    font-weight: 300; line-height: 1.05;
+    letter-spacing: -0.02em; color: var(--teal);
+  }
+  .section-title em { font-style: italic; font-weight: 400; }
+
+  .right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .note {
+    font-size: 0.9rem; line-height: 1.75;
+    font-weight: 300; color: var(--muted);
+  }
+
+  .note strong { font-weight: 500; color: var(--teal); }
+
+  .pill-row {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+
+  .pill {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-size: 0.72rem; font-weight: 400;
+    letter-spacing: 0.03em;
+    color: var(--teal);
+    background: rgba(13,59,79,0.06);
+    border: 1px solid rgba(13,59,79,0.12);
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+  }
+  .pill-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* Gold divider at bottom */
+  .divider {
+    margin-top: 3.5rem;
+    height: 1px;
+    background: linear-gradient(to right, rgba(201,169,110,0.5), transparent);
+  }
+
+  /* ── BRANDS MARQUEE ── */
+  .brands {
+    padding: 2.5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .brands::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.4), transparent);
+  }
+  .brands-label {
+    text-align: center;
+    font-size: 0.63rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+  }
+  .brands-label::before, .brands-label::after {
+    content: ''; width: 26px; height: 1px; background: var(--gold);
+  }
+  .fade-left, .fade-right {
+    position: absolute; top: 0; bottom: 0; width: 100px;
+    z-index: 2; pointer-events: none;
+  }
+  .fade-left  { left: 0;  background: linear-gradient(to right, var(--cream), transparent); }
+  .fade-right { right: 0; background: linear-gradient(to left,  var(--cream), transparent); }
+  .marquee-outer { overflow: hidden; }
+  .marquee-track {
+    display: flex; align-items: center; gap: 4.5rem;
+    width: max-content;
+    animation: marquee-scroll 28s linear infinite;
+  }
+  .marquee-track:hover { animation-play-state: paused; }
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .brand-logo {
+    height: 32px; width: auto;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.45);
+    transition: filter 0.3s ease;
+    flex-shrink: 0;
+  }
+  .brand-logo:hover { filter: grayscale(0%) opacity(1); }
+  .brand-logo-invert { filter: invert(1) grayscale(100%) opacity(0.45); }
+  .brand-logo-invert:hover { filter: invert(1) grayscale(0%) opacity(1); }
+  @media (max-width: 768px) {
+    .brand-logo { height: 24px; }
+    .marquee-track { gap: 3rem; animation-duration: 20s; }
+    .fade-left, .fade-right { width: 60px; }
+  }
+
+  @media (max-width: 900px) {
+    .pl-header { padding: 3.5rem 1.5rem 2.5rem; }
+    .inner { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .pl-header { padding: 2.5rem 1rem 2rem; }
+    .section-title { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+  <section class="pl-header">
+    <div class="inner">
+      <div>
+        <p class="eyebrow">Transparent Pricing</p>
+        <h1 class="section-title">Price <em>List</em></h1>
+      </div>
+      <div class="right-col">
+        <p class="note">
+          Every treatment includes an <strong>initial consultation</strong>. If you prefer to book your consultation as a standalone appointment, the fee is fully redeemable against any treatment of your choice.
+        </p>
+        <div class="pill-row">
+          <span class="pill"><span class="pill-dot"></span>Consultation included</span>
+          <span class="pill"><span class="pill-dot"></span>Bundle packages available</span>
+          <span class="pill"><span class="pill-dot"></span>Performed by Dr Smith</span>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="brands">
+      <p class="brands-label">Products We Use</p>
+      <div class="fade-left"></div>
+      <div class="fade-right"></div>
+      <div class="marquee-outer">
+        <div class="marquee-track">
+          <img class="brand-logo" src="https://static.wixstatic.com/media/0b63bc_de10604e4c624c4c9c679ba1c8b2fbab~mv2.png" alt="Juvéderm dermal filler used at Dr Smith Aesthetics London" title="Juvéderm – Premium Dermal Filler" />
+          <img class="brand-logo" src="https://static.wixstatic.com/media/0b63bc_fb6ca35c908d43bcb028effd972f41f7~mv2.png" alt="Skinvive by Juvéderm skin booster used at Dr Smith Aesthetics London" title="Skinvive by Juvéderm – Injectable Skin Booster" />
+          <img class="brand-logo brand-logo-invert" src="https://static.wixstatic.com/media/0b63bc_1d1c015ae27e4255bb3816ffc5c0ec23~mv2.png" alt="Teoxane anti-wrinkle injectable brand used at Dr Smith Aesthetics London" title="Teoxane – Premium Anti-Wrinkle Injectable" />
+          <img class="brand-logo" src="https://static.wixstatic.com/media/0b63bc_f0bcea0f35c64908bf5e7cd6fb17ffa1~mv2.png" alt="Dermapen 4 professional microneedling device used at Dr Smith Aesthetics London" title="Dermapen 4 – Medical Grade Microneedling Device" />
+          <img class="brand-logo" src="https://static.wixstatic.com/media/0b63bc_ad33cfe781f34bb58c2f02acd5c07b44~mv2.png" alt="Plinest polynucleotides by Mastelli used at Dr Smith Aesthetics London" title="Plinest by Mastelli – Polynucleotide Skin Regeneration" />
+          <img class="brand-logo" src="https://static.wixstatic.com/media/0b63bc_970e90bfdc8a4cd4bc708ebb291f71a5~mv2.png" alt="Sunekos amino acid and hyaluronic acid skin treatment used at Dr Smith Aesthetics London" title="Sunekos – Advanced Skin Regeneration Treatment" />
+          <!-- Duplicate for seamless loop -->
+          <img class="brand-logo" src="https://static.wixstatic.com/media/0b63bc_de10604e4c624c4c9c679ba1c8b2fbab~mv2.png" alt="Juvéderm dermal filler used at Dr Smith Aesthetics London" title="Juvéderm – Premium Dermal Filler" />
+          <img class="brand-logo" src="https://static.wixstatic.com/media/0b63bc_fb6ca35c908d43bcb028effd972f41f7~mv2.png" alt="Skinvive by Juvéderm skin booster used at Dr Smith Aesthetics London" title="Skinvive by Juvéderm – Injectable Skin Booster" />
+          <img class="brand-logo brand-logo-invert" src="https://static.wixstatic.com/media/0b63bc_1d1c015ae27e4255bb3816ffc5c0ec23~mv2.png" alt="Teoxane anti-wrinkle injectable brand used at Dr Smith Aesthetics London" title="Teoxane – Premium Anti-Wrinkle Injectable" />
+          <img class="brand-logo" src="https://static.wixstatic.com/media/0b63bc_f0bcea0f35c64908bf5e7cd6fb17ffa1~mv2.png" alt="Dermapen 4 professional microneedling device used at Dr Smith Aesthetics London" title="Dermapen 4 – Medical Grade Microneedling Device" />
+          <img class="brand-logo" src="https://static.wixstatic.com/media/0b63bc_ad33cfe781f34bb58c2f02acd5c07b44~mv2.png" alt="Plinest polynucleotides by Mastelli used at Dr Smith Aesthetics London" title="Plinest by Mastelli – Polynucleotide Skin Regeneration" />
+          <img class="brand-logo" src="https://static.wixstatic.com/media/0b63bc_970e90bfdc8a4cd4bc708ebb291f71a5~mv2.png" alt="Sunekos amino acid and hyaluronic acid skin treatment used at Dr Smith Aesthetics London" title="Sunekos – Advanced Skin Regeneration Treatment" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+<script>
+function notifyHeight() {
+  setTimeout(() => {
+    window.parent.postMessage({ type: 'iframeHeight', height: document.body.scrollHeight }, '*');
+  }, 50);
+}
+window.addEventListener('load', notifyHeight);
+window.addEventListener('resize', notifyHeight);
+</script>
+</body>
+</html>

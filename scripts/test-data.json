@@ -1,0 +1,227 @@
+{
+  "month": "May 2026",
+  "period": {
+    "start": "2026-05-01",
+    "end": "2026-05-31"
+  },
+  "wix": {
+    "sessions": 842,
+    "uniqueVisitors": 651,
+    "pageViews": 2103,
+    "topPages": [
+      {
+        "path": "/",
+        "title": "Home",
+        "views": 612
+      },
+      {
+        "path": "/treatment-anti-wrinkle",
+        "title": "Anti-Wrinkle Injections",
+        "views": 287
+      },
+      {
+        "path": "/treatment-fillers",
+        "title": "Dermal Fillers",
+        "views": 241
+      },
+      {
+        "path": "/obagi-page",
+        "title": "Obagi Skincare",
+        "views": 189
+      },
+      {
+        "path": "/treatment-prp-prf",
+        "title": "PRP and PRF",
+        "views": 142
+      }
+    ],
+    "sources": {
+      "organic": 48,
+      "direct": 28,
+      "social": 18,
+      "referral": 6
+    },
+    "vsLastMonth": {
+      "sessions": 12,
+      "pageViews": 8
+    }
+  },
+  "seo": [
+    {
+      "filename": "index.html",
+      "title": "Dr Smith Aesthetics | London",
+      "description": null,
+      "h1Count": 1,
+      "imagesWithoutAlt": 0,
+      "issues": [
+        {
+          "severity": "amber",
+          "text": "Title too short (28 chars, aim 50-60)"
+        },
+        {
+          "severity": "red",
+          "text": "Missing meta description"
+        }
+      ]
+    },
+    {
+      "filename": "treatment-anti-wrinkle.html",
+      "title": null,
+      "description": null,
+      "h1Count": 1,
+      "imagesWithoutAlt": 0,
+      "issues": [
+        {
+          "severity": "red",
+          "text": "Missing title tag"
+        },
+        {
+          "severity": "red",
+          "text": "Missing meta description"
+        }
+      ]
+    },
+    {
+      "filename": "treatment-fillers.html",
+      "title": null,
+      "description": null,
+      "h1Count": 1,
+      "imagesWithoutAlt": 0,
+      "issues": [
+        {
+          "severity": "red",
+          "text": "Missing title tag"
+        },
+        {
+          "severity": "red",
+          "text": "Missing meta description"
+        }
+      ]
+    },
+    {
+      "filename": "treatment-microneedling.html",
+      "title": null,
+      "description": null,
+      "h1Count": 1,
+      "imagesWithoutAlt": 0,
+      "issues": [
+        {
+          "severity": "red",
+          "text": "Missing title tag"
+        },
+        {
+          "severity": "red",
+          "text": "Missing meta description"
+        }
+      ]
+    },
+    {
+      "filename": "treatment-polynucleotides.html",
+      "title": null,
+      "description": null,
+      "h1Count": 1,
+      "imagesWithoutAlt": 0,
+      "issues": [
+        {
+          "severity": "red",
+          "text": "Missing title tag"
+        },
+        {
+          "severity": "red",
+          "text": "Missing meta description"
+        }
+      ]
+    },
+    {
+      "filename": "treatment-prp-prf.html",
+      "title": null,
+      "description": null,
+      "h1Count": 1,
+      "imagesWithoutAlt": 0,
+      "issues": [
+        {
+          "severity": "red",
+          "text": "Missing title tag"
+        },
+        {
+          "severity": "red",
+          "text": "Missing meta description"
+        }
+      ]
+    },
+    {
+      "filename": "treatment-skin-boosters.html",
+      "title": null,
+      "description": null,
+      "h1Count": 1,
+      "imagesWithoutAlt": 0,
+      "issues": [
+        {
+          "severity": "red",
+          "text": "Missing title tag"
+        },
+        {
+          "severity": "red",
+          "text": "Missing meta description"
+        }
+      ]
+    },
+    {
+      "filename": "obagi-page.html",
+      "title": null,
+      "description": null,
+      "h1Count": 0,
+      "imagesWithoutAlt": 0,
+      "issues": [
+        {
+          "severity": "red",
+          "text": "Missing title tag"
+        },
+        {
+          "severity": "red",
+          "text": "Missing meta description"
+        },
+        {
+          "severity": "red",
+          "text": "No H1 tag found"
+        }
+      ]
+    }
+  ],
+  "keywords": [
+    {
+      "term": "botox London",
+      "position": 7,
+      "snippet": "Dr Smith Aesthetics expert anti-wrinkle treatments in London."
+    },
+    {
+      "term": "dermal fillers London",
+      "position": null,
+      "snippet": ""
+    },
+    {
+      "term": "aesthetics clinic London",
+      "position": 14,
+      "snippet": ""
+    },
+    {
+      "term": "Dr Smith aesthetics",
+      "position": 1,
+      "snippet": "Official site of Dr Smith Aesthetics."
+    },
+    {
+      "term": "polynucleotides London",
+      "position": null,
+      "snippet": ""
+    }
+  ],
+  "financials": {
+    "income": 11450,
+    "transactions": 74,
+    "expenses": 3200,
+    "net": 8250,
+    "vsLastMonth": {
+      "income": 7
+    }
+  }
+}

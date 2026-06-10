@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+<style>
+  :root { --teal:#0D3B4F; --teal-mid:#1A5068; --gold:#C9A96E; --cream:#F5F1EB; --warm-white:#FDFAF6; --muted:#6B7280; --charcoal:#2D3748; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); }
+  .page { max-width: 860px; margin: 0 auto; padding: 4rem 2rem 5rem; }
+  .treatment-hero { background: var(--teal); border-radius: 6px 6px 0 0; padding: 3rem 2.5rem 2.5rem; position: relative; overflow: hidden; }
+  .treatment-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(201,169,110,0.08) 0%, transparent 65%); pointer-events: none; }
+  .eyebrow { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.7rem; }
+  .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+  .treatment-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--warm-white); }
+  .treatment-title em { font-style: italic; font-weight: 400; }
+  .images-wrap { background: var(--warm-white); padding: 1.75rem 2.5rem 0; }
+  .images-grid { display: grid; gap: 0.75rem; grid-template-columns: repeat(2, 1fr); }
+  .images-grid.single { grid-template-columns: 1fr; }
+  .images-grid.three { grid-template-columns: repeat(3, 1fr); }
+  .images-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 3px; display: block; }
+  .images-caption { font-size: 0.75rem; color: var(--muted); font-style: italic; margin-top: 0.6rem; line-height: 1.6; padding-bottom: 1rem; }
+  .treatment-content { background: var(--warm-white); border-radius: 0 0 6px 6px; padding: 2.5rem; }
+  .section { margin-bottom: 2rem; }
+  .section:last-of-type { margin-bottom: 0; }
+  .section-title { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: rgba(201,169,110,0.25); }
+  .section-body { font-size: 0.88rem; line-height: 1.8; color: var(--charcoal); font-weight: 300; }
+  .section-body p { margin-bottom: 0.6rem; }
+  .section-body p:last-child { margin-bottom: 0; }
+  .section-body ul { padding-left: 1.2rem; margin: 0.4rem 0; }
+  .section-body li { margin-bottom: 0.35rem; }
+  .section-body strong { font-weight: 500; color: var(--teal); }
+  .divider { height: 1px; background: rgba(13,59,79,0.08); margin: 1.75rem 0; }
+  .actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--warm-white); background: var(--teal); padding: 0.85rem 1.8rem; border-radius: 2px; text-decoration: none; border: 1px solid var(--teal); transition: background 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1); font-family: 'DM Sans', sans-serif; }
+  .btn-primary:hover { background: var(--teal-mid); border-color: var(--teal-mid); transform: translateY(-2px); }
+  .btn-outline { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); background: transparent; padding: 0.85rem 1.8rem; border-radius: 2px; text-decoration: none; border: 1px solid rgba(13,59,79,0.25); transition: border-color 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1); font-family: 'DM Sans', sans-serif; }
+  .btn-outline:hover { border-color: var(--teal); transform: translateY(-2px); }
+  @media (max-width: 600px) {
+    .page { padding: 2rem 1rem 3rem; }
+    .treatment-hero { padding: 2rem 1.5rem; }
+    .images-wrap { padding: 1.5rem 1.5rem 0; }
+    .treatment-content { padding: 1.75rem 1.5rem; }
+    .images-grid { grid-template-columns: 1fr; }
+    .images-grid.three { grid-template-columns: 1fr; }
+    .actions { flex-direction: column; }
+    .actions a { text-align: center; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="treatment-hero">
+    <p class="eyebrow">Skin Boosters</p>
+    <h1 class="treatment-title"><em>Skin</em> Boosters</h1>
+    <p style="font-size:0.78rem;letter-spacing:0.1em;color:rgba(253,250,246,0.55);margin-top:0.5rem;font-weight:300;">Kennington, South London</p>
+  </div>
+  <div class="images-wrap">
+    <div class="images-grid three">
+      <img src="https://static.wixstatic.com/media/0b63bc_8a44b8bdad9a4af1b93d550ed53d8dc9~mv2.png" alt="Profhilo skin booster treatment results by Dr Smith Aesthetics, South London" title="Profhilo Skin Booster – Dr Smith Aesthetics London" loading="lazy" />
+      <img src="https://static.wixstatic.com/media/0b63bc_0e47588560834e81b336f4c4a68327b9~mv2.jpg" alt="Skinvive injectable skin booster hydration treatment by Dr Smith Aesthetics Kennington" title="Skinvive Skin Booster – Dr Smith Aesthetics Kennington" loading="lazy" />
+      <img src="https://static.wixstatic.com/media/0b63bc_37a02a9f13914684ba6c5505f88c9c68~mv2.png" alt="Skin booster glow and hydration results by Dr Smith Aesthetics London" title="Skin Booster Glow Results – Dr Smith Aesthetics London" loading="lazy" />
+    </div>
+  </div>
+  <div class="treatment-content">
+    <div class="section"><p class="section-title">What are they?</p><div class="section-body"><ul><li>Skin boosters are injectable treatments designed at improving skin hydration, health and overall appearance.</li><li>There are many different types on the market.</li></ul></div></div>
+    <div class="divider"></div>
+    <div class="section"><p class="section-title">What do they do?</p><div class="section-body"><ul><li>Contain hyaluronic acid (found naturally in our skin).</li><li>Less viscous than fillers due to their bonding structure.</li><li>Described as an injectable moisturiser, hyaluronic acid draws in water to help hydrate the skin to give a healthy glow.</li></ul></div></div>
+    <div class="divider"></div>
+    <div class="section"><p class="section-title">Where can they be used?</p><div class="section-body"><p>Usually on the face or neck.</p></div></div>
+    <div class="divider"></div>
+    <div class="section"><p class="section-title">What concerns do they target?</p><div class="section-body"><ul><li>Improve fine lines and wrinkles.</li><li>Improve overall skin health and glow.</li><li>Improve dehydrated looking skin to looking more hydrated and healthy.</li></ul></div></div>
+    <div class="divider"></div>
+    <div class="section"><p class="section-title">Which Skin Boosters?</p><div class="section-body"><p>At Dr Smith Aesthetics we use 2 skin boosters:</p><ul><li><strong>Profhilo</strong> — very popular currently as it contains the highest concentration of hyaluronic acid on the market. It can only be used on the lower 2/3rd of the face or neck.</li><li><strong>Skinvive (Juvederm)</strong> — Hyaluronic acid. It can be used anywhere including on the face, neck, hands and scar tissue.</li></ul><p style="margin-top:0.5rem">Depending on patient demographics, areas of concern and treatment plan, we can help choose the right one for you.</p></div></div>
+    <div class="divider"></div>
+    <div class="section"><p class="section-title">How is it given?</p><div class="section-body"><ul><li><strong>Skinvive</strong> — Multiple, small, superficial injections in the target area with a small needle (mesotherapy), resulting in small "blebs" under the skin. Numbing cream used prior.</li><li><strong>Profhilo</strong> — delivered with 5 specific injection points on each side of the face to maximise effect (no numbing cream required for this).</li></ul></div></div>
+    <div class="divider"></div>
+    <div class="section"><p class="section-title">What is the downtime / recovery?</p><div class="section-body"><ul><li>Mesotherapy/small bleb technique — small blebs can last a number of hours to a few days.</li><li>Possibility of having minor swelling and bruising for a few days.</li><li>Discuss which option is best with the practitioner if having a big event a few days post treatment.</li><li>Can have alongside other treatments such as anti-wrinkle injections, dermal fillers, PRP and polynucleotides.</li></ul></div></div>
+    <div class="divider"></div>
+    <div class="section"><p class="section-title">Treatment course</p><div class="section-body"><ul><li>Profhilo — 2x sessions, 3–4 weeks apart.</li><li>Skinvive — 1x session.</li><li>Can have 6 monthly maintenance treatments.</li></ul></div></div>
+    <div class="divider"></div>
+    <div class="section"><p class="section-title">Results</p><div class="section-body"><ul><li>Full results noticeable after a few weeks post treatment.</li><li>Results should last up to 9 months.</li><li>Great to combine with other treatments such as polynucleotides.</li></ul></div></div>
+    <div class="actions">
+      <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" onclick="window.top.open(this.href,'_blank');return false;" class="btn-primary">Book Now →</a>
+      <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" onclick="window.top.open(this.href,'_blank');return false;" class="btn-outline">View Prices</a>
+      <a href="https://www.lsmithaesthetics.com/treatments" onclick="window.top.location.href='https://www.lsmithaesthetics.com/treatments';return false;" class="btn-outline">← Back to Treatments</a>
+    </div>
+  </div>
+</div>
+<script>
+function notifyHeight() {
+  setTimeout(() => { window.parent.postMessage({ type: 'iframeHeight', height: document.body.scrollHeight }, '*'); }, 50);
+}
+window.addEventListener('load', notifyHeight);
+</script>
+</body>
+</html>

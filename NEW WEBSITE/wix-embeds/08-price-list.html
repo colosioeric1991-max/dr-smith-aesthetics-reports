@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --teal:       #0D3B4F;
+    --teal-mid:   #1A5068;
+    --gold:       #C9A96E;
+    --warm-white: #FDFAF6;
+    --cream:      #F5F1EB;
+    --muted:      #6B7280;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--teal); }
+
+  .prices {
+    padding: 3rem 2rem 2.5rem;
+    background: var(--warm-white);
+    position: relative;
+  }
+  .prices::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.4), transparent);
+  }
+
+  .prices-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: end;
+    margin-bottom: 2.5rem;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold);
+    display: flex; align-items: center; gap: 0.7rem;
+    margin-bottom: 0.9rem;
+  }
+  .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.2vw, 3.4rem);
+    font-weight: 300; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--teal);
+  }
+  .section-title em { font-style: italic; font-weight: 400; }
+
+  .prices-note {
+    font-size: 0.92rem; line-height: 1.75;
+    font-weight: 300; color: var(--muted);
+  }
+
+  .cta-wrap {
+    margin-top: 1.75rem;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    font-size: 0.76rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--warm-white);
+    background: var(--teal);
+    padding: 0.95rem 2.1rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.25s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary:hover { background: var(--teal-mid); transform: translateY(-2px); }
+
+  @media (max-width: 900px) {
+    .prices { padding: 3.5rem 1.5rem 3rem; }
+    .prices-header { grid-template-columns: 1fr; gap: 1rem; }
+  }
+
+  @media (max-width: 480px) {
+    .prices { padding: 2.5rem 1rem 2.5rem; }
+  }
+</style>
+</head>
+<body>
+  <section class="prices">
+    <div class="prices-header">
+      <div>
+        <p class="eyebrow">Transparent Pricing</p>
+        <h2 class="section-title">Aesthetic Treatment Prices, <em>Kennington, South London</em></h2>
+      </div>
+      <p class="prices-note">Every treatment includes an initial consultation. If you prefer to book your consultation as a standalone appointment, the fee is fully redeemable against any treatment of your choice.</p>
+    </div>
+    <div class="cta-wrap">
+      <a href="https://www.lsmithaesthetics.com/pricelist"
+         class="btn-primary"
+         target="_blank"
+         onclick="window.top.open(this.href,'_blank');return false;">
+        View full price list
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+<script>
+function notifyHeight() {
+  setTimeout(() => {
+    window.parent.postMessage({ type: 'iframeHeight', height: document.body.scrollHeight }, '*');
+  }, 50);
+}
+window.addEventListener('load', notifyHeight);
+</script>
+</body>
+</html>

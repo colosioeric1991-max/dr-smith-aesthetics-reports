@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+<style>
+  :root { --teal:#0D3B4F; --teal-mid:#1A5068; --gold:#C9A96E; --cream:#F5F1EB; --warm-white:#FDFAF6; --muted:#6B7280; --charcoal:#2D3748; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); }
+  .page { max-width: 860px; margin: 0 auto; padding: 4rem 2rem 5rem; }
+  .treatment-hero { background: var(--teal); border-radius: 6px 6px 0 0; padding: 3rem 2.5rem 2.5rem; position: relative; overflow: hidden; }
+  .treatment-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(201,169,110,0.08) 0%, transparent 65%); pointer-events: none; }
+  .eyebrow { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.7rem; }
+  .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+  .treatment-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--warm-white); }
+  .treatment-title em { font-style: italic; font-weight: 400; }
+  .images-wrap { background: var(--warm-white); padding: 1.75rem 2.5rem 0; }
+  .images-grid { display: grid; gap: 0.75rem; grid-template-columns: repeat(2, 1fr); }
+  .images-grid.three { grid-template-columns: repeat(3, 1fr); }
+  .images-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 3px; display: block; }
+  .treatment-content { background: var(--warm-white); border-radius: 0 0 6px 6px; padding: 2.5rem; }
+  .section { margin-bottom: 2rem; }
+  .section:last-of-type { margin-bottom: 0; }
+  .section-title { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: rgba(201,169,110,0.25); }
+  .section-body { font-size: 0.88rem; line-height: 1.8; color: var(--charcoal); font-weight: 300; }
+  .section-body p { margin-bottom: 0.6rem; }
+  .section-body p:last-child { margin-bottom: 0; }
+  .section-body ul { padding-left: 1.2rem; margin: 0.4rem 0; }
+  .section-body li { margin-bottom: 0.35rem; }
+  .section-body strong { font-weight: 500; color: var(--teal); }
+  .divider { height: 1px; background: rgba(13,59,79,0.08); margin: 1.75rem 0; }
+  .actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--warm-white); background: var(--teal); padding: 0.85rem 1.8rem; border-radius: 2px; text-decoration: none; border: 1px solid var(--teal); transition: background 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1); font-family: 'DM Sans', sans-serif; }
+  .btn-primary:hover { background: var(--teal-mid); border-color: var(--teal-mid); transform: translateY(-2px); }
+  .btn-outline { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); background: transparent; padding: 0.85rem 1.8rem; border-radius: 2px; text-decoration: none; border: 1px solid rgba(13,59,79,0.25); transition: border-color 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1); font-family: 'DM Sans', sans-serif; }
+  .btn-outline:hover { border-color: var(--teal); transform: translateY(-2px); }
+  @media (max-width: 600px) {
+    .page { padding: 2rem 1rem 3rem; }
+    .treatment-hero { padding: 2rem 1.5rem; }
+    .images-wrap { padding: 1.5rem 1.5rem 0; }
+    .treatment-content { padding: 1.75rem 1.5rem; }
+    .images-grid { grid-template-columns: 1fr; }
+    .images-grid.three { grid-template-columns: 1fr; }
+    .actions { flex-direction: column; }
+    .actions a { text-align: center; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="treatment-hero">
+    <p class="eyebrow">PRP and PRF</p>
+    <h1 class="treatment-title">PRP <em>and</em> PRF</h1>
+    <p style="font-size:0.78rem;letter-spacing:0.1em;color:rgba(253,250,246,0.55);margin-top:0.5rem;font-weight:300;">Kennington, South London</p>
+  </div>
+  <div class="images-wrap">
+    <div class="images-grid three">
+      <img src="https://static.wixstatic.com/media/0b63bc_dc879e65556d43d0b150635001f445aa~mv2.jpg" alt="PRP platelet rich plasma treatment preparation by Dr Smith Aesthetics South London" title="PRP Treatment – Dr Smith Aesthetics South London" loading="lazy" />
+      <img src="https://static.wixstatic.com/media/0b63bc_7bdc211a2ba647718c32d9ebed775630~mv2.jpg" alt="PRF vampire facial platelet rich fibrin skin rejuvenation treatment by Dr Smith Aesthetics London" title="PRF Vampire Facial – Dr Smith Aesthetics London" loading="lazy" />
+      <img src="https://static.wixstatic.com/media/0b63bc_5d5d9c64e1c24758a752a68232c5a72e~mv2.jpg" alt="PRP PRF hair restoration and skin renewal treatment results by Dr Smith Aesthetics Kennington" title="PRP Hair Restoration Results – Dr Smith Aesthetics Kennington" loading="lazy" />
+    </div>
+  </div>
+  <div class="treatment-content">
+    <div class="section"><p class="section-title">What is PRP?</p><div class="section-body"><ul><li>PRP stands for platelet rich plasma.</li><li>Blood is taken from the client and then spun down in a centrifuge to separate into different parts. The plasma is the straw coloured liquid which contains platelets.</li><li>These platelets have many growth factors with a multitude of benefits.</li><li>We aim to get a much greater concentration of platelets to maximise these benefits.</li><li>In the human body, when we sustain an injury, platelets are activated and release these growth factors which stimulate the inflammatory process and hence wound healing.</li><li>They promote collagen production, improve texture and promote healing.</li></ul></div></div>
+    <div class="divider"></div>
+    <div class="section"><p class="section-title">Why do we use it in aesthetics?</p><div class="section-body"><ul><li>PRP growth factors promote wound healing, new blood vessels, collagen and elastin production, increase fibroblast activity, hair growth and thickness as well as other benefits to promote great skin health and texture.</li><li>Overall, we get younger looking, healthier skin.</li><li>Great results to stimulate dormant hair cells and create an environment for new and thicker hair.</li></ul></div></div>
+    <div class="divider"></div>
+    <div class="section"><p class="section-title">How is it administered?</p><div class="section-body"><p>Firstly your blood is taken on the same day and then spun down in the centrifuge (takes around 10–15 minutes). It is important not to have a high fat containing meal 4 hours prior to your treatment.</p><p style="margin-top:0.5rem">There are a number of ways to administer PRP:</p><ul><li><strong>Microneedling</strong> — Your PRP is applied directly to your skin and then micro-needling is used to make many very small punctures in the skin to help the PRP penetrate all the skin layers.</li><li><strong>Mesotherapy</strong> — Your PRP is drawn up in a syringe and using a very small needle, it is injected very superficially. This can be done for the whole face, neck, on scars and in areas of hair loss/scalp.</li></ul></div></div>
+    <div class="divider"></div>
+    <div class="section"><p class="section-title">What is PRF?</p><div class="section-body"><ul><li>PRF (Platelet Rich Fibrin) is a newer, more advanced version of PRP.</li><li>PRP requires an anticoagulant to be mixed with your blood to prevent it clotting, which can inhibit the release of some growth factors.</li><li>With PRF, we do not use additives or anticoagulants, only your blood. The blood is spun slower and for longer to preserve platelets.</li><li>This ensures a high platelet count and a fibrin matrix to form, allowing for a slower, longer release of growth factors and hence better, longer lasting results.</li></ul></div></div>
+    <div class="divider"></div>
+    <div class="section"><p class="section-title">Why choose Dr Smith Aesthetics for PRF?</p><div class="section-body"><ul><li>PRP and PRF can be confusing to practitioners, let alone the general public.</li><li>There is not much standardisation with regards to centrifugation. What speed and how long are extremely important variables that can result in poor platelet counts and hence results.</li><li>As there are many variables that will affect the platelet concentration, we go by the latest research in order to produce the highest platelet concentration in our PRF.</li><li>Your practitioner should know these variables: what material the blood tubes are made from and why, what rotor type is used and why, what relative centrifugal force they are aiming for and why.</li></ul></div></div>
+    <div class="divider"></div>
+    <div class="section"><p class="section-title">What is the downtime / recovery?</p><div class="section-body"><ul><li>Minor red marks and mild swelling post treatment which can last around 1–24 hours.</li><li>Possibility of minor bruising which can last a few days to a week.</li></ul></div></div>
+    <div class="divider"></div>
+    <div class="section"><p class="section-title">Results</p><div class="section-body"><ul><li>It takes time for skin to produce collagen and for hair follicles to start growing again, so results are a gradual improvement rather than a quick fix. This is an investment in your long term goals that your older self will thank you for!</li><li>It is recommended to have minimum 3 treatments (hair 4–6) and then to have ongoing maintenance treatments to maintain results.</li><li>PRP results generally last around 3–6 months, with PRF results lasting longer.</li></ul></div></div>
+    <div class="actions">
+      <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" onclick="window.top.open(this.href,'_blank');return false;" class="btn-primary">Book Now →</a>
+      <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" onclick="window.top.open(this.href,'_blank');return false;" class="btn-outline">View Prices</a>
+      <a href="https://www.lsmithaesthetics.com/treatments" onclick="window.top.location.href='https://www.lsmithaesthetics.com/treatments';return false;" class="btn-outline">← Back to Treatments</a>
+    </div>
+  </div>
+</div>
+<script>
+function notifyHeight() {
+  setTimeout(() => { window.parent.postMessage({ type: 'iframeHeight', height: document.body.scrollHeight }, '*'); }, 50);
+}
+window.addEventListener('load', notifyHeight);
+</script>
+</body>
+</html>

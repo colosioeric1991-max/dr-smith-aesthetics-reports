@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --teal: #0D3B4F;
+    --gold: #C9A96E;
+    --cream: #F5F1EB;
+    --muted: #6B7280;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); }
+
+  .intro-strip {
+    background: var(--cream);
+    padding: 4.5rem 5.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    border-top: 1px solid rgba(201,169,110,0.25);
+    border-bottom: 1px solid rgba(201,169,110,0.25);
+    height: 100%;
+  }
+  .intro-block { padding: 0 1rem; }
+  .intro-block + .intro-block { border-left: 1px solid rgba(13,59,79,0.1); }
+  .intro-block h3 {
+    font-size: 1.3rem; font-weight: 500;
+    color: var(--teal); margin-bottom: 0.6rem; line-height: 1.2;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .intro-block p {
+    font-size: 0.88rem; line-height: 1.75;
+    color: var(--muted); font-weight: 300;
+  }
+  .intro-icon { font-size: 1.4rem; margin-bottom: 0.75rem; color: var(--gold); }
+
+  @media (max-width: 1100px) {
+    .intro-strip { padding: 4rem 3rem; gap: 2rem; }
+  }
+  @media (max-width: 700px) {
+    .intro-strip {
+      grid-template-columns: 1fr;
+      padding: 2.5rem 1.5rem;
+      gap: 1.5rem;
+      height: auto;
+    }
+    .intro-block + .intro-block { border-left: none; border-top: 1px solid rgba(13,59,79,0.1); padding-top: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+  <div class="intro-strip">
+    <div class="intro-block">
+      <div class="intro-icon">🩺</div>
+      <h3>Medically Trained</h3>
+      <p>MBBS, BSc (Hons). NHS-trained doctor with specialist experience across a range of medical specialties before dedicating his practice to aesthetics.</p>
+    </div>
+    <div class="intro-block">
+      <div class="intro-icon">✦</div>
+      <h3>Natural Results</h3>
+      <p>Committed to personalised care and tailored treatments that enhance your natural beauty, ensuring every client feels confident and satisfied.</p>
+    </div>
+    <div class="intro-block">
+      <div class="intro-icon">◈</div>
+      <h3>Industry Educator</h3>
+      <p>Dr Smith teaches botox, filler and skin rejuvenation to doctors, nurses and other medical professionals at Cosmetic Courses, raising standards across the industry.</p>
+    </div>
+  </div>
+</body>
+</html>

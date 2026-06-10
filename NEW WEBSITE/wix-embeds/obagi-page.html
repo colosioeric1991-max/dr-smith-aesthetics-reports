@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+<style>
+  :root { --teal:#0D3B4F; --teal-mid:#1A5068; --gold:#C9A96E; --cream:#F5F1EB; --warm-white:#FDFAF6; --muted:#6B7280; --charcoal:#2D3748; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); }
+  .page { max-width: 860px; margin: 0 auto; padding: 4rem 2rem 5rem; }
+
+  /* ── CONTENT ── */
+  .treatment-content { background: var(--warm-white); border-radius: 6px; padding: 2.5rem; }
+  .section { margin-bottom: 2rem; }
+  .section:last-of-type { margin-bottom: 0; }
+  .section-title { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: rgba(201,169,110,0.25); }
+  .section-body { font-size: 0.88rem; line-height: 1.8; color: var(--charcoal); font-weight: 300; }
+  .section-body p { margin-bottom: 0.6rem; }
+  .section-body p:last-child { margin-bottom: 0; }
+  .section-body ul { padding-left: 1.2rem; margin: 0.4rem 0; }
+  .section-body li { margin-bottom: 0.35rem; }
+  .section-body strong { font-weight: 500; color: var(--teal); }
+  .divider { height: 1px; background: rgba(13,59,79,0.08); margin: 1.75rem 0; }
+
+  /* ── PRODUCT RANGES ── */
+  .range-header {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; font-weight: 500;
+    color: var(--teal); margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  .price-table { width: 100%; border-collapse: collapse; }
+  .price-table tr { border-bottom: 1px solid rgba(13,59,79,0.06); }
+  .price-table tr:last-child { border-bottom: none; }
+  .price-table td { padding: 0.45rem 0; font-size: 0.85rem; font-weight: 300; color: var(--charcoal); line-height: 1.5; }
+  .price-table td.price { text-align: right; white-space: nowrap; color: var(--teal); font-weight: 400; padding-left: 1rem; }
+  .price-table .kit-name { font-weight: 500; color: var(--teal); padding-top: 0.75rem; }
+  .price-table .kit-desc { font-size: 0.8rem; color: var(--muted); padding-bottom: 0.25rem; }
+
+  /* ── RANGES GRID ── */
+  .ranges-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; }
+  .range-card { background: var(--cream); border-radius: 4px; padding: 1.25rem 1.5rem; }
+
+  /* ── CALECIM CALLOUT ── */
+  .callout {
+    background: rgba(13,59,79,0.04);
+    border: 1px solid rgba(13,59,79,0.1);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 0.5rem;
+  }
+  .callout-note { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-top: 0.5rem; }
+
+  /* ── ACTIONS ── */
+  .actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--warm-white); background: var(--teal); padding: 0.85rem 1.8rem; border-radius: 2px; text-decoration: none; border: 1px solid var(--teal); transition: background 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1); font-family: 'DM Sans', sans-serif; }
+  .btn-primary:hover { background: var(--teal-mid); border-color: var(--teal-mid); transform: translateY(-2px); }
+  .btn-outline { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); background: transparent; padding: 0.85rem 1.8rem; border-radius: 2px; text-decoration: none; border: 1px solid rgba(13,59,79,0.25); transition: border-color 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1); font-family: 'DM Sans', sans-serif; }
+  .btn-outline:hover { border-color: var(--teal); transform: translateY(-2px); }
+
+  @media (max-width: 600px) {
+    .page { padding: 2rem 1rem 3rem; }
+    .treatment-hero { padding: 2rem 1.5rem; }
+    .treatment-content { padding: 1.75rem 1.5rem; }
+    .ranges-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .actions { flex-direction: column; }
+    .actions a { text-align: center; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="treatment-content">
+
+    <!-- ABOUT OBAGI -->
+    <div class="section">
+      <p class="section-title">About Obagi Medical</p>
+      <div class="section-body">
+        <p>Founded by Dr Zein Obagi, a board-certified dermatologist with over 35 years of clinical research, Obagi Medical is one of the world's leading medical-grade skincare brands, trusted by dermatologists and aesthetic practitioners worldwide.</p>
+        <p>Unlike high-street skincare, Obagi formulations are not available over the counter. They are exclusively prescribed through licensed medical professionals, ensuring every product is matched to the right patient and skin type. This is what makes them genuinely effective.</p>
+        <p>Obagi works at a cellular level, targeting the root causes of skin concerns rather than masking them. The range addresses pigmentation, uneven skin tone, ageing, acne and overall skin health, using prescription-strength ingredients including tretinoin, hydroquinone and vitamin C. The results are visible, measurable and long-lasting.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- WHY DR SMITH RECOMMENDS IT -->
+    <div class="section">
+      <p class="section-title">Why Dr Smith recommends Obagi</p>
+      <div class="section-body">
+        <p>As a medically trained doctor, Dr Smith believes that great skin starts from within. Obagi's science-led approach aligns perfectly with this philosophy, combining prescription-grade ingredients with clinical rigour to deliver real, lasting improvements.</p>
+        <p>Dr Smith is an authorised Obagi practitioner, which means he can prescribe the full range including tretinoin-based products that are simply not available anywhere else. Every recommendation is made following a thorough skin consultation and assessment, so you can be confident the products you receive are right for your skin.</p>
+        <p>Obagi also works beautifully alongside injectable treatments, maintaining and enhancing your results between clinic visits. Whether you are looking to address pigmentation, improve skin texture or simply invest in your long-term skin health, Obagi gives your skin the best possible foundation.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PRODUCT RANGES -->
+    <div class="section">
+      <p class="section-title">Product Ranges</p>
+      <div class="section-body">
+        <p style="margin-bottom:1.5rem;">All products are available to order online through our secure patient portal. A consultation with Dr Smith is recommended to ensure the right products are selected for your skin.</p>
+
+        <div class="ranges-grid">
+
+          <div class="range-card">
+            <p class="range-header">Obagi Nu-Derm®</p>
+            <p>A complete skin transformation system targeting pigmentation, uneven skin tone and the visible signs of ageing. Available in Fx and prescription Rx formulations for both dry and oily skin types.</p>
+          </div>
+
+          <div class="range-card">
+            <p class="range-header">Obagi-C® Fx &amp; Rx</p>
+            <p>A vitamin C–powered system designed to brighten, clarify and protect. The Rx range includes prescription-strength ingredients for deeper correction of pigmentation and tone.</p>
+          </div>
+
+          <div class="range-card">
+            <p class="range-header">Obagi Professional-C®</p>
+            <p>High-potency vitamin C serums available in 10%, 15% and 20% concentrations, alongside peptide and resurfacing formulations for radiance and skin renewal.</p>
+          </div>
+
+          <div class="range-card">
+            <p class="range-header">Obagi Moisturisers</p>
+            <p>A full range of hydrating formulas including daily moisturisers, lightweight gel creams, barrier repair and targeted eye care — suitable for all skin types.</p>
+          </div>
+
+          <div class="range-card">
+            <p class="range-header">ELASTIderm®</p>
+            <p>Clinically developed to restore skin elasticity and firmness. Targets the face, eye area and neck with concentrated serums, creams and sculpting formulas.</p>
+          </div>
+
+          <div class="range-card">
+            <p class="range-header">SUZANOBAGIMD™ &amp; SPF Sun Shield®</p>
+            <p>A curated range of daily repair, rejuvenating retinoid complexes, and broad-spectrum SPF50 mineral and tinted sun protection for everyday skin health.</p>
+          </div>
+
+          <div class="range-card">
+            <p class="range-header">Retinol &amp; Tretinoin</p>
+            <p>From over-the-counter retinol to prescription-only tretinoin at 0.025%, 0.05% and 0.1% strengths — the gold standard in skin renewal, available exclusively through licensed practitioners.</p>
+          </div>
+
+          <div class="range-card">
+            <p class="range-header">CLENZIderm M.D.®</p>
+            <p>A medically developed acne treatment system combining benzoyl peroxide with solubilised technology for deeper penetration and effective clearing of acne-prone skin.</p>
+          </div>
+
+        </div><!-- end ranges-grid -->
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- BUNDLE KITS -->
+    <div class="section">
+      <p class="section-title">Obagi Bundle Kits</p>
+      <div class="section-body">
+        <table class="price-table">
+          <tr><td class="kit-name">Obagi Repair Foundation Kit</td></tr>
+          <tr><td class="kit-desc">Nu-Derm Gentle Cleanser, Obagi Hydrate, Sun Shield Matte SPF50</td></tr>
+          <tr><td class="kit-name">Obagi Men Carbon Kit</td></tr>
+          <tr><td class="kit-desc">CLENZIderm Foaming Cleanser, C-Exfoliating Day Lotion, Retinol 1.0, Deluxe Mini Daily Hydro-Drops</td></tr>
+          <tr><td class="kit-name">Obagi Vitamin C Care Kit Warm</td></tr>
+          <tr><td class="kit-desc">C-Cleansing Gel, C-Exfoliating Day Lotion, Professional-C Microdermabrasion Polish+Mask, Sun Shield TINT Warm SPF50</td></tr>
+        </table>
+        <p style="margin-top:1rem;font-size:0.82rem;color:var(--muted);font-style:italic;">Gift sets also available on the online store.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CALECIM -->
+    <div class="section">
+      <p class="section-title">Calecim® Professional</p>
+      <div class="section-body">
+        <p>Calecim Professional is a stem cell–derived skincare range, also available at Dr Smith Aesthetics. <strong>Note: Calecim products are only available in clinic.</strong></p>
+        <div class="callout" style="margin-top:1rem;">
+          <p>The range includes the Advanced Hair System, Professional Serum, Multi-Action Cream, Recovery Night, Restorative Hydration, Eye Contour Lifting and Professional Pigment formulations.</p>
+          <p class="callout-note">Calecim is only available to purchase in clinic — please book a consultation to discuss.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a href="https://drsmithaesthetics.cleverpatients.co.uk/-/login" target="_blank" onclick="window.top.open(this.href,'_blank');return false;" class="btn-primary">Shop Online →</a>
+      <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" onclick="window.top.open(this.href,'_blank');return false;" class="btn-outline">Book Consultation</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function notifyHeight() {
+  setTimeout(() => { window.parent.postMessage({ type: 'iframeHeight', height: document.body.scrollHeight }, '*'); }, 50);
+}
+window.addEventListener('load', notifyHeight);
+window.addEventListener('resize', notifyHeight);
+</script>
+</body>
+</html>

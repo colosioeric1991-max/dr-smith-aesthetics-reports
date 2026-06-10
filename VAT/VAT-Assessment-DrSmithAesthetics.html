@@ -1,0 +1,3046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAT Threshold Assessment — Dr Smith Aesthetics</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; color: #1a1a2e; background: #f7f8fc; }
+  
+  .page { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+  
+  /* Header */
+  .header { display: flex; align-items: center; justify-content: space-between; padding: 28px 36px; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,20,40,0.08); margin-bottom: 24px; }
+  .header-logo { width: 220px; }
+  .header-right { text-align: right; }
+  .header-right h1 { font-size: 18px; font-weight: 700; color: #062336; letter-spacing: -0.02em; }
+  .header-right p { font-size: 12px; color: #6b7280; margin-top: 4px; }
+
+  /* Alert box */
+  .alert { background: #fff1f2; border-left: 4px solid #dc2626; border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; }
+  .alert h2 { color: #dc2626; font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .alert p { color: #7f1d1d; font-size: 13px; line-height: 1.6; }
+  .alert strong { color: #dc2626; }
+
+  /* Summary cards */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .card { background: #fff; border-radius: 10px; padding: 18px 20px; box-shadow: 0 1px 6px rgba(0,20,40,0.07); border-top: 3px solid #062336; }
+  .card.green { border-top-color: #16a34a; }
+  .card.red { border-top-color: #dc2626; }
+  .card.amber { border-top-color: #d97706; }
+  .card-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7280; margin-bottom: 6px; }
+  .card-value { font-size: 22px; font-weight: 700; color: #062336; letter-spacing: -0.02em; }
+  .card-sub { font-size: 11px; color: #9ca3af; margin-top: 4px; }
+
+  /* Rolling analysis table */
+  .section { background: #fff; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,20,40,0.07); }
+  .section h2 { font-size: 14px; font-weight: 700; color: #062336; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #e5e7eb; }
+  
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  thead th { background: #062336; color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; font-size: 11.5px; letter-spacing: 0.03em; }
+  thead th:not(:first-child) { text-align: right; }
+  tbody tr:nth-child(even) { background: #f9fafb; }
+  tbody td { padding: 7px 12px; border-bottom: 1px solid #f0f0f0; color: #374151; }
+  tbody td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+  
+  .row-threshold td { background: #fef2f2 !important; font-weight: 700; color: #dc2626 !important; }
+  .row-over td { background: #fff7ed !important; color: #92400e !important; }
+  .row-deadline td { background: #fffbeb !important; }
+  .row-regdate td { background: #f0fdf4 !important; }
+  .row-zero td { color: #9ca3af; }
+
+  .badge { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+  .badge-red { background: #fee2e2; color: #dc2626; }
+  .badge-amber { background: #fef3c7; color: #92400e; }
+  .badge-green { background: #dcfce7; color: #16a34a; }
+  .badge-blue { background: #dbeafe; color: #1d4ed8; }
+
+  /* Notes */
+  .notes { font-size: 12px; color: #4b5563; }
+  .notes li { padding: 5px 0; border-bottom: 1px solid #f3f4f6; line-height: 1.5; }
+  .notes li:last-child { border-bottom: none; }
+
+  /* Daily table scroll */
+  .scroll-wrap { overflow-x: auto; }
+  .daily-table { min-width: 700px; }
+  .daily-table tbody td { padding: 5px 10px; font-size: 12px; }
+  .daily-table thead th { padding: 8px 10px; }
+
+  .progress-bar { background: #e5e7eb; border-radius: 4px; height: 8px; margin-top: 8px; }
+  .progress-fill { background: #062336; border-radius: 4px; height: 8px; }
+  .progress-fill.over { background: #dc2626; }
+
+  @media print {
+    body { background: #fff; }
+    .page { padding: 0; max-width: 100%; }
+    .header { box-shadow: none; border: 1px solid #e5e7eb; }
+    .section { box-shadow: none; border: 1px solid #e5e7eb; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-logo"><?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 475.07 148.5">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #002436;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer_1">
+    <g>
+      <g>
+        <path d="M290.03,148.26h-3.42l7.27-16.97h2.3l7.27,16.97h-3.42l-1.6-3.76h-6.81l-1.6,3.76ZM295.02,136.57l-2.16,5.02h4.31l-2.16-5.02Z"/>
+        <path d="M320.91,134.2h-6.91v3.52h5.21v2.91h-5.21v4.73h7.15v2.91h-10.42v-16.97h10.18v2.91Z"/>
+        <path d="M328.06,145.95l2.13-2.23c1.13,1.25,2.46,1.87,4,1.87.73,0,1.32-.2,1.78-.61.46-.4.69-.91.69-1.53,0-.65-.26-1.17-.78-1.56s-1.31-.8-2.36-1.2c-1.06-.4-1.82-.74-2.29-1.02-1.6-.94-2.4-2.22-2.4-3.85,0-1.44.56-2.59,1.67-3.47,1.12-.87,2.42-1.31,3.93-1.31,1.84,0,3.48.53,4.92,1.6l-1.7,2.42c-.81-.74-1.79-1.12-2.93-1.12-.69,0-1.31.15-1.83.46-.53.31-.79.77-.79,1.38,0,.48.27.91.81,1.27.54.36,1.19.69,1.95.97s1.52.61,2.29.98c.77.37,1.42.93,1.96,1.67.54.74.81,1.65.81,2.72,0,1.47-.57,2.69-1.7,3.65-1.13.96-2.48,1.44-4.05,1.44-2.23,0-4.28-.85-6.13-2.55Z"/>
+        <path d="M346.12,131.29h12.24v2.91h-4.49v14.06h-3.27v-14.06h-4.49v-2.91Z"/>
+        <path d="M378,148.26v-7.64h-8.48v7.64h-3.27v-16.97h3.27v6.42h8.48v-6.42h3.27v16.97h-3.27Z"/>
+        <path d="M400.67,134.2h-6.91v3.52h5.21v2.91h-5.21v4.73h7.15v2.91h-10.42v-16.97h10.18v2.91Z"/>
+        <path d="M408.19,131.29h12.24v2.91h-4.49v14.06h-3.27v-14.06h-4.49v-2.91Z"/>
+        <path d="M428.31,148.26v-16.97h3.27v16.97h-3.27Z"/>
+        <path d="M448.5,133.95c-1.6,0-2.94.57-4.02,1.7-1.08,1.13-1.62,2.51-1.62,4.12s.56,3.03,1.67,4.15,2.49,1.67,4.12,1.67c1.99,0,3.59-.78,4.8-2.35l2.25,2.01c-.78.99-1.78,1.77-3.02,2.36-1.24.59-2.61.89-4.11.89-2.62,0-4.77-.84-6.46-2.51-1.69-1.67-2.53-3.75-2.53-6.22s.84-4.55,2.52-6.22c1.68-1.67,3.82-2.51,6.42-2.51s4.54.81,6.21,2.42l-2.11,2.23c-1.16-1.16-2.54-1.75-4.12-1.75Z"/>
+        <path d="M462.13,145.95l2.13-2.23c1.13,1.25,2.46,1.87,4,1.87.73,0,1.32-.2,1.78-.61.46-.4.69-.91.69-1.53,0-.65-.26-1.17-.78-1.56s-1.31-.8-2.36-1.2c-1.06-.4-1.82-.74-2.29-1.02-1.6-.94-2.4-2.22-2.4-3.85,0-1.44.56-2.59,1.67-3.47,1.12-.87,2.42-1.31,3.93-1.31,1.84,0,3.48.53,4.92,1.6l-1.7,2.42c-.81-.74-1.79-1.12-2.93-1.12-.69,0-1.31.15-1.83.46-.53.31-.79.77-.79,1.38,0,.48.27.91.81,1.27.54.36,1.19.69,1.95.97s1.52.61,2.29.98c.77.37,1.42.93,1.96,1.67.54.74.81,1.65.81,2.72,0,1.47-.57,2.69-1.7,3.65-1.13.96-2.48,1.44-4.05,1.44-2.23,0-4.28-.85-6.13-2.55Z"/>
+      </g>
+      <path d="M189.19,104.39l-.44-16.58,1.44-.22c4.64,12.6,14.48,22.32,29.17,22.32,7.62,0,14.7-4.86,14.7-13.92,0-10.83-14.26-15.91-23.1-19.45-11.38-4.75-20.89-8.51-20.89-21.33,0-13.7,11.05-22.21,28.4-22.21,8.18,0,15.47,1.77,21.22,4.64l.44,14.37-1.22.44c-4.53-11.38-13.92-17.57-24.64-17.57-8.84,0-15.8,5.19-15.8,13.92,0,9.84,11.16,13.81,20,17.35,11.27,4.31,24.64,9.28,24.64,22.54,0,15.14-13.92,23.54-26.63,23.54-11.38,0-21.66-3.65-27.3-7.85Z"/>
+      <path d="M249.08,109.59c3.65-1.22,4.42-4.53,4.42-12.49v-25.42c0-6.52-1.66-7.62-4.42-8.84v-1.55l14.59-6.41,1.1.88v9.28c6.08-4.97,14.04-9.95,22.65-9.95,7.74,0,12.82,2.98,14.92,10.06,6.08-4.97,14.15-10.06,22.88-10.06,10.17,0,15.91,5.3,15.91,18.23v23.76c0,7.96.77,11.27,4.42,12.49v1.55h-20.11v-1.55c3.65-1.22,4.42-4.53,4.42-12.49v-21.77c0-9.95-3.2-15.8-11.38-15.8-5.19,0-9.95,2.54-15.8,7.18.44,1.99.66,4.2.66,6.63v23.76c0,7.96.77,11.27,4.42,12.49v1.55h-20.11v-1.55c3.65-1.22,4.42-4.53,4.42-12.49v-21.77c0-9.95-3.21-15.8-11.38-15.8-5.19,0-9.95,2.54-15.91,7.4v30.17c0,7.96.77,11.27,4.42,12.49v1.55h-20.11v-1.55Z"/>
+      <path d="M350.31,109.59c3.65-1.22,4.42-4.53,4.42-12.49v-25.42c0-6.52-1.66-7.62-4.42-8.84v-1.55l14.59-6.41,1.1.88v41.33c0,7.96.77,11.27,4.42,12.49v1.55h-20.11v-1.55Z"/>
+      <path d="M383.02,95.55v-37.9h-7.07v-1.77l16.58-14.59h1.77v14.59h17.13l-.44,1.77h-16.69v38.02c0,6.85,2.54,9.84,7.4,9.84,2.43,0,6.19-.99,9.84-5.53l1.1,1.11c-5.86,6.74-11.49,11.16-18.12,11.16-7.51,0-11.49-4.75-11.49-16.69Z"/>
+      <path d="M415.29,109.59c3.65-1.22,4.42-4.53,4.42-12.49v-58.57c0-6.52-1.66-7.63-4.42-8.84v-1.55l14.59-6.41,1.1.88v42.44c6.08-4.97,14.04-9.95,22.65-9.95,10.17,0,17.02,5.3,17.02,18.23v23.76c0,7.96.77,11.27,4.42,12.49v1.55h-20.11v-1.55c3.65-1.22,4.42-4.53,4.42-12.49v-21.77c0-9.95-4.31-15.8-12.49-15.8-5.19,0-9.95,2.54-15.91,7.4v30.17c0,7.96.77,11.27,4.42,12.49v1.55h-20.11v-1.55Z"/>
+      <circle cx="357.71" cy="40.41" r="7.4"/>
+      <rect class="cls-1" width="163.9" height="148.13"/>
+      <g>
+        <path class="cls-2" d="M18.14,111.13v-1.55c3.65-1.22,4.42-4.53,4.42-12.49v-49.29c0-7.96-.77-11.27-4.42-12.49v-1.55h27.63c31.83,0,42.21,20.89,42.32,37.13.11,23.98-15.58,40.23-39.89,40.23h-30.06ZM75.05,76.32c0-22.65-11.71-40.78-36.36-40.78h-4.42v65.75c0,5.19,1.1,8.07,7.18,8.07h5.97c17.79,0,27.63-9.39,27.63-33.04Z"/>
+        <path class="cls-2" d="M96.82,109.59c3.65-1.22,4.42-4.53,4.42-12.49v-25.42c0-6.52-1.66-7.62-4.42-8.84v-1.55l14.59-6.41,1.1.88v13.37c1.66-3.87,4.53-7.29,8.07-9.73,4.09-2.87,8.29-4.31,13.59-4.31,3.76,0,7.07.99,7.07,3.32s-2.43,7.18-7.51,7.18c-3.09,0-7.29-1.1-14.37-3.32-2.76,2.32-6.52,7.29-6.85,12.82v21.99c0,7.96.77,11.27,4.42,12.49v1.55h-20.11v-1.55Z"/>
+        <circle class="cls-2" cx="140.66" cy="105.78" r="7.4"/>
+      </g>
+    </g>
+  </g>
+</svg></div>
+    <div class="header-right">
+      <h1>VAT Threshold Assessment</h1>
+      <p>Period: 01/01/2025 – 01/04/2026 &nbsp;|&nbsp; Generated: 02/04/2026</p>
+      <p>Data source: Square card machine exports</p>
+    </div>
+  </div>
+
+  <!-- URGENT ALERT -->
+  <div class="alert">
+    <h2>⚠ Urgent — HMRC Notification Deadline Has Passed</h2>
+    <p>
+      The rolling 12-month taxable turnover exceeded £90,000 at the end of <strong>February 2026</strong> (total: <strong>£92,379.79</strong>).<br>
+      The HMRC notification deadline was <strong>30/03/2026</strong> — this date has already passed (today is 02/04/2026).<br>
+      VAT registration should be effective from <strong>01/04/2026</strong> (today). <strong>Contact your accountant immediately.</strong>
+    </p>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="cards">
+    <div class="card red">
+      <div class="card-label">Threshold Crossed</div>
+      <div class="card-value">Feb 2026</div>
+      <div class="card-sub">Rolling 12-month: £92,379.79</div>
+      <div class="progress-bar"><div class="progress-fill over" style="width:100%"></div></div>
+    </div>
+    <div class="card amber">
+      <div class="card-label">HMRC Deadline</div>
+      <div class="card-value">30/03/2026</div>
+      <div class="card-sub">30 days after end of February 2026</div>
+    </div>
+    <div class="card">
+      <div class="card-label">VAT Registration From</div>
+      <div class="card-value">01/04/2026</div>
+      <div class="card-sub">Effective date (today)</div>
+    </div>
+  </div>
+
+  <!-- Rolling 12-month table -->
+  <div class="section">
+    <h2>Rolling 12-Month Threshold Analysis</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Month End</th>
+          <th>Rolling 12-Month Total</th>
+          <th>Threshold</th>
+          <th>Headroom / Overage</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="">
+            <td>January 2025</td>
+            <td>£3,638.00</td>
+            <td>£90,000.00</td>
+            <td>£-86,362.00</td>
+            <td><span class="badge badge-green">Under threshold</span></td>
+          </tr><tr class="">
+            <td>February 2025</td>
+            <td>£9,027.87</td>
+            <td>£90,000.00</td>
+            <td>£-80,972.13</td>
+            <td><span class="badge badge-green">Under threshold</span></td>
+          </tr><tr class="">
+            <td>March 2025</td>
+            <td>£15,674.37</td>
+            <td>£90,000.00</td>
+            <td>£-74,325.63</td>
+            <td><span class="badge badge-green">Under threshold</span></td>
+          </tr><tr class="">
+            <td>April 2025</td>
+            <td>£21,757.37</td>
+            <td>£90,000.00</td>
+            <td>£-68,242.63</td>
+            <td><span class="badge badge-green">Under threshold</span></td>
+          </tr><tr class="">
+            <td>May 2025</td>
+            <td>£27,537.12</td>
+            <td>£90,000.00</td>
+            <td>£-62,462.88</td>
+            <td><span class="badge badge-green">Under threshold</span></td>
+          </tr><tr class="">
+            <td>June 2025</td>
+            <td>£34,792.17</td>
+            <td>£90,000.00</td>
+            <td>£-55,207.83</td>
+            <td><span class="badge badge-green">Under threshold</span></td>
+          </tr><tr class="">
+            <td>July 2025</td>
+            <td>£43,939.92</td>
+            <td>£90,000.00</td>
+            <td>£-46,060.08</td>
+            <td><span class="badge badge-green">Under threshold</span></td>
+          </tr><tr class="">
+            <td>August 2025</td>
+            <td>£51,539.67</td>
+            <td>£90,000.00</td>
+            <td>£-38,460.33</td>
+            <td><span class="badge badge-green">Under threshold</span></td>
+          </tr><tr class="">
+            <td>September 2025</td>
+            <td>£59,345.67</td>
+            <td>£90,000.00</td>
+            <td>£-30,654.33</td>
+            <td><span class="badge badge-green">Under threshold</span></td>
+          </tr><tr class="">
+            <td>October 2025</td>
+            <td>£67,933.66</td>
+            <td>£90,000.00</td>
+            <td>£-22,066.34</td>
+            <td><span class="badge badge-green">Under threshold</span></td>
+          </tr><tr class="">
+            <td>November 2025</td>
+            <td>£75,458.66</td>
+            <td>£90,000.00</td>
+            <td>£-14,541.34</td>
+            <td><span class="badge badge-green">Under threshold</span></td>
+          </tr><tr class="">
+            <td>December 2025</td>
+            <td>£83,011.16</td>
+            <td>£90,000.00</td>
+            <td>£-6,988.84</td>
+            <td><span class="badge badge-green">Under threshold</span></td>
+          </tr><tr class="">
+            <td>January 2026</td>
+            <td>£88,245.66</td>
+            <td>£90,000.00</td>
+            <td>£-1,754.34</td>
+            <td><span class="badge badge-green">Under threshold</span></td>
+          </tr><tr class="row-threshold">
+            <td>February 2026</td>
+            <td>£92,379.79</td>
+            <td>£90,000.00</td>
+            <td>+£2,379.79</td>
+            <td><span class="badge badge-red">THRESHOLD CROSSED</span></td>
+          </tr><tr class="row-over">
+            <td>March 2026</td>
+            <td>£100,472.29</td>
+            <td>£90,000.00</td>
+            <td>+£10,472.29</td>
+            <td><span class="badge badge-amber">Over threshold</span></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Daily transactions -->
+  <div class="section">
+    <h2>Daily Transaction Log — Square Card Machine</h2>
+    <div class="scroll-wrap">
+      <table class="daily-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Net Sales (£)</th>
+            <th>Cumulative Total (£)</th>
+            <th>Rolling 12-Month (£)</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-zero">
+              <td>01/01/2025</td>
+              <td>—</td>
+              <td>£0.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>02/01/2025</td>
+              <td>£232.50</td>
+              <td>£232.50</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>03/01/2025</td>
+              <td>—</td>
+              <td>£232.50</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>04/01/2025</td>
+              <td>£30.00</td>
+              <td>£262.50</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>05/01/2025</td>
+              <td>£343.50</td>
+              <td>£606.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>06/01/2025</td>
+              <td>—</td>
+              <td>£606.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>07/01/2025</td>
+              <td>—</td>
+              <td>£606.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>08/01/2025</td>
+              <td>—</td>
+              <td>£606.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>09/01/2025</td>
+              <td>—</td>
+              <td>£606.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>10/01/2025</td>
+              <td>—</td>
+              <td>£606.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>11/01/2025</td>
+              <td>—</td>
+              <td>£606.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>12/01/2025</td>
+              <td>—</td>
+              <td>£606.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>13/01/2025</td>
+              <td>£30.00</td>
+              <td>£636.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>14/01/2025</td>
+              <td>—</td>
+              <td>£636.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>15/01/2025</td>
+              <td>—</td>
+              <td>£636.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>16/01/2025</td>
+              <td>—</td>
+              <td>£636.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>17/01/2025</td>
+              <td>£100.00</td>
+              <td>£736.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>18/01/2025</td>
+              <td>—</td>
+              <td>£736.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>19/01/2025</td>
+              <td>—</td>
+              <td>£736.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>20/01/2025</td>
+              <td>—</td>
+              <td>£736.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>21/01/2025</td>
+              <td>—</td>
+              <td>£736.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>22/01/2025</td>
+              <td>£180.00</td>
+              <td>£916.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>23/01/2025</td>
+              <td>—</td>
+              <td>£916.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>24/01/2025</td>
+              <td>£1,096.50</td>
+              <td>£2,012.50</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>25/01/2025</td>
+              <td>£100.00</td>
+              <td>£2,112.50</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>26/01/2025</td>
+              <td>—</td>
+              <td>£2,112.50</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>27/01/2025</td>
+              <td>£141.00</td>
+              <td>£2,253.50</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>28/01/2025</td>
+              <td>£216.00</td>
+              <td>£2,469.50</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>29/01/2025</td>
+              <td>—</td>
+              <td>£2,469.50</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>30/01/2025</td>
+              <td>£342.00</td>
+              <td>£2,811.50</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>31/01/2025</td>
+              <td>£826.50</td>
+              <td>£3,638.00</td>
+              <td>£3,638.00</td>
+              <td></td>
+            </tr><tr class="">
+              <td>01/02/2025</td>
+              <td>£1,020.00</td>
+              <td>£4,658.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>02/02/2025</td>
+              <td>—</td>
+              <td>£4,658.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>03/02/2025</td>
+              <td>£216.00</td>
+              <td>£4,874.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>04/02/2025</td>
+              <td>£186.00</td>
+              <td>£5,060.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>05/02/2025</td>
+              <td>—</td>
+              <td>£5,060.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>06/02/2025</td>
+              <td>—</td>
+              <td>£5,060.00</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>07/02/2025</td>
+              <td>£158.30</td>
+              <td>£5,218.30</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>08/02/2025</td>
+              <td>—</td>
+              <td>£5,218.30</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>09/02/2025</td>
+              <td>£225.00</td>
+              <td>£5,443.30</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>10/02/2025</td>
+              <td>£324.41</td>
+              <td>£5,767.71</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>11/02/2025</td>
+              <td>—</td>
+              <td>£5,767.71</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>12/02/2025</td>
+              <td>—</td>
+              <td>£5,767.71</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>13/02/2025</td>
+              <td>£290.00</td>
+              <td>£6,057.71</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>14/02/2025</td>
+              <td>£90.00</td>
+              <td>£6,147.71</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>15/02/2025</td>
+              <td>—</td>
+              <td>£6,147.71</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>16/02/2025</td>
+              <td>£432.00</td>
+              <td>£6,579.71</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>17/02/2025</td>
+              <td>£50.00</td>
+              <td>£6,629.71</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>18/02/2025</td>
+              <td>£125.00</td>
+              <td>£6,754.71</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>19/02/2025</td>
+              <td>£249.00</td>
+              <td>£7,003.71</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>20/02/2025</td>
+              <td>£159.00</td>
+              <td>£7,162.71</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>21/02/2025</td>
+              <td>£343.00</td>
+              <td>£7,505.71</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>22/02/2025</td>
+              <td>£190.00</td>
+              <td>£7,695.71</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>23/02/2025</td>
+              <td>£310.50</td>
+              <td>£8,006.21</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>24/02/2025</td>
+              <td>—</td>
+              <td>£8,006.21</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>25/02/2025</td>
+              <td>—</td>
+              <td>£8,006.21</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>26/02/2025</td>
+              <td>£675.00</td>
+              <td>£8,681.21</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>27/02/2025</td>
+              <td>—</td>
+              <td>£8,681.21</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>28/02/2025</td>
+              <td>£346.66</td>
+              <td>£9,027.87</td>
+              <td>£9,027.87</td>
+              <td></td>
+            </tr><tr class="">
+              <td>01/03/2025</td>
+              <td>£369.00</td>
+              <td>£9,396.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>02/03/2025</td>
+              <td>—</td>
+              <td>£9,396.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>03/03/2025</td>
+              <td>—</td>
+              <td>£9,396.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>04/03/2025</td>
+              <td>—</td>
+              <td>£9,396.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>05/03/2025</td>
+              <td>—</td>
+              <td>£9,396.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>06/03/2025</td>
+              <td>£190.00</td>
+              <td>£9,586.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>07/03/2025</td>
+              <td>—</td>
+              <td>£9,586.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>08/03/2025</td>
+              <td>—</td>
+              <td>£9,586.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>09/03/2025</td>
+              <td>£230.00</td>
+              <td>£9,816.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>10/03/2025</td>
+              <td>£60.00</td>
+              <td>£9,876.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>11/03/2025</td>
+              <td>£1,640.00</td>
+              <td>£11,516.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>12/03/2025</td>
+              <td>£240.00</td>
+              <td>£11,756.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>13/03/2025</td>
+              <td>£1,020.00</td>
+              <td>£12,776.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>14/03/2025</td>
+              <td>—</td>
+              <td>£12,776.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>15/03/2025</td>
+              <td>—</td>
+              <td>£12,776.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>16/03/2025</td>
+              <td>—</td>
+              <td>£12,776.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>17/03/2025</td>
+              <td>—</td>
+              <td>£12,776.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>18/03/2025</td>
+              <td>—</td>
+              <td>£12,776.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>19/03/2025</td>
+              <td>£1,056.00</td>
+              <td>£13,832.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>20/03/2025</td>
+              <td>—</td>
+              <td>£13,832.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>21/03/2025</td>
+              <td>£131.50</td>
+              <td>£13,964.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>22/03/2025</td>
+              <td>£263.00</td>
+              <td>£14,227.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>23/03/2025</td>
+              <td>£180.00</td>
+              <td>£14,407.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>24/03/2025</td>
+              <td>—</td>
+              <td>£14,407.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>25/03/2025</td>
+              <td>£640.00</td>
+              <td>£15,047.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>26/03/2025</td>
+              <td>—</td>
+              <td>£15,047.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>27/03/2025</td>
+              <td>£60.00</td>
+              <td>£15,107.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>28/03/2025</td>
+              <td>£471.00</td>
+              <td>£15,578.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>29/03/2025</td>
+              <td>£96.00</td>
+              <td>£15,674.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>30/03/2025</td>
+              <td>—</td>
+              <td>£15,674.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>31/03/2025</td>
+              <td>—</td>
+              <td>£15,674.37</td>
+              <td>£15,674.37</td>
+              <td></td>
+            </tr><tr class="">
+              <td>01/04/2025</td>
+              <td>£30.00</td>
+              <td>£15,704.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>02/04/2025</td>
+              <td>—</td>
+              <td>£15,704.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>03/04/2025</td>
+              <td>£375.00</td>
+              <td>£16,079.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>04/04/2025</td>
+              <td>£80.00</td>
+              <td>£16,159.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>05/04/2025</td>
+              <td>£849.50</td>
+              <td>£17,008.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>06/04/2025</td>
+              <td>—</td>
+              <td>£17,008.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>07/04/2025</td>
+              <td>£381.00</td>
+              <td>£17,389.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>08/04/2025</td>
+              <td>£30.00</td>
+              <td>£17,419.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>09/04/2025</td>
+              <td>£325.00</td>
+              <td>£17,744.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>10/04/2025</td>
+              <td>£160.00</td>
+              <td>£17,904.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>11/04/2025</td>
+              <td>£676.00</td>
+              <td>£18,580.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>12/04/2025</td>
+              <td>£240.00</td>
+              <td>£18,820.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>13/04/2025</td>
+              <td>—</td>
+              <td>£18,820.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>14/04/2025</td>
+              <td>£74.00</td>
+              <td>£18,894.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>15/04/2025</td>
+              <td>—</td>
+              <td>£18,894.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>16/04/2025</td>
+              <td>£1,255.00</td>
+              <td>£20,149.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>17/04/2025</td>
+              <td>£30.00</td>
+              <td>£20,179.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>18/04/2025</td>
+              <td>—</td>
+              <td>£20,179.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>19/04/2025</td>
+              <td>—</td>
+              <td>£20,179.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>20/04/2025</td>
+              <td>£30.00</td>
+              <td>£20,209.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>21/04/2025</td>
+              <td>—</td>
+              <td>£20,209.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>22/04/2025</td>
+              <td>£126.00</td>
+              <td>£20,335.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>23/04/2025</td>
+              <td>£141.00</td>
+              <td>£20,476.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>24/04/2025</td>
+              <td>£710.50</td>
+              <td>£21,187.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>25/04/2025</td>
+              <td>£30.00</td>
+              <td>£21,217.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>26/04/2025</td>
+              <td>£30.00</td>
+              <td>£21,247.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>27/04/2025</td>
+              <td>—</td>
+              <td>£21,247.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>28/04/2025</td>
+              <td>—</td>
+              <td>£21,247.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>29/04/2025</td>
+              <td>—</td>
+              <td>£21,247.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>30/04/2025</td>
+              <td>£510.00</td>
+              <td>£21,757.37</td>
+              <td>£21,757.37</td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>01/05/2025</td>
+              <td>—</td>
+              <td>£21,757.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>02/05/2025</td>
+              <td>£255.00</td>
+              <td>£22,012.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>03/05/2025</td>
+              <td>£396.00</td>
+              <td>£22,408.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>04/05/2025</td>
+              <td>—</td>
+              <td>£22,408.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>05/05/2025</td>
+              <td>—</td>
+              <td>£22,408.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>06/05/2025</td>
+              <td>—</td>
+              <td>£22,408.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>07/05/2025</td>
+              <td>£750.00</td>
+              <td>£23,158.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>08/05/2025</td>
+              <td>—</td>
+              <td>£23,158.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>09/05/2025</td>
+              <td>£30.00</td>
+              <td>£23,188.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>10/05/2025</td>
+              <td>£592.00</td>
+              <td>£23,780.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>11/05/2025</td>
+              <td>—</td>
+              <td>£23,780.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>12/05/2025</td>
+              <td>£403.00</td>
+              <td>£24,183.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>13/05/2025</td>
+              <td>—</td>
+              <td>£24,183.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>14/05/2025</td>
+              <td>£240.00</td>
+              <td>£24,423.37</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>15/05/2025</td>
+              <td>£637.50</td>
+              <td>£25,060.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>16/05/2025</td>
+              <td>—</td>
+              <td>£25,060.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>17/05/2025</td>
+              <td>£490.00</td>
+              <td>£25,550.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>18/05/2025</td>
+              <td>—</td>
+              <td>£25,550.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>19/05/2025</td>
+              <td>—</td>
+              <td>£25,550.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>20/05/2025</td>
+              <td>—</td>
+              <td>£25,550.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>21/05/2025</td>
+              <td>—</td>
+              <td>£25,550.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>22/05/2025</td>
+              <td>£30.00</td>
+              <td>£25,580.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>23/05/2025</td>
+              <td>—</td>
+              <td>£25,580.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>24/05/2025</td>
+              <td>£261.00</td>
+              <td>£25,841.87</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>25/05/2025</td>
+              <td>£200.25</td>
+              <td>£26,042.12</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>26/05/2025</td>
+              <td>£60.00</td>
+              <td>£26,102.12</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>27/05/2025</td>
+              <td>—</td>
+              <td>£26,102.12</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>28/05/2025</td>
+              <td>£345.00</td>
+              <td>£26,447.12</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>29/05/2025</td>
+              <td>£480.00</td>
+              <td>£26,927.12</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>30/05/2025</td>
+              <td>£240.00</td>
+              <td>£27,167.12</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>31/05/2025</td>
+              <td>£370.00</td>
+              <td>£27,537.12</td>
+              <td>£27,537.12</td>
+              <td></td>
+            </tr><tr class="">
+              <td>01/06/2025</td>
+              <td>£150.00</td>
+              <td>£27,687.12</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>02/06/2025</td>
+              <td>—</td>
+              <td>£27,687.12</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>03/06/2025</td>
+              <td>—</td>
+              <td>£27,687.12</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>04/06/2025</td>
+              <td>£240.00</td>
+              <td>£27,927.12</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>05/06/2025</td>
+              <td>£170.00</td>
+              <td>£28,097.12</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>06/06/2025</td>
+              <td>£170.00</td>
+              <td>£28,267.12</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>07/06/2025</td>
+              <td>£255.00</td>
+              <td>£28,522.12</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>08/06/2025</td>
+              <td>£247.50</td>
+              <td>£28,769.62</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>09/06/2025</td>
+              <td>£350.00</td>
+              <td>£29,119.62</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>10/06/2025</td>
+              <td>£80.00</td>
+              <td>£29,199.62</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>11/06/2025</td>
+              <td>£755.00</td>
+              <td>£29,954.62</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>12/06/2025</td>
+              <td>—</td>
+              <td>£29,954.62</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>13/06/2025</td>
+              <td>—</td>
+              <td>£29,954.62</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>14/06/2025</td>
+              <td>£525.00</td>
+              <td>£30,479.62</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>15/06/2025</td>
+              <td>£202.05</td>
+              <td>£30,681.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>16/06/2025</td>
+              <td>—</td>
+              <td>£30,681.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>17/06/2025</td>
+              <td>—</td>
+              <td>£30,681.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>18/06/2025</td>
+              <td>£30.00</td>
+              <td>£30,711.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>19/06/2025</td>
+              <td>£110.00</td>
+              <td>£30,821.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>20/06/2025</td>
+              <td>£395.00</td>
+              <td>£31,216.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>21/06/2025</td>
+              <td>£425.00</td>
+              <td>£31,641.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>22/06/2025</td>
+              <td>£234.00</td>
+              <td>£31,875.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>23/06/2025</td>
+              <td>£60.00</td>
+              <td>£31,935.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>24/06/2025</td>
+              <td>£631.00</td>
+              <td>£32,566.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>25/06/2025</td>
+              <td>—</td>
+              <td>£32,566.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>26/06/2025</td>
+              <td>£693.50</td>
+              <td>£33,260.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>27/06/2025</td>
+              <td>£320.00</td>
+              <td>£33,580.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>28/06/2025</td>
+              <td>£812.00</td>
+              <td>£34,392.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>29/06/2025</td>
+              <td>—</td>
+              <td>£34,392.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>30/06/2025</td>
+              <td>£400.00</td>
+              <td>£34,792.17</td>
+              <td>£34,792.17</td>
+              <td></td>
+            </tr><tr class="">
+              <td>01/07/2025</td>
+              <td>£1,630.00</td>
+              <td>£36,422.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>02/07/2025</td>
+              <td>£30.00</td>
+              <td>£36,452.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>03/07/2025</td>
+              <td>£234.00</td>
+              <td>£36,686.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>04/07/2025</td>
+              <td>—</td>
+              <td>£36,686.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>05/07/2025</td>
+              <td>£30.00</td>
+              <td>£36,716.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>06/07/2025</td>
+              <td>£30.00</td>
+              <td>£36,746.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>07/07/2025</td>
+              <td>£30.00</td>
+              <td>£36,776.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>08/07/2025</td>
+              <td>£-30.00</td>
+              <td>£36,746.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>09/07/2025</td>
+              <td>£330.00</td>
+              <td>£37,076.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>10/07/2025</td>
+              <td>£30.00</td>
+              <td>£37,106.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>11/07/2025</td>
+              <td>£480.00</td>
+              <td>£37,586.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>12/07/2025</td>
+              <td>£540.00</td>
+              <td>£38,126.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>13/07/2025</td>
+              <td>—</td>
+              <td>£38,126.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>14/07/2025</td>
+              <td>£30.00</td>
+              <td>£38,156.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>15/07/2025</td>
+              <td>£1,160.00</td>
+              <td>£39,316.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>16/07/2025</td>
+              <td>£60.00</td>
+              <td>£39,376.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>17/07/2025</td>
+              <td>£330.00</td>
+              <td>£39,706.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>18/07/2025</td>
+              <td>£510.00</td>
+              <td>£40,216.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>19/07/2025</td>
+              <td>£350.00</td>
+              <td>£40,566.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>20/07/2025</td>
+              <td>£50.00</td>
+              <td>£40,616.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>21/07/2025</td>
+              <td>£1,987.50</td>
+              <td>£42,603.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>22/07/2025</td>
+              <td>—</td>
+              <td>£42,603.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>23/07/2025</td>
+              <td>—</td>
+              <td>£42,603.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>24/07/2025</td>
+              <td>£30.00</td>
+              <td>£42,633.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>25/07/2025</td>
+              <td>—</td>
+              <td>£42,633.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>26/07/2025</td>
+              <td>—</td>
+              <td>£42,633.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>27/07/2025</td>
+              <td>£30.00</td>
+              <td>£42,663.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>28/07/2025</td>
+              <td>—</td>
+              <td>£42,663.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>29/07/2025</td>
+              <td>£30.00</td>
+              <td>£42,693.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>30/07/2025</td>
+              <td>£72.50</td>
+              <td>£42,766.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>31/07/2025</td>
+              <td>£1,173.75</td>
+              <td>£43,939.92</td>
+              <td>£43,939.92</td>
+              <td></td>
+            </tr><tr class="">
+              <td>01/08/2025</td>
+              <td>£335.00</td>
+              <td>£44,274.92</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>02/08/2025</td>
+              <td>£880.00</td>
+              <td>£45,154.92</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>03/08/2025</td>
+              <td>—</td>
+              <td>£45,154.92</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>04/08/2025</td>
+              <td>£30.00</td>
+              <td>£45,184.92</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>05/08/2025</td>
+              <td>£270.00</td>
+              <td>£45,454.92</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>06/08/2025</td>
+              <td>£221.25</td>
+              <td>£45,676.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>07/08/2025</td>
+              <td>£1,166.00</td>
+              <td>£46,842.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>08/08/2025</td>
+              <td>£30.00</td>
+              <td>£46,872.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>09/08/2025</td>
+              <td>£641.00</td>
+              <td>£47,513.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>10/08/2025</td>
+              <td>£445.00</td>
+              <td>£47,958.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>11/08/2025</td>
+              <td>—</td>
+              <td>£47,958.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>12/08/2025</td>
+              <td>—</td>
+              <td>£47,958.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>13/08/2025</td>
+              <td>£195.00</td>
+              <td>£48,153.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>14/08/2025</td>
+              <td>£487.00</td>
+              <td>£48,640.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>15/08/2025</td>
+              <td>£150.00</td>
+              <td>£48,790.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>16/08/2025</td>
+              <td>£171.00</td>
+              <td>£48,961.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>17/08/2025</td>
+              <td>£170.00</td>
+              <td>£49,131.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>18/08/2025</td>
+              <td>—</td>
+              <td>£49,131.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>19/08/2025</td>
+              <td>£341.00</td>
+              <td>£49,472.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>20/08/2025</td>
+              <td>—</td>
+              <td>£49,472.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>21/08/2025</td>
+              <td>£100.00</td>
+              <td>£49,572.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>22/08/2025</td>
+              <td>£50.00</td>
+              <td>£49,622.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>23/08/2025</td>
+              <td>£100.00</td>
+              <td>£49,722.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>24/08/2025</td>
+              <td>—</td>
+              <td>£49,722.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>25/08/2025</td>
+              <td>—</td>
+              <td>£49,722.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>26/08/2025</td>
+              <td>—</td>
+              <td>£49,722.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>27/08/2025</td>
+              <td>—</td>
+              <td>£49,722.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>28/08/2025</td>
+              <td>£100.00</td>
+              <td>£49,822.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>29/08/2025</td>
+              <td>£724.50</td>
+              <td>£50,546.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>30/08/2025</td>
+              <td>£1,043.00</td>
+              <td>£51,589.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>31/08/2025</td>
+              <td>£-50.00</td>
+              <td>£51,539.67</td>
+              <td>£51,539.67</td>
+              <td></td>
+            </tr><tr class="">
+              <td>01/09/2025</td>
+              <td>£140.00</td>
+              <td>£51,679.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>02/09/2025</td>
+              <td>£347.50</td>
+              <td>£52,027.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>03/09/2025</td>
+              <td>£766.00</td>
+              <td>£52,793.17</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>04/09/2025</td>
+              <td>£637.50</td>
+              <td>£53,430.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>05/09/2025</td>
+              <td>—</td>
+              <td>£53,430.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>06/09/2025</td>
+              <td>£1,062.00</td>
+              <td>£54,492.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>07/09/2025</td>
+              <td>£100.00</td>
+              <td>£54,592.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>08/09/2025</td>
+              <td>—</td>
+              <td>£54,592.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>09/09/2025</td>
+              <td>£860.00</td>
+              <td>£55,452.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>10/09/2025</td>
+              <td>£100.00</td>
+              <td>£55,552.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>11/09/2025</td>
+              <td>£171.00</td>
+              <td>£55,723.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>12/09/2025</td>
+              <td>£50.00</td>
+              <td>£55,773.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>13/09/2025</td>
+              <td>£617.00</td>
+              <td>£56,390.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>14/09/2025</td>
+              <td>£200.00</td>
+              <td>£56,590.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>15/09/2025</td>
+              <td>£210.00</td>
+              <td>£56,800.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>16/09/2025</td>
+              <td>£220.00</td>
+              <td>£57,020.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>17/09/2025</td>
+              <td>—</td>
+              <td>£57,020.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>18/09/2025</td>
+              <td>—</td>
+              <td>£57,020.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>19/09/2025</td>
+              <td>£50.00</td>
+              <td>£57,070.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>20/09/2025</td>
+              <td>£370.00</td>
+              <td>£57,440.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>21/09/2025</td>
+              <td>—</td>
+              <td>£57,440.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>22/09/2025</td>
+              <td>£310.00</td>
+              <td>£57,750.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>23/09/2025</td>
+              <td>—</td>
+              <td>£57,750.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>24/09/2025</td>
+              <td>£50.00</td>
+              <td>£57,800.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>25/09/2025</td>
+              <td>£50.00</td>
+              <td>£57,850.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>26/09/2025</td>
+              <td>£485.00</td>
+              <td>£58,335.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>27/09/2025</td>
+              <td>—</td>
+              <td>£58,335.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>28/09/2025</td>
+              <td>£100.00</td>
+              <td>£58,435.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>29/09/2025</td>
+              <td>£740.00</td>
+              <td>£59,175.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>30/09/2025</td>
+              <td>£170.00</td>
+              <td>£59,345.67</td>
+              <td>£59,345.67</td>
+              <td></td>
+            </tr><tr class="">
+              <td>01/10/2025</td>
+              <td>£100.00</td>
+              <td>£59,445.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>02/10/2025</td>
+              <td>—</td>
+              <td>£59,445.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>03/10/2025</td>
+              <td>£359.00</td>
+              <td>£59,804.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>04/10/2025</td>
+              <td>—</td>
+              <td>£59,804.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>05/10/2025</td>
+              <td>£50.00</td>
+              <td>£59,854.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>06/10/2025</td>
+              <td>—</td>
+              <td>£59,854.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>07/10/2025</td>
+              <td>£622.00</td>
+              <td>£60,476.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>08/10/2025</td>
+              <td>£310.00</td>
+              <td>£60,786.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>09/10/2025</td>
+              <td>£480.00</td>
+              <td>£61,266.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>10/10/2025</td>
+              <td>£220.00</td>
+              <td>£61,486.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>11/10/2025</td>
+              <td>£401.00</td>
+              <td>£61,887.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>12/10/2025</td>
+              <td>—</td>
+              <td>£61,887.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>13/10/2025</td>
+              <td>£374.00</td>
+              <td>£62,261.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>14/10/2025</td>
+              <td>£560.00</td>
+              <td>£62,821.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>15/10/2025</td>
+              <td>£50.00</td>
+              <td>£62,871.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>16/10/2025</td>
+              <td>£50.00</td>
+              <td>£62,921.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>17/10/2025</td>
+              <td>£210.00</td>
+              <td>£63,131.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>18/10/2025</td>
+              <td>£553.00</td>
+              <td>£63,684.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>19/10/2025</td>
+              <td>£171.00</td>
+              <td>£63,855.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>20/10/2025</td>
+              <td>£50.00</td>
+              <td>£63,905.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>21/10/2025</td>
+              <td>£50.00</td>
+              <td>£63,955.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>22/10/2025</td>
+              <td>£190.00</td>
+              <td>£64,145.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>23/10/2025</td>
+              <td>£640.00</td>
+              <td>£64,785.67</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>24/10/2025</td>
+              <td>£1,259.99</td>
+              <td>£66,045.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>25/10/2025</td>
+              <td>£270.00</td>
+              <td>£66,315.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>26/10/2025</td>
+              <td>£130.00</td>
+              <td>£66,445.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>27/10/2025</td>
+              <td>£358.00</td>
+              <td>£66,803.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>28/10/2025</td>
+              <td>£500.00</td>
+              <td>£67,303.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>29/10/2025</td>
+              <td>—</td>
+              <td>£67,303.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>30/10/2025</td>
+              <td>£50.00</td>
+              <td>£67,353.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>31/10/2025</td>
+              <td>£580.00</td>
+              <td>£67,933.66</td>
+              <td>£67,933.66</td>
+              <td></td>
+            </tr><tr class="">
+              <td>01/11/2025</td>
+              <td>£137.00</td>
+              <td>£68,070.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>02/11/2025</td>
+              <td>£50.00</td>
+              <td>£68,120.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>03/11/2025</td>
+              <td>£50.00</td>
+              <td>£68,170.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>04/11/2025</td>
+              <td>£140.00</td>
+              <td>£68,310.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>05/11/2025</td>
+              <td>—</td>
+              <td>£68,310.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>06/11/2025</td>
+              <td>£340.00</td>
+              <td>£68,650.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>07/11/2025</td>
+              <td>—</td>
+              <td>£68,650.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>08/11/2025</td>
+              <td>£220.00</td>
+              <td>£68,870.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>09/11/2025</td>
+              <td>£420.00</td>
+              <td>£69,290.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>10/11/2025</td>
+              <td>£198.00</td>
+              <td>£69,488.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>11/11/2025</td>
+              <td>—</td>
+              <td>£69,488.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>12/11/2025</td>
+              <td>£859.50</td>
+              <td>£70,348.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>13/11/2025</td>
+              <td>£930.00</td>
+              <td>£71,278.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>14/11/2025</td>
+              <td>£1,038.50</td>
+              <td>£72,316.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>15/11/2025</td>
+              <td>—</td>
+              <td>£72,316.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>16/11/2025</td>
+              <td>£50.00</td>
+              <td>£72,366.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>17/11/2025</td>
+              <td>£360.00</td>
+              <td>£72,726.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>18/11/2025</td>
+              <td>£170.00</td>
+              <td>£72,896.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>19/11/2025</td>
+              <td>£260.00</td>
+              <td>£73,156.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>20/11/2025</td>
+              <td>£50.00</td>
+              <td>£73,206.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>21/11/2025</td>
+              <td>—</td>
+              <td>£73,206.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>22/11/2025</td>
+              <td>£460.00</td>
+              <td>£73,666.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>23/11/2025</td>
+              <td>—</td>
+              <td>£73,666.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>24/11/2025</td>
+              <td>£50.00</td>
+              <td>£73,716.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>25/11/2025</td>
+              <td>£619.50</td>
+              <td>£74,336.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>26/11/2025</td>
+              <td>£100.00</td>
+              <td>£74,436.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>27/11/2025</td>
+              <td>£772.50</td>
+              <td>£75,208.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>28/11/2025</td>
+              <td>£150.00</td>
+              <td>£75,358.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>29/11/2025</td>
+              <td>£100.00</td>
+              <td>£75,458.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>30/11/2025</td>
+              <td>—</td>
+              <td>£75,458.66</td>
+              <td>£75,458.66</td>
+              <td></td>
+            </tr><tr class="">
+              <td>01/12/2025</td>
+              <td>£987.50</td>
+              <td>£76,446.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>02/12/2025</td>
+              <td>£280.00</td>
+              <td>£76,726.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>03/12/2025</td>
+              <td>£100.00</td>
+              <td>£76,826.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>04/12/2025</td>
+              <td>£50.00</td>
+              <td>£76,876.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>05/12/2025</td>
+              <td>£1,996.00</td>
+              <td>£78,872.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>06/12/2025</td>
+              <td>£50.00</td>
+              <td>£78,922.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>07/12/2025</td>
+              <td>—</td>
+              <td>£78,922.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>08/12/2025</td>
+              <td>£120.00</td>
+              <td>£79,042.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>09/12/2025</td>
+              <td>£372.00</td>
+              <td>£79,414.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>10/12/2025</td>
+              <td>£741.00</td>
+              <td>£80,155.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>11/12/2025</td>
+              <td>—</td>
+              <td>£80,155.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>12/12/2025</td>
+              <td>£455.00</td>
+              <td>£80,610.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>13/12/2025</td>
+              <td>—</td>
+              <td>£80,610.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>14/12/2025</td>
+              <td>—</td>
+              <td>£80,610.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>15/12/2025</td>
+              <td>£170.00</td>
+              <td>£80,780.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>16/12/2025</td>
+              <td>£260.00</td>
+              <td>£81,040.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>17/12/2025</td>
+              <td>—</td>
+              <td>£81,040.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>18/12/2025</td>
+              <td>£50.00</td>
+              <td>£81,090.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>19/12/2025</td>
+              <td>£431.00</td>
+              <td>£81,521.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>20/12/2025</td>
+              <td>£50.00</td>
+              <td>£81,571.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>21/12/2025</td>
+              <td>—</td>
+              <td>£81,571.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>22/12/2025</td>
+              <td>£710.00</td>
+              <td>£82,281.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>23/12/2025</td>
+              <td>—</td>
+              <td>£82,281.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>24/12/2025</td>
+              <td>—</td>
+              <td>£82,281.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>25/12/2025</td>
+              <td>—</td>
+              <td>£82,281.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>26/12/2025</td>
+              <td>—</td>
+              <td>£82,281.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>27/12/2025</td>
+              <td>£170.00</td>
+              <td>£82,451.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>28/12/2025</td>
+              <td>£200.00</td>
+              <td>£82,651.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>29/12/2025</td>
+              <td>—</td>
+              <td>£82,651.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>30/12/2025</td>
+              <td>£100.00</td>
+              <td>£82,751.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>31/12/2025</td>
+              <td>£260.00</td>
+              <td>£83,011.16</td>
+              <td>£83,011.16</td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>01/01/2026</td>
+              <td>—</td>
+              <td>£83,011.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>02/01/2026</td>
+              <td>—</td>
+              <td>£83,011.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>03/01/2026</td>
+              <td>£202.50</td>
+              <td>£83,213.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>04/01/2026</td>
+              <td>£450.00</td>
+              <td>£83,663.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>05/01/2026</td>
+              <td>—</td>
+              <td>£83,663.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>06/01/2026</td>
+              <td>£1,134.50</td>
+              <td>£84,798.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>07/01/2026</td>
+              <td>£480.00</td>
+              <td>£85,278.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>08/01/2026</td>
+              <td>£170.00</td>
+              <td>£85,448.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>09/01/2026</td>
+              <td>£188.00</td>
+              <td>£85,636.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>10/01/2026</td>
+              <td>£50.00</td>
+              <td>£85,686.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>11/01/2026</td>
+              <td>£300.00</td>
+              <td>£85,986.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>12/01/2026</td>
+              <td>—</td>
+              <td>£85,986.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>13/01/2026</td>
+              <td>£733.00</td>
+              <td>£86,719.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>14/01/2026</td>
+              <td>£461.00</td>
+              <td>£87,180.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>15/01/2026</td>
+              <td>—</td>
+              <td>£87,180.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>16/01/2026</td>
+              <td>£1,245.00</td>
+              <td>£88,425.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>17/01/2026</td>
+              <td>£50.00</td>
+              <td>£88,475.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>18/01/2026</td>
+              <td>—</td>
+              <td>£88,475.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>19/01/2026</td>
+              <td>£100.00</td>
+              <td>£88,575.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>20/01/2026</td>
+              <td>—</td>
+              <td>£88,575.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>21/01/2026</td>
+              <td>£50.00</td>
+              <td>£88,625.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>22/01/2026</td>
+              <td>£50.00</td>
+              <td>£88,675.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>23/01/2026</td>
+              <td>£1,139.00</td>
+              <td>£89,814.16</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>24/01/2026</td>
+              <td>£911.50</td>
+              <td>£90,725.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>25/01/2026</td>
+              <td>£50.00</td>
+              <td>£90,775.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>26/01/2026</td>
+              <td>£293.00</td>
+              <td>£91,068.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>27/01/2026</td>
+              <td>—</td>
+              <td>£91,068.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>28/01/2026</td>
+              <td>£715.00</td>
+              <td>£91,783.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>29/01/2026</td>
+              <td>£50.00</td>
+              <td>£91,833.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>30/01/2026</td>
+              <td>—</td>
+              <td>£91,833.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>31/01/2026</td>
+              <td>£50.00</td>
+              <td>£91,883.66</td>
+              <td>£88,245.66</td>
+              <td></td>
+            </tr><tr class="">
+              <td>01/02/2026</td>
+              <td>£50.00</td>
+              <td>£91,933.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>02/02/2026</td>
+              <td>£937.00</td>
+              <td>£92,870.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>03/02/2026</td>
+              <td>—</td>
+              <td>£92,870.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>04/02/2026</td>
+              <td>—</td>
+              <td>£92,870.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>05/02/2026</td>
+              <td>£184.00</td>
+              <td>£93,054.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>06/02/2026</td>
+              <td>£663.00</td>
+              <td>£93,717.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>07/02/2026</td>
+              <td>£640.00</td>
+              <td>£94,357.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>08/02/2026</td>
+              <td>£585.00</td>
+              <td>£94,942.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>09/02/2026</td>
+              <td>£150.00</td>
+              <td>£95,092.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>10/02/2026</td>
+              <td>£50.00</td>
+              <td>£95,142.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>11/02/2026</td>
+              <td>£260.00</td>
+              <td>£95,402.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>12/02/2026</td>
+              <td>£520.00</td>
+              <td>£95,922.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>13/02/2026</td>
+              <td>£1,220.00</td>
+              <td>£97,142.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>14/02/2026</td>
+              <td>—</td>
+              <td>£97,142.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>15/02/2026</td>
+              <td>£210.00</td>
+              <td>£97,352.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>16/02/2026</td>
+              <td>£300.00</td>
+              <td>£97,652.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>17/02/2026</td>
+              <td>£50.00</td>
+              <td>£97,702.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>18/02/2026</td>
+              <td>£50.00</td>
+              <td>£97,752.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>19/02/2026</td>
+              <td>£2,375.00</td>
+              <td>£100,127.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>20/02/2026</td>
+              <td>£540.00</td>
+              <td>£100,667.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>21/02/2026</td>
+              <td>—</td>
+              <td>£100,667.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>22/02/2026</td>
+              <td>£430.00</td>
+              <td>£101,097.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>23/02/2026</td>
+              <td>£50.00</td>
+              <td>£101,147.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>24/02/2026</td>
+              <td>—</td>
+              <td>£101,147.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>25/02/2026</td>
+              <td>£210.00</td>
+              <td>£101,357.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>26/02/2026</td>
+              <td>—</td>
+              <td>£101,357.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>27/02/2026</td>
+              <td>£50.00</td>
+              <td>£101,407.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-threshold">
+              <td>28/02/2026</td>
+              <td>—</td>
+              <td>£101,407.66</td>
+              <td>£92,379.79</td>
+              <td><span class="badge badge-red">THRESHOLD CROSSED</span></td>
+            </tr><tr class="row-zero">
+              <td>01/03/2026</td>
+              <td>—</td>
+              <td>£101,407.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>02/03/2026</td>
+              <td>£873.00</td>
+              <td>£102,280.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>03/03/2026</td>
+              <td>£260.00</td>
+              <td>£102,540.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>04/03/2026</td>
+              <td>£226.00</td>
+              <td>£102,766.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>05/03/2026</td>
+              <td>£2,109.00</td>
+              <td>£104,875.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>06/03/2026</td>
+              <td>£570.00</td>
+              <td>£105,445.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>07/03/2026</td>
+              <td>£1,692.00</td>
+              <td>£107,137.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>08/03/2026</td>
+              <td>£326.00</td>
+              <td>£107,463.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>09/03/2026</td>
+              <td>—</td>
+              <td>£107,463.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>10/03/2026</td>
+              <td>£583.00</td>
+              <td>£108,046.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>11/03/2026</td>
+              <td>£150.00</td>
+              <td>£108,196.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>12/03/2026</td>
+              <td>£1,445.00</td>
+              <td>£109,641.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>13/03/2026</td>
+              <td>£50.00</td>
+              <td>£109,691.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>14/03/2026</td>
+              <td>—</td>
+              <td>£109,691.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>15/03/2026</td>
+              <td>—</td>
+              <td>£109,691.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>16/03/2026</td>
+              <td>£600.00</td>
+              <td>£110,291.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>17/03/2026</td>
+              <td>£740.00</td>
+              <td>£111,031.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>18/03/2026</td>
+              <td>£220.00</td>
+              <td>£111,251.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>19/03/2026</td>
+              <td>£818.00</td>
+              <td>£112,069.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>20/03/2026</td>
+              <td>£522.00</td>
+              <td>£112,591.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>21/03/2026</td>
+              <td>—</td>
+              <td>£112,591.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>22/03/2026</td>
+              <td>£880.00</td>
+              <td>£113,471.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>23/03/2026</td>
+              <td>—</td>
+              <td>£113,471.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>24/03/2026</td>
+              <td>£480.00</td>
+              <td>£113,951.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>25/03/2026</td>
+              <td>£100.00</td>
+              <td>£114,051.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>26/03/2026</td>
+              <td>£715.00</td>
+              <td>£114,766.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="">
+              <td>27/03/2026</td>
+              <td>£540.00</td>
+              <td>£115,306.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-zero">
+              <td>28/03/2026</td>
+              <td>—</td>
+              <td>£115,306.66</td>
+              <td></td>
+              <td></td>
+            </tr><tr class="row-deadline">
+              <td>29/03/2026</td>
+              <td>£100.00</td>
+              <td>£115,406.66</td>
+              <td></td>
+              <td><span class="badge badge-amber">HMRC DEADLINE</span></td>
+            </tr><tr class="row-deadline">
+              <td>30/03/2026</td>
+              <td>£100.00</td>
+              <td>£115,506.66</td>
+              <td></td>
+              <td><span class="badge badge-amber">HMRC DEADLINE</span></td>
+            </tr><tr class="">
+              <td>31/03/2026</td>
+              <td>£640.00</td>
+              <td>£116,146.66</td>
+              <td>£100,472.29</td>
+              <td></td>
+            </tr><tr class="row-regdate">
+              <td>01/04/2026</td>
+              <td>£310.00</td>
+              <td>£116,456.66</td>
+              <td></td>
+              <td><span class="badge badge-blue">VAT REGISTRATION EFFECTIVE</span></td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Notes for accountant -->
+  <div class="section">
+    <h2>Notes for Accountant</h2>
+    <ul class="notes">
+      <li><strong>VAT treatment:</strong> Cosmetic aesthetics treatments (botox, dermal fillers, skin boosters, etc.) performed at Dr Smith Aesthetics are <strong>Standard Rated at 20% VAT</strong>. These are NOT exempt from VAT, even when performed by a qualified doctor.</li>
+      <li><strong>Figures used:</strong> Net Sales from Square (gross sales minus returns/refunds) <em>before</em> Square's processing fees. Square fees are a deductible business expense and are not relevant to the VAT threshold calculation.</li>
+      <li><strong>Rolling 12-month method:</strong> HMRC requires assessment at the end of every calendar month. The rolling window is the 12 calendar months ending on the last day of that month.</li>
+      <li><strong>Booking system data NOT included:</strong> Transactions processed through the booking system have not been included in this assessment. These may push the threshold crossing date earlier. Please incorporate these figures for a complete picture.</li>
+      <li><strong>Threshold:</strong> £90,000 taxable turnover in any rolling 12-month period (rate applicable as of April 2025).</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+# Credentials — NEVER commit
+ga-credentials.json
+*.pem
+*.key
+*.p12
+
+# Report output
+reports/*.html
+reports/*.json
+
+# Dependencies
+node_modules/
+**/node_modules/
+NEW WEBSITE/package-lock.json
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Large media — video editing and content assets
+Video editing/
+*.mov
+*.mp4
+*.heic
+*.avi
+*.wmv
+
+# Content/social media working directories (large assets)
+Newsletter/
+OBAGI post/
+SummerSkin-Carousel/
+Experience post/
+
+# Temporary files
+NEW WEBSITE/temporary screenshots/
+*.tmp

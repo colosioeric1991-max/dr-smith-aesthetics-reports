@@ -1,6 +1,8 @@
 # Monthly Maxi Report — Dr Smith Aesthetics
 
-Run on the 1st of each month at 09:00. Reports on the previous full calendar month.
+Run on the 1st of each month at 09:00 BST. Reports on the previous full calendar month.
+
+Note: all file paths below are relative to the cloned repo root (your working directory).
 
 ---
 
@@ -16,27 +18,36 @@ Calculate:
 
 ## Step 2: Pull Wix Analytics
 
-Use the Wix MCP to query site analytics for the reporting period.
+Use the Wix MCP to query site analytics for site ID `37239859-70c1-4361-bd60-cdecdc8423a1`.
 
-First, search the Wix REST documentation for the Analytics Data API to find the correct endpoint for retrieving aggregate traffic data (sessions, unique visitors, page views). Look for measurement types such as `TOTAL_SESSIONS`, `TOTAL_UNIQUE_VISITORS`, `TOTAL_PAGE_VIEWS`.
+Call the Analytics Data API:
+```
+GET https://www.wixapis.com/analytics/v2/site-analytics/data
+  ?date_range.start_date=YYYY-MM-DD
+  &date_range.end_date=YYYY-MM-DD
+  &measurement_types[]=TOTAL_SESSIONS
+  &measurement_types[]=TOTAL_UNIQUE_VISITORS
+```
+
+Note: TOTAL_PAGE_VIEWS is not a valid measurement type — do not include it.
 
 Retrieve those metrics for:
 - The reporting period (start to end date from Step 1)
 - The prior month (to calculate month-on-month % change)
 
-Then retrieve top 5 pages by views for the reporting period.
-
-Then retrieve traffic source breakdown (organic, direct, social, referral) as percentages.
-
 Store results as a `wix` object:
 ```json
 {
-  "sessions": 842,
-  "uniqueVisitors": 651,
-  "pageViews": 2103,
-  "topPages": [{ "path": "/", "title": "Home", "views": 612 }],
-  "sources": { "organic": 48, "direct": 28, "social": 18, "referral": 6 },
-  "vsLastMonth": { "sessions": 12, "pageViews": 8 }
+  "sessions": 313,
+  "uniqueVisitors": 185,
+  "pageViews": null,
+  "topPages": [],
+  "sources": {},
+  "vsLastMonth": {
+    "sessions": null,
+    "uniqueVisitors": null,
+    "note": "Prior month data may be unavailable beyond 62-day retention window"
+  }
 }
 ```
 
@@ -47,52 +58,50 @@ Store results as a `wix` object:
 Use the Square MCP (Payments API) to retrieve all completed payments for the reporting period.
 
 Call the `payments` service, `list` method, with:
-- `begin_time`: start date from Step 1 in ISO 8601 format (e.g. `2026-05-01T00:00:00Z`)
-- `end_time`: end date from Step 1 in ISO 8601 format (e.g. `2026-05-31T23:59:59Z`)
+- `begin_time`: start date in ISO 8601 (e.g. `2026-05-01T00:00:00Z`)
+- `end_time`: end date in ISO 8601 (e.g. `2026-05-31T23:59:59Z`)
 - `sort_order`: DESC
+- `limit`: 100
 
-Sum the `amount_money.amount` values of all payments with `status: "COMPLETED"`. Square amounts are in pence — divide by 100 for pounds.
+Sum the `total_money.amount` values (currency GBP) of all COMPLETED payments. Square amounts are in pence — divide by 100 for pounds.
 
 Count total number of completed transactions.
 
-Calculate month-on-month income % change by fetching the prior month's total the same way.
+Fetch the prior month the same way for month-on-month comparison.
 
-Store results as a `financials` object (leave `expenses` and `net` as 0 for now):
+Store results as a `financials` object:
 ```json
 {
-  "income": 11450,
-  "transactions": 74,
-  "expenses": 0,
-  "net": 0,
-  "vsLastMonth": { "income": 7 }
+  "income": 12323.50,
+  "transactions": 69,
+  "expenses": null,
+  "expensesNote": "Expenses entered manually in the VAT app",
+  "net": null,
+  "vsLastMonth": {
+    "income": 15705.00,
+    "transactions": 99,
+    "changeGBP": -3381.50,
+    "changePct": -21.5
+  }
 }
 ```
 
 ---
 
-## Step 4: Extract expenses from VAT app
+## Step 4: Run SEO audit
 
-Read the file at:
-`/Users/leesmith/Desktop/CLAUDE/VAT/VAT-Assessment-DrSmithAesthetics.html`
-
-Scan for manually entered expense rows corresponding to the reporting month. Sum those amounts and set as `expenses` in the financials object. Calculate `net = income - expenses`.
-
----
-
-## Step 5: Run SEO audit
-
-Run:
+Run from the repo root:
 ```bash
-node /Users/leesmith/Desktop/CLAUDE/scripts/seo-audit.mjs
+node scripts/seo-audit.mjs
 ```
 
 Capture the JSON output as `seo`.
 
 ---
 
-## Step 6: Check keyword rankings
+## Step 5: Check keyword rankings
 
-Use web search to find the current ranking of lsmithaesthetics.com for each keyword. Record the position (1-20) if found, or null if not ranked in top 20. Include a brief snippet if available.
+Use web search to find the current ranking of lsmithaesthetics.com for each keyword. Record the position as a string: "#1", "#5", or "Not in top 10". Include a brief snippet of competing results.
 
 Keywords:
 - "botox London"
@@ -104,19 +113,16 @@ Keywords:
 Store results as a `keywords` array:
 ```json
 [
-  { "term": "botox London", "position": 7, "snippet": "..." },
-  { "term": "dermal fillers London", "position": null, "snippet": "" }
+  { "term": "botox London", "position": "Not in top 10", "snippet": "Competitors: Dr Nyla, LPA..." },
+  { "term": "Dr Smith aesthetics", "position": "#1", "snippet": "lsmithaesthetics.com ranks first" }
 ]
 ```
 
 ---
 
-## Step 7: Assemble and write data JSON
+## Step 6: Assemble and write data JSON
 
-Write all collected data to:
-`/Users/leesmith/Desktop/CLAUDE/reports/data-[FILE-SUFFIX].json`
-
-Use this shape:
+Write all collected data to `reports/data-[FILE-SUFFIX].json`:
 ```json
 {
   "month": "May 2026",
@@ -130,40 +136,39 @@ Use this shape:
 
 ---
 
-## Step 8: Generate the HTML report
+## Step 7: Generate the HTML report
 
-Run:
+Run from the repo root:
 ```bash
-node /Users/leesmith/Desktop/CLAUDE/scripts/run-report.mjs \
-  /Users/leesmith/Desktop/CLAUDE/reports/data-[FILE-SUFFIX].json \
-  /Users/leesmith/Desktop/CLAUDE/reports/report-[FILE-SUFFIX].html
+node scripts/run-report.mjs reports/data-[FILE-SUFFIX].json reports/report-[FILE-SUFFIX].html
 ```
 
 ---
 
-## Step 9: Email the report
+## Step 8: Email the report draft
 
-Use the Gmail MCP to send an email to info@lsmithaesthetics.com:
+Use the Gmail MCP `create_draft` tool to create a draft email at info@lsmithaesthetics.com:
 
-Subject: `Dr Smith Aesthetics | Monthly Report [MONTH LABEL]`
+Subject: `Dr Smith Aesthetics | Monthly Report | [MONTH LABEL]`
 
-Body:
-```
-Monthly report for [MONTH LABEL] is ready.
+Body: an HTML summary of the key metrics (sessions, revenue vs last month, SEO issue count, top recommendations). Keep it concise — full detail is in the saved report file.
 
-Key numbers:
-- Website sessions: [sessions] ([change vs last month])
-- Monthly revenue: £[income] ([change vs last month])
-- Net position: £[net]
-- SEO issues: [total] ([red count] critical)
+---
 
-Full report attached.
-```
+## Step 9: Create Google Calendar notification
 
-Attach or embed the HTML report file contents.
+Use the Google Calendar MCP to create an event on the primary calendar:
+
+- Title: `Monthly Report Ready — [MONTH LABEL]`
+- Date: today (the 1st of the current month)
+- Time: the current time (make it a 15-minute event)
+- Description: "The Dr Smith Aesthetics monthly report has been generated. Key numbers: Sessions [sessions] | Revenue £[income] ([changePct]% vs last month) | SEO issues [total] ([red] critical). Check the Gmail draft at info@lsmithaesthetics.com to review and send."
+- Use the `create_event` tool
+
+This will send a push notification to your phone via Google Calendar.
 
 ---
 
 ## Step 10: Confirm
 
-Log: "Monthly report for [MONTH LABEL] complete. Saved to reports/report-[FILE-SUFFIX].html and emailed to info@lsmithaesthetics.com."
+Log: "Monthly report for [MONTH LABEL] complete. Gmail draft created at info@lsmithaesthetics.com. Calendar notification sent."

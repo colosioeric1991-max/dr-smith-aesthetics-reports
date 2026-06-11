@@ -1,48 +1,64 @@
-import { readFileSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT_DIR = join(__dirname, '..', 'NEW WEBSITE');
-const EMBEDS_DIR = join(ROOT_DIR, 'wix-embeds');
+const BASE_URL = 'https://www.lsmithaesthetics.com';
 
 const PAGES = [
-  { dir: ROOT_DIR,    filename: 'index.html' },
-  { dir: EMBEDS_DIR,  filename: 'treatment-anti-wrinkle.html' },
-  { dir: EMBEDS_DIR,  filename: 'treatment-fillers.html' },
-  { dir: EMBEDS_DIR,  filename: 'treatment-microneedling.html' },
-  { dir: EMBEDS_DIR,  filename: 'treatment-polynucleotides.html' },
-  { dir: EMBEDS_DIR,  filename: 'treatment-prp-prf.html' },
-  { dir: EMBEDS_DIR,  filename: 'treatment-skin-boosters.html' },
-  { dir: EMBEDS_DIR,  filename: 'obagi-page.html' },
+  { slug: 'home',           url: '/',               label: 'Homepage' },
+  { slug: 'treatments',     url: '/treatments',      label: 'Treatments Overview' },
+  { slug: 'anti-wrinkle',   url: '/anti-wrinkle',    label: 'Anti-Wrinkle Injections' },
+  { slug: 'filler',         url: '/filler',          label: 'Dermal Fillers' },
+  { slug: 'skinbooster',    url: '/skinbooster',     label: 'Skin Boosters' },
+  { slug: 'polynucleotides',url: '/polynucleotides', label: 'Polynucleotides' },
+  { slug: 'prf',            url: '/prf',             label: 'PRP & PRF' },
+  { slug: 'microneedling',  url: '/microneedling',   label: 'Microneedling' },
+  { slug: 'pricelist',      url: '/pricelist',       label: 'Price List' },
+  { slug: 'obagi',          url: '/obagi',           label: 'Obagi' },
+  { slug: 'contact',        url: '/contact',         label: 'Contact' },
+  { slug: 'gift-card',      url: '/gift-card',       label: 'Gift Card' },
 ];
 
+const HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (compatible; DrSmithSEOAudit/1.0)',
+  'Accept': 'text/html',
+};
+
+function decodeEntities(str) {
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&mdash;/g, '—')
+    .replace(/&#x27;/g, "'");
+}
+
 function extractTitle(html) {
-  const m = html.match(/<title>([^<]+)<\/title>/i);
-  return m ? m[1].trim() : null;
+  const m = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+  return m ? decodeEntities(m[1].trim()) : null;
 }
 
-function extractMeta(html, name) {
-  const m = html.match(new RegExp(`<meta[^>]+name=["']${name}["'][^>]+content=["']([^"']+)["']`, 'i'))
-    || html.match(new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+name=["']${name}["']`, 'i'));
-  return m ? m[1].trim() : null;
+function extractDescription(html) {
+  // Match content="..." allowing any characters including apostrophes
+  const m =
+    html.match(/<meta[^>]+name=["']description["'][^>]+content="([^"]+)"/i) ||
+    html.match(/<meta[^>]+content="([^"]+)"[^>]+name=["']description["']/i) ||
+    html.match(/<meta[^>]+name=["']description["'][^>]+content='([^']+)'/i) ||
+    html.match(/<meta[^>]+content='([^']+)'[^>]+name=["']description["']/i);
+  return m ? decodeEntities(m[1].trim()) : null;
 }
 
-function countH1s(html) {
-  return (html.match(/<h1[\s>]/gi) || []).length;
-}
+async function auditPage({ slug, url, label }) {
+  const fullUrl = `${BASE_URL}${url}`;
+  let html;
+  try {
+    const res = await fetch(fullUrl, { headers: HEADERS });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    html = await res.text();
+  } catch (e) {
+    return { slug, label, url: fullUrl, error: `Fetch failed: ${e.message}`, issues: [] };
+  }
 
-function countImagesWithoutAlt(html) {
-  const imgs = html.match(/<img[^>]+>/gi) || [];
-  return imgs.filter(tag => !/alt=["'][^"']+["']/.test(tag)).length;
-}
-
-function auditPage({ dir, filename }) {
-  const html = readFileSync(join(dir, filename), 'utf8');
   const title = extractTitle(html);
-  const description = extractMeta(html, 'description');
-  const h1Count = countH1s(html);
-  const imagesWithoutAlt = countImagesWithoutAlt(html);
+  const description = extractDescription(html);
   const issues = [];
 
   if (!title) {
@@ -61,30 +77,20 @@ function auditPage({ dir, filename }) {
     issues.push({ severity: 'amber', text: `Description too long (${description.length} chars, aim 150-160)` });
   }
 
-  if (h1Count === 0) {
-    issues.push({ severity: 'red', text: 'No H1 tag found' });
-  } else if (h1Count > 1) {
-    issues.push({ severity: 'amber', text: `Multiple H1 tags (${h1Count})` });
-  }
-
-  if (imagesWithoutAlt > 0) {
-    issues.push({ severity: 'amber', text: `${imagesWithoutAlt} image(s) missing alt text` });
-  }
-
-  return { filename, title, description, h1Count, imagesWithoutAlt, issues };
+  return { slug, label, url: fullUrl, title, description, issues };
 }
 
-export function runSeoAudit() {
-  return PAGES.map(page => {
-    try {
-      return auditPage(page);
-    } catch (e) {
-      return { filename: page.filename, error: `Could not read: ${e.message}`, issues: [] };
-    }
-  });
+export async function runSeoAudit() {
+  const results = [];
+  for (const page of PAGES) {
+    results.push(await auditPage(page));
+  }
+  return results;
 }
 
 // CLI: node scripts/seo-audit.mjs
-if (process.argv[1].endsWith('seo-audit.mjs')) {
-  console.log(JSON.stringify(runSeoAudit(), null, 2));
+if (process.argv[1]?.endsWith('seo-audit.mjs')) {
+  runSeoAudit()
+    .then(r => console.log(JSON.stringify(r, null, 2)))
+    .catch(e => { console.error(e.message); process.exit(1); });
 }

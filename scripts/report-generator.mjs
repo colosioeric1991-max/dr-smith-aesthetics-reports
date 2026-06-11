@@ -1,34 +1,38 @@
 const PAGE_NAMES = {
-  'index.html':                    'Homepage',
-  'treatment-anti-wrinkle.html':   'Anti-Wrinkle Injections',
-  'treatment-fillers.html':        'Dermal Fillers',
-  'treatment-microneedling.html':  'Microneedling',
-  'treatment-polynucleotides.html':'Polynucleotides',
-  'treatment-prp-prf.html':        'PRP / PRF',
-  'treatment-skin-boosters.html':  'Skin Boosters',
-  'obagi-page.html':               'Obagi',
+  'home':            'Homepage',
+  'treatments':      'Treatments Overview',
+  'anti-wrinkle':    'Anti-Wrinkle Injections',
+  'filler':          'Dermal Fillers',
+  'skinbooster':     'Skin Boosters',
+  'polynucleotides': 'Polynucleotides',
+  'prf':             'PRP & PRF',
+  'microneedling':   'Microneedling',
+  'pricelist':       'Price List',
+  'obagi':           'Obagi',
+  'contact':         'Contact',
+  'gift-card':       'Gift Card',
 };
 
 const TITLE_SUGGESTIONS = {
-  'index.html':                    'Dr Smith Aesthetics | Anti-Wrinkle, Fillers & Skin Treatments, London',
-  'treatment-anti-wrinkle.html':   'Anti-Wrinkle Injections London | Dr Smith Aesthetics',
-  'treatment-fillers.html':        'Dermal Fillers London | Lip & Facial Fillers | Dr Smith Aesthetics',
-  'treatment-microneedling.html':  'Microneedling London | Skin Rejuvenation | Dr Smith Aesthetics',
-  'treatment-polynucleotides.html':'Polynucleotides London | Regenerative Skin Treatment | Dr Smith Aesthetics',
-  'treatment-prp-prf.html':        'PRP & PRF Treatment London | Platelet-Rich Plasma | Dr Smith Aesthetics',
-  'treatment-skin-boosters.html':  'Skin Boosters London | Hydration & Glow | Dr Smith Aesthetics',
-  'obagi-page.html':               'Obagi Skincare London | Medical-Grade Products | Dr Smith Aesthetics',
+  'home':            'Dr Smith Aesthetics | Aesthetic Clinic Kennington, South London',
+  'anti-wrinkle':    'Anti-Wrinkle Injections South London | Dr Smith Aesthetics',
+  'filler':          'Dermal Fillers South London | Lip & Facial Fillers | Dr Smith Aesthetics',
+  'microneedling':   'Microneedling South London | Skin Rejuvenation | Dr Smith Aesthetics',
+  'polynucleotides': 'Polynucleotides South London | Regenerative Skin Treatment | Dr Smith Aesthetics',
+  'prf':             'PRP & PRF Treatment South London | Dr Smith Aesthetics Kennington',
+  'skinbooster':     'Skin Boosters South London | Hydration & Glow | Dr Smith Aesthetics',
+  'obagi':           'Obagi Skincare South London | Medical-Grade Products | Dr Smith Aesthetics',
 };
 
 const DESC_SUGGESTIONS = {
-  'index.html':                    'Dr Smith is a medical doctor offering anti-wrinkle injections, dermal fillers, polynucleotides and skin treatments in London. Book a consultation today.',
-  'treatment-anti-wrinkle.html':   'Natural-looking anti-wrinkle injections in London, delivered by Dr Smith. Treat forehead lines, crow\'s feet and frown lines. From £X. Book online.',
-  'treatment-fillers.html':        'Expert dermal filler treatments in London with Dr Smith. Lip fillers, cheek fillers and facial contouring. Fully qualified medical doctor. Book today.',
-  'treatment-microneedling.html':  'Professional microneedling in London with Dr Smith. Improve skin texture, reduce scarring and stimulate collagen. Medical-grade treatment. Book now.',
-  'treatment-polynucleotides.html':'Polynucleotide skin treatment in London with Dr Smith. Regenerate collagen, improve skin quality and slow visible ageing. Book a consultation.',
-  'treatment-prp-prf.html':        'PRP and PRF treatments in London with Dr Smith. Use your body\'s own growth factors to rejuvenate skin and stimulate hair growth. Book online.',
-  'treatment-skin-boosters.html':  'Skin booster injections in London with Dr Smith. Deep hydration, improved elasticity and a natural glow. Profhilo and Juvederm available. Book now.',
-  'obagi-page.html':               'Medical-grade Obagi skincare products available at Dr Smith Aesthetics, London. Clinically proven formulas for brighter, healthier skin. Shop now.',
+  'home':            'Dr Smith is a medical doctor offering anti-wrinkle injections, dermal fillers, polynucleotides and skin treatments in Kennington, South London. Book a consultation today.',
+  'anti-wrinkle':    'Natural-looking anti-wrinkle injections in South London, delivered by Dr Smith. Treat forehead lines, crow\'s feet and frown lines. Kennington clinic. Book online.',
+  'filler':          'Expert dermal filler treatments in South London with Dr Smith. Lip fillers, cheek fillers and facial contouring. Fully qualified medical doctor in Kennington. Book today.',
+  'microneedling':   'Professional microneedling in South London with Dr Smith. Improve skin texture, reduce scarring and stimulate collagen. Medical-grade treatment in Kennington. Book now.',
+  'polynucleotides': 'Polynucleotide skin treatment in South London with Dr Smith. Regenerate collagen, improve skin quality and slow visible ageing. Kennington clinic. Book a consultation.',
+  'prf':             'PRP and PRF treatments in South London with Dr Smith. Use your body\'s own growth factors to rejuvenate skin and stimulate hair growth. Kennington clinic. Book online.',
+  'skinbooster':     'Skin booster injections in South London with Dr Smith. Deep hydration, improved elasticity and a natural glow. Profhilo available at our Kennington clinic. Book now.',
+  'obagi':           'Medical-grade Obagi skincare at Dr Smith Aesthetics, Kennington, South London. Clinically proven formulas for brighter, healthier skin. Book a consultation today.',
 };
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
@@ -167,20 +171,23 @@ function buildSEOAndTrafficActions(seo, keywords, wix, ga4) {
   const traffic = ga4 || wix;
 
   // SEO: missing titles
+  const key = p => p.slug || p.filename;
+  const name = p => PAGE_NAMES[key(p)] || p.label || key(p);
+
   const missingTitles = (seo || []).filter(p =>
     p.issues?.some(i => i.text.includes('Missing title') || i.text.includes('Title too short'))
   );
   if (missingTitles.length > 0) {
-    const pageList = missingTitles.map(p => PAGE_NAMES[p.filename] || p.filename);
+    const pageList = missingTitles.map(name);
     const examples = missingTitles.slice(0, 2).map(p =>
-      TITLE_SUGGESTIONS[p.filename] ? `<em>${PAGE_NAMES[p.filename]}:</em> "${TITLE_SUGGESTIONS[p.filename]}"` : ''
+      TITLE_SUGGESTIONS[key(p)] ? `<em>${name(p)}:</em> "${TITLE_SUGGESTIONS[key(p)]}"` : ''
     ).filter(Boolean).join('<br>');
     actions.push({
       priority: 'High',
       category: 'SEO',
-      title: `Add title tags to ${missingTitles.length} page${missingTitles.length > 1 ? 's' : ''}`,
-      detail: `The following pages are missing a title tag: <strong>${pageList.join(', ')}</strong>. Title tags are the single most important SEO element — Google uses them to understand what each page is about and displays them in search results. Without one, these pages cannot rank for any relevant searches.`,
-      howTo: `In Wix, go to each page > SEO Settings > Page Title. Aim for 50-60 characters including your main keyword and location. Examples:<br>${examples}`,
+      title: `Fix title tags on ${missingTitles.length} page${missingTitles.length > 1 ? 's' : ''}`,
+      detail: `The following pages have a missing or very short title tag: <strong>${pageList.join(', ')}</strong>. Title tags are the single most important SEO element — Google uses them to understand what each page is about and displays them in search results.`,
+      howTo: `In Wix, go to each page > SEO Settings > Page Title. Aim for 50-60 characters including your main keyword and location.${examples ? '<br>' + examples : ''}`,
     });
   }
 
@@ -189,14 +196,14 @@ function buildSEOAndTrafficActions(seo, keywords, wix, ga4) {
     p.issues?.some(i => i.text.includes('Missing meta description'))
   );
   if (missingDesc.length > 0) {
-    const pageList = missingDesc.map(p => PAGE_NAMES[p.filename] || p.filename);
+    const pageList = missingDesc.map(name);
     const example = missingDesc[0];
     actions.push({
       priority: 'High',
       category: 'SEO',
       title: `Add meta descriptions to ${missingDesc.length} page${missingDesc.length > 1 ? 's' : ''}`,
-      detail: `The following pages have no meta description: <strong>${pageList.join(', ')}</strong>. Meta descriptions appear under your page title in Google search results — a compelling one significantly increases the number of people who click through to your site.`,
-      howTo: `In Wix, go to each page > SEO Settings > Meta Description. Aim for 150-160 characters. Include the treatment name, the word "London", and a call to action. Example for ${PAGE_NAMES[example?.filename]}: "${DESC_SUGGESTIONS[example?.filename] || 'Add a compelling 150-160 character description here.'}"`,
+      detail: `The following pages have no meta description: <strong>${pageList.join(', ')}</strong>. Meta descriptions appear under your page title in Google search results — a compelling one significantly increases click-through rate.`,
+      howTo: `In Wix, go to each page > SEO Settings > Meta Description. Aim for 150-160 characters including the treatment name, South London or Kennington, and a call to action. Example for ${name(example)}: "${DESC_SUGGESTIONS[key(example)] || 'Add a compelling 150-160 character description here.'}"`,
     });
   }
 
@@ -208,9 +215,9 @@ function buildSEOAndTrafficActions(seo, keywords, wix, ga4) {
     actions.push({
       priority: 'High',
       category: 'SEO',
-      title: `Add H1 heading to ${missingH1.map(p => PAGE_NAMES[p.filename] || p.filename).join(', ')}`,
-      detail: `The ${missingH1.map(p => PAGE_NAMES[p.filename]).join(' and ')} page${missingH1.length > 1 ? 's are' : ' is'} missing an H1 heading. Google uses H1 headings as a strong signal for what the page is about. Every page needs exactly one H1 with the main keyword.`,
-      howTo: `In Wix, ensure the main headline on the page is set to Heading 1 (H1) in the text editor. For example: "Obagi Skincare London" or "Obagi Medical-Grade Skincare".`,
+      title: `Add H1 heading to ${missingH1.map(name).join(', ')}`,
+      detail: `The ${missingH1.map(name).join(' and ')} page${missingH1.length > 1 ? 's are' : ' is'} missing an H1 heading. Google uses H1 headings as a strong signal for what the page is about. Every page needs exactly one H1 with the main keyword.`,
+      howTo: `In Wix, ensure the main headline on the page is set to Heading 1 (H1) in the text editor. For example: "Obagi Skincare South London" or "Obagi Medical-Grade Skincare".`,
     });
   }
 
@@ -494,16 +501,20 @@ export function generateMainReport(data) {
     <table>
       <thead><tr><th>Page</th><th>Current Title</th><th>Description</th><th>Issues</th></tr></thead>
       <tbody>
-        ${(seo || []).map(p => `
+        ${(seo || []).map(p => {
+          const k = p.slug || p.filename;
+          const label = PAGE_NAMES[k] || p.label || k;
+          return `
           <tr>
-            <td style="white-space:nowrap;font-weight:600;color:#062336">${PAGE_NAMES[p.filename] || p.filename}</td>
+            <td style="white-space:nowrap;font-weight:600;color:#062336">${label}</td>
             <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:${p.title ? '#374151' : '#dc2626'}">${p.title || 'MISSING'}</td>
             <td style="color:${p.description ? '#374151' : '#dc2626'}">${p.description ? badge('green', 'Present') : badge('red', 'Missing')}</td>
             <td>${(p.issues?.length > 0)
               ? p.issues.map(i => `${badge(i.severity, i.text)} `).join('')
               : badge('green', 'OK')
             }</td>
-          </tr>`).join('')}
+          </tr>`;
+        }).join('')}
       </tbody>
     </table>
     <div class="section-note">All 8 site pages audited. ${redSeoIssues} critical issue${redSeoIssues !== 1 ? 's' : ''} found. See Action Plan for specific fixes and suggested copy.</div>

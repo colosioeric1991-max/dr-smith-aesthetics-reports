@@ -1,5 +1,8 @@
 # Credentials — NEVER commit
 ga-credentials.json
+ga-oauth-token.json
+oauth-client.json
+client_secret*.json
 *.pem
 *.key
 *.p12

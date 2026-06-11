@@ -120,7 +120,25 @@ Store results as a `keywords` array:
 
 ---
 
-## Step 6: Assemble and write data JSON
+## Step 6: Pull Google Analytics (GA4) data
+
+Run from the repo root:
+```bash
+node scripts/ga4-fetch.mjs [START-DATE] [END-DATE] [PREV-START-DATE] [PREV-END-DATE]
+```
+
+Example for May 2026:
+```bash
+node scripts/ga4-fetch.mjs 2026-05-01 2026-05-31 2026-04-01 2026-04-30
+```
+
+This requires `ga-oauth-token.json` to be present in the repo root (not committed to GitHub — stored locally only).
+
+Capture the JSON output as `ga4`.
+
+---
+
+## Step 7: Assemble and write data JSON
 
 Write all collected data to `reports/data-[FILE-SUFFIX].json`:
 ```json
@@ -128,6 +146,7 @@ Write all collected data to `reports/data-[FILE-SUFFIX].json`:
   "month": "May 2026",
   "period": { "start": "2026-05-01", "end": "2026-05-31" },
   "wix": { },
+  "ga4": { },
   "seo": [ ],
   "keywords": [ ],
   "financials": { }
@@ -136,7 +155,7 @@ Write all collected data to `reports/data-[FILE-SUFFIX].json`:
 
 ---
 
-## Step 7: Generate the HTML report
+## Step 8: Generate the HTML report
 
 Run from the repo root:
 ```bash
@@ -145,7 +164,7 @@ node scripts/run-report.mjs reports/data-[FILE-SUFFIX].json reports/report-[FILE
 
 ---
 
-## Step 8: Email the report draft
+## Step 9: Email the report draft
 
 Use the Gmail MCP `create_draft` tool to create a draft email at info@lsmithaesthetics.com:
 
@@ -155,7 +174,7 @@ Body: an HTML summary of the key metrics (sessions, revenue vs last month, SEO i
 
 ---
 
-## Step 9: Create Google Calendar notification
+## Step 10: Create Google Calendar notification
 
 Use the Google Calendar MCP to create an event on the primary calendar:
 
@@ -169,6 +188,6 @@ This will send a push notification to your phone via Google Calendar.
 
 ---
 
-## Step 10: Confirm
+## Step 11: Confirm
 
 Log: "Monthly report for [MONTH LABEL] complete. Gmail draft created at info@lsmithaesthetics.com. Calendar notification sent."

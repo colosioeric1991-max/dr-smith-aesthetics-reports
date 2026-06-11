@@ -104,16 +104,23 @@ Capture the JSON output as `seo`.
 Use web search to find the current ranking of lsmithaesthetics.com for each keyword. Record the position as a string: "#1", "#5", or "Not in top 10". Include a brief snippet of competing results.
 
 Keywords:
-- "botox London"
-- "dermal fillers London"
-- "aesthetics clinic London"
+- "botox South London"
+- "botox Kennington"
+- "dermal fillers South London"
+- "aesthetics clinic South London"
+- "aesthetics clinic Kennington"
+- "polynucleotides South London"
+- "anti-wrinkle injections South London"
+- "skin boosters South London"
+- "PRP treatment South London"
+- "PRF treatment South London"
+- "microneedling South London"
 - "Dr Smith aesthetics"
-- "polynucleotides London"
 
 Store results as a `keywords` array:
 ```json
 [
-  { "term": "botox London", "position": "Not in top 10", "snippet": "Competitors: Dr Nyla, LPA..." },
+  { "term": "botox South London", "position": "Not in top 10", "snippet": "Competitors: Dr Nyla, LPA..." },
   { "term": "Dr Smith aesthetics", "position": "#1", "snippet": "lsmithaesthetics.com ranks first" }
 ]
 ```

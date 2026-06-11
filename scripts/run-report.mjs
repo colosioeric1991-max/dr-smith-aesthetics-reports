@@ -1,7 +1,7 @@
 import { writeFileSync, readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { generateReport } from './report-generator.mjs';
+import { generateMainReport, generateFinanceReport } from './report-generator.mjs';
 
 const [,, dataPath, outputPath] = process.argv;
 
@@ -23,9 +23,14 @@ try {
     data.logoDataUri = '';
   }
 
-  const html = generateReport(data);
-  writeFileSync(outputPath, html, 'utf8');
-  console.log(`Report saved: ${outputPath}`);
+  // Main (shareable) report
+  writeFileSync(outputPath, generateMainReport(data), 'utf8');
+  console.log(`Main report saved:    ${outputPath}`);
+
+  // Finance (confidential) report — same path with -finance suffix
+  const financePath = outputPath.replace(/\.html$/, '-finance.html');
+  writeFileSync(financePath, generateFinanceReport(data), 'utf8');
+  console.log(`Finance report saved: ${financePath}`);
 } catch (e) {
   console.error(`Error: ${e.message}`);
   process.exit(1);

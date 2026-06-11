@@ -155,12 +155,16 @@ Write all collected data to `reports/data-[FILE-SUFFIX].json`:
 
 ---
 
-## Step 8: Generate the HTML report
+## Step 8: Generate the HTML reports
 
 Run from the repo root:
 ```bash
 node scripts/run-report.mjs reports/data-[FILE-SUFFIX].json reports/report-[FILE-SUFFIX].html
 ```
+
+This generates two files:
+- `reports/report-[FILE-SUFFIX].html` — main report (shareable): traffic, SEO, keywords, action plan
+- `reports/report-[FILE-SUFFIX]-finance.html` — finance report (confidential): revenue, transactions, AOV, expenses, revenue actions
 
 ---
 

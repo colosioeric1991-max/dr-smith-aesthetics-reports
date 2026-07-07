@@ -65,6 +65,8 @@ Call the `payments` service, `list` method, with:
 
 Sum the `total_money.amount` values (currency GBP) of all COMPLETED payments. Square amounts are in pence — divide by 100 for pounds.
 
+**CRITICAL: filter on `status == "COMPLETED"` before summing or counting. The list response also contains FAILED payments, and including them inflates revenue (this happened in the May 2026 run: 5 failed payments added a false £1,250). Sanity-check by printing the count per status before using the numbers.**
+
 Count total number of completed transactions.
 
 Fetch the prior month the same way for month-on-month comparison.

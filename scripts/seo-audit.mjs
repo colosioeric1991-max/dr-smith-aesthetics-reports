@@ -46,15 +46,36 @@ function extractDescription(html) {
   return m ? decodeEntities(m[1].trim()) : null;
 }
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// Wix intermittently serves a stripped page with no <title> or meta description.
+// It's a serving glitch, not a real SEO problem, so retry until the full page comes
+// back (i.e. it has a title) rather than logging a false "missing title" red.
+async function fetchFullPage(fullUrl, { attempts = 4, delayMs = 800 } = {}) {
+  let html = null;
+  let lastError = null;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      const res = await fetch(fullUrl, { headers: HEADERS });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      html = await res.text();
+      // A page with a title tag is the full version — accept it immediately.
+      if (extractTitle(html)) return { html };
+    } catch (e) {
+      lastError = e;
+    }
+    if (i < attempts - 1) await sleep(delayMs);
+  }
+  // Never got a full page: return the last body (so a genuine missing title is still
+  // reported) or the error if every attempt failed outright.
+  return html !== null ? { html } : { error: lastError?.message ?? 'no response' };
+}
+
 async function auditPage({ slug, url, label }) {
   const fullUrl = `${BASE_URL}${url}`;
-  let html;
-  try {
-    const res = await fetch(fullUrl, { headers: HEADERS });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    html = await res.text();
-  } catch (e) {
-    return { slug, label, url: fullUrl, error: `Fetch failed: ${e.message}`, issues: [] };
+  const { html, error } = await fetchFullPage(fullUrl);
+  if (error) {
+    return { slug, label, url: fullUrl, error: `Fetch failed: ${error}`, issues: [] };
   }
 
   const title = extractTitle(html);

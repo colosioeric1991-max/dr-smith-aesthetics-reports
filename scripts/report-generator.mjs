@@ -318,6 +318,8 @@ function buildSEOAndTrafficActions(seo, keywords, wix, ga4) {
 
 function buildRevenueActions(financials) {
   const actions = [];
+  // No Square figures yet — can't assess revenue, so don't invent revenue actions.
+  if (financials?.income === null || financials?.income === undefined) return actions;
   const revPct = financials?.vsLastMonth?.changePct;
 
   if (revPct !== null && revPct !== undefined && revPct < -10) {
@@ -554,9 +556,14 @@ export function generateFinanceReport(data) {
     ? Math.round((new Date(data.period.end) - new Date(data.period.start)) / 86400000) + 1
     : 31;
 
+  // Revenue comes from Square. If the connector wasn't authorised at generation time,
+  // income is null — show derived figures as "pending" rather than a misleading £0 / -100%.
+  const revenuePending = financials?.income === null || financials?.income === undefined;
+  const pendingSpan = '<span style="color:#9ca3af;font-style:italic">pending</span>';
+
   const aov = financials?.transactions ? (financials.income / financials.transactions) : 0;
   const prevAov = financials?.vsLastMonth?.transactions ? (financials.vsLastMonth.income / financials.vsLastMonth.transactions) : 0;
-  const aovPct = prevAov ? Math.round(((aov - prevAov) / prevAov) * 100) : null;
+  const aovPct = (prevAov && !revenuePending) ? Math.round(((aov - prevAov) / prevAov) * 100) : null;
 
   const actions = buildRevenueActions(financials);
   const highActions = actions.filter(a => a.priority === 'High');
@@ -566,7 +573,9 @@ export function generateFinanceReport(data) {
   const revColour = revPct > 0 ? '#16a34a' : revPct < 0 ? '#dc2626' : '#6b7280';
 
   const summaryLines = [];
-  if (revPct !== null && revPct !== undefined) {
+  if (revenuePending) {
+    summaryLines.push(`Revenue figures for ${month} are <strong>pending</strong> — the Square connector was not authorised when this report was generated. Reconnect Square and regenerate to complete this section.`);
+  } else if (revPct !== null && revPct !== undefined) {
     summaryLines.push(`Revenue was <strong style="color:${revColour}">${fmtGBP(financials?.income)} (${revDir} ${Math.abs(revPct)}% vs last month)</strong> from ${fmt(financials?.transactions)} transactions.`);
   } else {
     summaryLines.push(`Revenue was <strong>${fmtGBP(financials?.income)}</strong> from ${fmt(financials?.transactions)} transactions.`);
@@ -598,17 +607,17 @@ export function generateFinanceReport(data) {
     </div>
     <div class="card">
       <div class="card-label">Transactions</div>
-      <div class="card-value">${fmt(financials?.transactions)}</div>
-      <div class="card-sub">${trend(financials?.vsLastMonth?.transactions !== undefined ? Math.round(((financials.transactions - financials.vsLastMonth.transactions) / (financials.vsLastMonth.transactions || 1)) * 100) : null)} vs last month</div>
+      <div class="card-value">${revenuePending ? pendingSpan : fmt(financials?.transactions)}</div>
+      <div class="card-sub">${revenuePending ? trend(null) : trend(financials?.vsLastMonth?.transactions !== undefined ? Math.round(((financials.transactions - financials.vsLastMonth.transactions) / (financials.vsLastMonth.transactions || 1)) * 100) : null)} vs last month</div>
     </div>
-    <div class="card ${aovPct >= 0 ? 'green' : 'red'}">
+    <div class="card ${revenuePending ? '' : (aovPct >= 0 ? 'green' : 'red')}">
       <div class="card-label">Avg Order Value</div>
-      <div class="card-value">${fmtGBP(aov)}</div>
-      <div class="card-sub">${trend(aovPct)} vs last month</div>
+      <div class="card-value">${revenuePending ? pendingSpan : fmtGBP(aov)}</div>
+      <div class="card-sub">${revenuePending ? 'awaiting Square' : `${trend(aovPct)} vs last month`}</div>
     </div>
     <div class="card">
       <div class="card-label">Daily Average</div>
-      <div class="card-value">${fmtGBP((financials?.income || 0) / days)}</div>
+      <div class="card-value">${revenuePending ? pendingSpan : fmtGBP(financials.income / days)}</div>
       <div class="card-sub">over ${days} days</div>
     </div>
   </div>
@@ -619,9 +628,9 @@ export function generateFinanceReport(data) {
       <thead><tr><th>Metric</th><th class="r">This Month</th><th class="r">Last Month</th><th class="r">Change</th></tr></thead>
       <tbody>
         <tr><td>Total Revenue</td><td class="r"><strong>${fmtGBP(financials?.income)}</strong></td><td class="r" style="color:#6b7280">${fmtGBP(financials?.vsLastMonth?.income)}</td><td class="r">${trend(financials?.vsLastMonth?.changePct)}</td></tr>
-        <tr><td>Transactions</td><td class="r"><strong>${fmt(financials?.transactions)}</strong></td><td class="r" style="color:#6b7280">${fmt(financials?.vsLastMonth?.transactions)}</td><td class="r">${trend(financials?.vsLastMonth?.transactions !== undefined ? Math.round(((financials.transactions - financials.vsLastMonth.transactions) / (financials.vsLastMonth.transactions || 1)) * 100) : null)}</td></tr>
-        <tr><td>Avg Order Value</td><td class="r"><strong>${fmtGBP(aov)}</strong></td><td class="r" style="color:#6b7280">${fmtGBP(prevAov)}</td><td class="r">${trend(aovPct)}</td></tr>
-        <tr><td>Daily Revenue Average</td><td class="r">${fmtGBP((financials?.income || 0) / days)}</td><td class="r" style="color:#6b7280">—</td><td class="r">—</td></tr>
+        <tr><td>Transactions</td><td class="r"><strong>${revenuePending ? pendingSpan : fmt(financials?.transactions)}</strong></td><td class="r" style="color:#6b7280">${fmt(financials?.vsLastMonth?.transactions)}</td><td class="r">${revenuePending ? trend(null) : trend(financials?.vsLastMonth?.transactions !== undefined ? Math.round(((financials.transactions - financials.vsLastMonth.transactions) / (financials.vsLastMonth.transactions || 1)) * 100) : null)}</td></tr>
+        <tr><td>Avg Order Value</td><td class="r"><strong>${revenuePending ? pendingSpan : fmtGBP(aov)}</strong></td><td class="r" style="color:#6b7280">${fmtGBP(prevAov)}</td><td class="r">${trend(aovPct)}</td></tr>
+        <tr><td>Daily Revenue Average</td><td class="r">${revenuePending ? pendingSpan : fmtGBP(financials.income / days)}</td><td class="r" style="color:#6b7280">—</td><td class="r">—</td></tr>
         <tr><td>Expenses</td><td class="r">${financials?.expenses ? fmtGBP(financials.expenses) : '<span style="color:#9ca3af;font-style:italic">enter manually</span>'}</td><td class="r" style="color:#6b7280">—</td><td class="r">—</td></tr>
         <tr class="total-row"><td>Net Position</td><td class="r">${financials?.net ? fmtGBP(financials.net) : '<span style="color:#9ca3af;font-style:italic">pending expenses</span>'}</td><td class="r">—</td><td class="r">—</td></tr>
       </tbody>
@@ -633,7 +642,11 @@ export function generateFinanceReport(data) {
 
   <div class="section">
     <h2>Revenue Action Plan</h2>
-    ${actions.map(actionCard).join('')}
+    ${actions.length
+      ? actions.map(actionCard).join('')
+      : revenuePending
+        ? `<div class="section-note">Revenue actions will be generated once June's Square figures are pulled in.</div>`
+        : `<div class="section-note">No revenue actions flagged this month.</div>`}
   </div>`;
 
   return htmlShell(`Finance Report | Dr Smith Aesthetics | ${month}`, BASE_CSS, body);

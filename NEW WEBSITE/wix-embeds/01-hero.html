@@ -16,23 +16,20 @@
     --muted:      #6B7280;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { width: 100%; height: 100%; overflow: hidden; }
+  html, body { width: 100%; height: auto; }
   body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--teal); }
   h1 { font-family: 'Cormorant Garamond', serif; }
 
   .hero {
     display: grid;
     grid-template-columns: 55% 45%;
-    height: 100vh;
-    min-height: 600px;
-    position: relative;
+    min-height: 100vh;
     background: var(--warm-white);
   }
 
   .hero-left {
     display: flex; flex-direction: column; justify-content: center;
     padding: 80px 4rem 60px 5.5rem;
-    position: relative; z-index: 2;
   }
 
   .hero-eyebrow {
@@ -57,10 +54,10 @@
 
   .hero-sub {
     font-size: 1rem; font-weight: 300; line-height: 1.8;
-    color: #4A5568; max-width: 400px; margin-bottom: 2.75rem;
+    color: #4A5568; max-width: 480px; margin-bottom: 2.75rem;
   }
 
-  .hero-actions { display: flex; align-items: center; gap: 1.5rem; }
+  .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1.5rem; }
 
   .btn-primary {
     display: inline-flex; align-items: center; gap: 0.55rem;
@@ -86,68 +83,38 @@
   }
   .btn-ghost:hover { gap: 0.9rem; color: var(--teal-mid); }
 
-  .hero-right {
-    position: relative; overflow: hidden;
-    background: var(--teal);
-    display: flex; align-items: center; justify-content: center;
-    padding: 2rem;
+  /* ── INTRO PANEL (right column) ── */
+  .intro-panel {
+    background: var(--warm-white);
+    border-left: 1px solid rgba(201,169,110,0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 3.5rem;
+    gap: 0;
   }
-  .hero-video {
-    width: 100%; height: auto;
-    max-height: 85%;
-    border-radius: 4px;
-    display: block;
-    position: relative; z-index: 1;
-    box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+  .intro-block {
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(13,59,79,0.1);
   }
-  .hero-right::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to right, var(--warm-white) 0%, transparent 12%);
-    z-index: 2; pointer-events: none;
+  .intro-block:first-child { padding-top: 0; }
+  .intro-block:last-child { border-bottom: none; padding-bottom: 0; }
+  .intro-block h3 {
+    font-size: 1.1rem; font-weight: 500;
+    color: var(--teal); margin-bottom: 0.5rem; line-height: 1.2;
   }
+  .intro-block p {
+    font-size: 0.88rem; line-height: 1.75;
+    color: var(--muted); font-weight: 300;
+  }
+  .intro-icon { font-size: 1.2rem; margin-bottom: 0.6rem; color: var(--gold); }
 
-  .hero-badge {
-    position: absolute; top: 2rem; left: 2rem; z-index: 3;
-    background: rgba(253,250,246,0.92);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(201,169,110,0.35);
-    border-radius: 3px; padding: 1.1rem 1.4rem;
-    box-shadow: 0 8px 28px rgba(13,59,79,0.14);
-  }
-  .hero-badge-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem; font-weight: 300;
-    color: var(--teal); line-height: 1;
-  }
-  .hero-badge-label {
-    font-size: 0.7rem; letter-spacing: 0.1em;
-    color: var(--muted); margin-top: 0.2rem;
-  }
-
-
-  .mobile-only { display: none; }
-  .desktop-only { display: flex; }
-
-  @media (max-width: 1100px) {
-    .hero-left { padding: 60px 3rem 40px 3.5rem; }
-  }
   @media (max-width: 900px) {
-    .mobile-only { display: flex; }
-    .desktop-only { display: none; }
-
-    .hero { grid-template-columns: 1fr; height: auto; min-height: auto; }
-    .hero-left { padding: 80px 1.5rem 2.5rem; }
-    .hero-right {
-      display: flex;
-      height: 420px;
-      padding: 0;
-    }
-    .hero-right::after { display: none; }
-    .hero-video { border-radius: 0; width: 100%; height: 100%; object-fit: cover; max-height: none; }
-    .hero-badge { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 60px 1.5rem 2.5rem; }
     .hero-heading { font-size: clamp(2.6rem, 11vw, 3.4rem); }
     .hero-actions { flex-direction: column; gap: 0.85rem; }
-    .hero-actions a { width: 100%; text-align: center; justify-content: center; }
+    .intro-panel { display: none; }
   }
 </style>
 </head>
@@ -168,20 +135,27 @@
           Book Now
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <span class="btn-ghost desktop-only">Scroll to explore more ↓</span>
-        <a href="https://www.lsmithaesthetics.com/treatments" target="_blank" onclick="window.top.open(this.href,'_blank');return false;" class="btn-ghost mobile-only">Scroll to explore more ↓</a>
+        <span class="btn-ghost">Scroll to explore more ↓</span>
       </div>
     </div>
 
-    <div class="hero-right">
-      <video class="hero-video" controls playsinline>
-        <source src="https://video.wixstatic.com/video/0b63bc_776502c93d1f45e0b213fb49db1960fb/1080p/mp4/file.mp4" type="video/mp4" />
-      </video>
-      <div class="hero-badge">
-        <div class="hero-badge-num">MBBS</div>
-        <div class="hero-badge-label">BSc (Hons) · GMC Registered</div>
-      </div>
+    <div class="intro-panel">
+    <div class="intro-block">
+      <div class="intro-icon">🩺</div>
+      <h3>Medically Trained</h3>
+      <p>MBBS, BSc (Hons). NHS-trained doctor with specialist experience across a range of medical specialties before dedicating his practice to aesthetics.</p>
     </div>
+    <div class="intro-block">
+      <div class="intro-icon">✦</div>
+      <h3>Natural Results</h3>
+      <p>Committed to personalised care and tailored treatments that enhance your natural beauty, ensuring every client feels confident and satisfied.</p>
+    </div>
+    <div class="intro-block">
+      <div class="intro-icon">◈</div>
+      <h3>Industry Educator</h3>
+      <p>Dr Smith teaches botox, filler and skin rejuvenation to doctors, nurses and other medical professionals at Cosmetic Courses, raising standards across the industry.</p>
+    </div>
+  </div>
   </section>
 
 </body>

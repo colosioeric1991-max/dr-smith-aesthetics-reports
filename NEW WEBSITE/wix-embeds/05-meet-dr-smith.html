@@ -15,34 +15,32 @@
     --muted:      #6B7280;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { width: 100%; overflow-x: hidden; }
+  html, body { width: 100%; height: 100%; overflow: hidden; }
   body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); }
 
   .about {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 660px;
     height: 100%;
   }
 
   .about-img {
     position: relative; overflow: hidden;
-    background: var(--teal);
   }
   .about-img img {
     width: 100%; height: 100%;
-    object-fit: contain; object-position: center bottom;
+    object-fit: cover; object-position: center 15%;
     display: block;
   }
   .about-img::after {
     content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to right, transparent 70%, rgba(253,250,246,0.6));
+    background: linear-gradient(to right, transparent 70%, rgba(253,250,246,0.55));
     pointer-events: none;
   }
 
   .about-content {
-    padding: 6rem 5rem;
-    display: flex; flex-direction: column; justify-content: center;
+    padding: 3.5rem 3.5rem;
+    display: flex; flex-direction: column;
     background: var(--warm-white);
     position: relative;
   }
@@ -66,34 +64,34 @@
 
   .section-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.2rem, 3.2vw, 3.4rem);
-    font-weight: 300; line-height: 1.1;
+    font-size: clamp(1.7rem, 2.4vw, 2.6rem);
+    font-weight: 300; line-height: 1.15;
     letter-spacing: -0.02em; color: var(--teal);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
   }
   .section-title em { font-style: italic; font-weight: 400; }
 
   .about-body {
-    font-size: 0.95rem; line-height: 1.85;
+    font-size: 0.88rem; line-height: 1.72;
     color: #4A5568; font-weight: 300;
-    margin: 1rem 0 0;
+    margin: 0.65rem 0 0;
   }
 
   .about-credentials {
     font-family: 'Cormorant Garamond', serif;
-    font-style: italic; font-size: 1.2rem;
-    color: var(--teal-light); margin-top: 1.75rem;
+    font-style: italic; font-size: 1.05rem;
+    color: var(--teal-light); margin-top: 1rem;
   }
 
   .about-stats {
     display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem; margin-top: 2.5rem;
-    padding-top: 2.5rem;
+    gap: 1rem; margin-top: 1.25rem;
+    padding-top: 1.25rem;
     border-top: 1px solid rgba(13,59,79,0.1);
   }
   .stat-n {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.6rem; font-weight: 300;
+    font-size: 2rem; font-weight: 300;
     color: var(--teal); line-height: 1;
   }
   .stat-l {
@@ -102,10 +100,10 @@
   }
 
   @media (max-width: 1100px) {
-    .about-content { padding: 4rem 3rem; }
+    .about-content { padding: 2.5rem 2.5rem; }
   }
   @media (max-width: 900px) {
-    .about { grid-template-columns: 1fr; height: auto; min-height: auto; }
+    .about { grid-template-columns: 1fr; height: auto; }
     .about-img {
       height: 420px;
       background: var(--cream);

@@ -60,11 +60,18 @@
   .section-title em { font-style: italic; font-weight: 400; }
 
   .treatments-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) 1.2fr;
+    grid-template-rows: auto auto;
     gap: 1.5px;
     background: rgba(13,59,79,0.07);
     border: 1.5px solid rgba(13,59,79,0.07);
     border-radius: 4px; overflow: hidden;
+  }
+  .tx-card.tx-featured {
+    grid-column: 4;
+    grid-row: 1 / 3;
+    display: flex; flex-direction: column; justify-content: center;
   }
   .tx-card {
     background: var(--warm-white);
@@ -223,6 +230,7 @@
     .treatments { padding: 4rem 1.5rem; }
     .treatments-header { grid-template-columns: 1fr; gap: 1rem; }
     .treatments-grid { grid-template-columns: repeat(2, 1fr); }
+    .tx-card.tx-featured { grid-column: auto; grid-row: auto; }
     .detail-view { padding: 3rem 1.5rem; }
     .detail-hero { padding: 2rem 1.5rem; }
     .detail-content { padding: 1.75rem 1.5rem; }
@@ -246,7 +254,7 @@
         <h2 class="section-title">Our <em>Treatments</em></h2>
       </div>
       <p class="treatments-subhead">
-        Our range of aesthetic treatments includes anti-wrinkle injections, fillers, skin boosters, polynucleotides, and PRP. Each treatment is carefully designed to enhance your natural beauty and boost your confidence.
+        Our range of aesthetic treatments includes anti-wrinkle injections, fillers, skin boosters, polynucleotides, PRP and biostimulators. Each treatment is carefully designed to enhance your natural beauty and boost your confidence.
       </p>
     </div>
     <div class="treatments-grid">
@@ -285,6 +293,14 @@
         <h3 class="tx-name">Microneedling</h3>
         <p class="tx-desc">Medical-grade microneedling using the Dermapen 4, one of the most advanced devices on the market. Can be combined with PRF, exosomes or polynucleotides for enhanced results.</p>
         <button class="tx-link">Know More <span class="tx-arr">→</span></button>
+      </div>
+      <div class="tx-card tx-featured" onclick="window.top.location.href='https://www.lsmithaesthetics.com/biostimulators'">
+        <div class="tx-icon">✺</div>
+        <h3 class="tx-name">Biostimulators</h3>
+        <p class="tx-desc">Advanced collagen-stimulating injectables that work with your body to restore volume and improve skin quality over time.</p>
+        <p class="tx-desc" style="margin-top:1rem;"><strong style="font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;color:inherit;font-weight:500;">HarmonyCa®</strong><br/>Hybrid injectable combining instant volume with long-term collagen stimulation.</p>
+        <p class="tx-desc" style="margin-top:0.75rem;"><strong style="font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;color:inherit;font-weight:500;">Sculptra®</strong><br/>PLLA biostimulator that gradually restores facial volume and firmness over weeks.</p>
+        <button class="tx-link" style="margin-top:1.4rem;">Know More <span class="tx-arr">→</span></button>
       </div>
     </div>
   </section>
@@ -398,6 +414,19 @@ const TREATMENTS = {
       { title: 'Why choose Dr Smith Aesthetics for PRF?', body: `<ul><li>PRP and PRF can be confusing to practitioners, let alone the general public.</li><li>There is not much standardisation with regards to centrifugation. What speed and how long are extremely important variables that can result in poor platelet counts and hence results.</li><li>As there are many variables that will affect the platelet concentration, we go by the latest research in order to produce the highest platelet concentration in our PRF.</li><li>Your practitioner should know these variables: what material the blood tubes are made from and why, what rotor type is used and why, what relative centrifugal force they are aiming for and why.</li></ul>` },
       { title: 'What is the downtime / recovery?', body: `<ul><li>Minor red marks and mild swelling post treatment which can last around 1–24 hours.</li><li>Possibility of minor bruising which can last a few days to a week.</li></ul>` },
       { title: 'Results', body: `<ul><li>It takes time for skin to produce collagen and for hair follicles to start growing again, so results are a gradual improvement rather than a quick fix. This is an investment in your long term goals that your older self will thank you for!</li><li>It is recommended to have minimum 3 treatments (hair 4–6) and then to have ongoing maintenance treatments to maintain results.</li><li>PRP results generally last around 3–6 months, with PRF results lasting longer.</li></ul>` }
+    ]
+  },
+  biostimulators: {
+    eyebrow: 'Biostimulators',
+    title: '<em>Bio</em>stimulators',
+    images: [],
+    caption: '',
+    sections: [
+      { title: 'What are biostimulators?', body: `<p>Biostimulators are injectable treatments that work by stimulating your body's own collagen production, rather than simply adding volume like traditional fillers. Results develop gradually and naturally over several weeks, improving skin quality, firmness and facial structure with a longer-lasting effect.</p><p style="margin-top:0.5rem">At Dr Smith Aesthetics we offer two biostimulator treatments: <strong>HarmonyCa®</strong> and <strong>Sculptra®</strong>. Both are carried out by Dr Smith following a full medical consultation to ensure suitability and create a personalised treatment plan.</p>` },
+      { title: 'HarmonyCa® · 1 hour', body: `<p>HarmonyCa® is an advanced hybrid injectable that combines hyaluronic acid (dermal filler) with calcium hydroxyapatite (a collagen-stimulating biostimulator). This unique combination provides both immediate lifting and contouring, while also encouraging your body's natural collagen production for longer-term skin rejuvenation.</p><p style="margin-top:0.5rem">The hyaluronic acid component provides instant volume and structural support, helping to enhance areas such as the cheeks and jawline. The calcium hydroxyapatite works over time to stimulate collagen production, improving skin quality, firmness and elasticity.</p><p style="margin-top:0.5rem">HarmonyCa® is commonly used to restore facial definition, improve mild to moderate skin laxity, soften the appearance of jowls, and create a more refreshed and supported appearance. Most patients require a single treatment session, with results typically lasting 12–18 months.</p><p style="margin-top:0.6rem"><strong>Benefits:</strong></p><ul><li>Immediate lifting and contouring</li><li>Stimulates natural collagen production</li><li>Improves skin firmness and elasticity</li><li>Enhances cheek and jawline definition</li><li>Helps improve mild skin laxity and jowling</li><li>Long-lasting results (typically 12–18 months)</li></ul>` },
+      { title: 'Sculptra® · 1 hour', body: `<p>Sculptra® is a PLLA (poly-L-lactic acid) biostimulator designed to gradually restore facial volume and improve skin quality over time. Unlike traditional dermal fillers, Sculptra® works by stimulating your body's own collagen production, helping to improve facial structure, skin firmness and overall facial rejuvenation with natural-looking results.</p><p style="margin-top:0.5rem">Common treatment areas include the cheeks, temples, jawline, lower face, and areas affected by age-related volume loss. Results develop gradually over several weeks and can continue to improve for several months as new collagen is produced.</p><p style="margin-top:0.5rem">Most patients require a course of 2–3 treatment sessions. The listed price includes 1 vial per session. During your consultation, Dr Smith will assess your facial structure, skin quality and treatment goals to determine whether 1 or 2 vials per session are needed. If an additional vial is required this will be discussed before treatment.</p><p style="margin-top:0.6rem"><strong>Benefits:</strong></p><ul><li>Stimulates natural collagen production</li><li>Gradually restores facial volume</li><li>Improves skin firmness and texture</li><li>Natural-looking, long-lasting results</li><li>Suitable for facial rejuvenation and age-related volume loss</li></ul>` },
+      { title: 'Optional add-on', body: `<p>Receive <strong>£20 off Obagi Professional-C Serum 15% and Obagi Hydrate Luxe®</strong> when purchased alongside your biostimulator treatment. These products help support collagen production, hydration and overall skin quality between sessions.</p>` },
+      { title: 'Who is suitable?', body: `<p>Biostimulators are particularly well suited to patients who want gradual, natural improvement rather than an immediate dramatic change. They are ideal for those looking to restore facial structure, address mild to moderate skin laxity, or improve overall skin quality with results that last.</p><p style="margin-top:0.5rem">All treatments are carried out by Dr Smith following a full medical consultation to ensure suitability and create a personalised treatment plan.</p>` }
     ]
   },
   microneedling: {

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --teal: #0D3B4F;
+    --teal-mid: #1A5068;
+    --gold: #C9A96E;
+    --cream: #F5F1EB;
+    --warm-white: #FDFAF6;
+    --muted: #6B7280;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #1a1a2e;
+    color: #e0e0e0;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    font-weight: 300;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
+  .page-subtitle {
+    font-size: 0.9rem;
+    color: #a0a0b0;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+
+  .option-wrapper {
+    margin-bottom: 2.5rem;
+    border: 2px solid rgba(201,169,110,0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  }
+  .option-wrapper:hover {
+    border-color: rgba(201,169,110,0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+  .option-wrapper.selected {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,169,110,0.2), 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .option-label {
+    background: rgba(201,169,110,0.12);
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(201,169,110,0.15);
+  }
+  .option-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    font-weight: 400;
+    width: 2rem;
+    flex-shrink: 0;
+  }
+  .option-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: #fff;
+    letter-spacing: 0.01em;
+  }
+  .option-info p {
+    font-size: 0.78rem;
+    color: #9090a8;
+    margin-top: 0.2rem;
+  }
+  .option-check {
+    margin-left: auto;
+    width: 1.5rem; height: 1.5rem;
+    border-radius: 50%;
+    border: 2px solid rgba(201,169,110,0.4);
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    color: transparent;
+    transition: all 0.2s ease;
+  }
+  .option-wrapper.selected .option-check {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #0D3B4F;
+  }
+
+  .option-preview {
+    background: #f0ede8;
+    overflow: hidden;
+  }
+
+  /* ─── OPTION A: Social Proof Strip ─── */
+  .strip {
+    background: var(--teal);
+    padding: 1.2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .strip-item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+  .strip-stars {
+    color: var(--gold);
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+  }
+  .strip-text {
+    font-size: 0.78rem;
+    color: rgba(248,244,238,0.85);
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .strip-divider {
+    width: 1px;
+    height: 1.5rem;
+    background: rgba(201,169,110,0.3);
+  }
+  .strip-badge {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: rgba(248,244,238,0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border: 1px solid rgba(201,169,110,0.3);
+    border-radius: 2px;
+    padding: 0.2rem 0.55rem;
+  }
+
+  /* ─── OPTION B: Reviews Section ─── */
+  .reviews-section {
+    background: var(--warm-white);
+    padding: 3.5rem 3.5rem 3rem;
+  }
+  .eyebrow {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.9rem;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 26px; height: 1px;
+    background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--teal);
+    margin-bottom: 2.5rem;
+  }
+  .section-title em { font-style: italic; font-weight: 400; }
+  .reviews-score-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(13,59,79,0.1);
+  }
+  .score-big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.8rem;
+    font-weight: 300;
+    color: var(--teal);
+    line-height: 1;
+  }
+  .score-stars-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .score-stars {
+    color: var(--gold);
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+  }
+  .score-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .review-card {
+    background: var(--cream);
+    border: 1px solid rgba(13,59,79,0.07);
+    border-radius: 4px;
+    padding: 1.5rem;
+  }
+  .review-stars {
+    color: var(--gold);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.75rem;
+  }
+  .review-text {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: #4A5568;
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+  .review-author {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ─── OPTION C: Enhanced Why Choose Us ─── */
+  .why-section {
+    background: var(--teal);
+    padding: 3.5rem 3rem 3rem;
+    position: relative;
+  }
+  .why-section::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.35), transparent);
+  }
+  .why-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: end;
+    margin-bottom: 2.5rem;
+  }
+  .why-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--warm-white);
+  }
+  .why-title em { font-style: italic; }
+  .why-sub {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    font-weight: 300;
+    color: rgba(248,244,238,0.6);
+    align-self: end;
+  }
+  .trust-bar {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 4px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    color: rgba(248,244,238,0.8);
+    letter-spacing: 0.06em;
+  }
+  .trust-item-stars {
+    color: var(--gold);
+    font-size: 0.85rem;
+  }
+  .trust-divider {
+    width: 1px;
+    height: 1.2rem;
+    background: rgba(201,169,110,0.25);
+  }
+  .why-grid-5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5px;
+    background: rgba(255,255,255,0.07);
+    border: 1.5px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .why-item {
+    background: rgba(255,255,255,0.04);
+    padding: 1.75rem 1.5rem;
+    position: relative;
+  }
+  .why-item.featured {
+    background: rgba(201,169,110,0.1);
+    border: 1px solid rgba(201,169,110,0.2);
+  }
+  .why-dot {
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 0.9rem;
+  }
+  .why-item-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--warm-white);
+    margin-bottom: 0.5rem;
+    line-height: 1.25;
+  }
+  .why-item-desc {
+    font-size: 0.78rem;
+    line-height: 1.65;
+    font-weight: 300;
+    color: rgba(248,244,238,0.55);
+  }
+  .new-tag {
+    position: absolute;
+    top: 0.75rem; right: 0.75rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,169,110,0.4);
+    border-radius: 2px;
+    padding: 0.1rem 0.4rem;
+  }
+
+  .note {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.35);
+    font-style: italic;
+    text-align: center;
+    margin-top: 0.75rem;
+    padding: 0 1rem;
+  }
+
+  /* Selection state */
+  .option-wrapper.selected .option-label {
+    background: rgba(201,169,110,0.2);
+  }
+
+  .cta-row {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(201,169,110,0.15);
+  }
+  .cta-note {
+    font-size: 0.82rem;
+    color: #9090a8;
+  }
+</style>
+</head>
+<body>
+
+<p class="page-title">Adding Social Proof & Credentials</p>
+<p class="page-subtitle">Three ways to add trust signals to the existing site — without changing any of the current sections.<br/>Click an option to select it. You can pick more than one.</p>
+
+<!-- OPTION A -->
+<div class="option-wrapper" data-choice="a" onclick="toggleSelect(this)">
+  <div class="option-label">
+    <div class="option-letter">A</div>
+    <div class="option-info">
+      <h3>Trust Strip — slim bar, goes near the top</h3>
+      <p>New embed, sits above or below the hero. One line of credentials + review score. Very subtle.</p>
+    </div>
+    <div class="option-check">✓</div>
+  </div>
+  <div class="option-preview">
+    <div class="strip">
+      <div class="strip-item">
+        <span class="strip-stars">★★★★★</span>
+        <span class="strip-text">5.0 · Verified Reviews</span>
+      </div>
+      <div class="strip-divider"></div>
+      <div class="strip-item">
+        <span class="strip-badge">GMC Registered</span>
+      </div>
+      <div class="strip-divider"></div>
+      <div class="strip-item">
+        <span class="strip-badge">NHS-Trained Doctor</span>
+      </div>
+      <div class="strip-divider"></div>
+      <div class="strip-item">
+        <span class="strip-badge">Industry Educator</span>
+      </div>
+    </div>
+    <p class="note">Sits as a thin bar — barely changes the page, just adds trust at a glance</p>
+  </div>
+</div>
+
+<!-- OPTION B -->
+<div class="option-wrapper" data-choice="b" onclick="toggleSelect(this)">
+  <div class="option-label">
+    <div class="option-letter">B</div>
+    <div class="option-info">
+      <h3>Reviews Section — new embed with testimonials</h3>
+      <p>New embed placed after Real Results. Shows review score + 3 written patient quotes.</p>
+    </div>
+    <div class="option-check">✓</div>
+  </div>
+  <div class="option-preview">
+    <div class="reviews-section">
+      <p class="eyebrow">Patient Reviews</p>
+      <h2 class="section-title">What Our <em>Patients Say</em></h2>
+      <div class="reviews-score-row">
+        <div class="score-big">5.0</div>
+        <div class="score-stars-col">
+          <span class="score-stars">★★★★★</span>
+          <span class="score-label">From verified patient reviews</span>
+        </div>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Dr Smith made me feel completely at ease. The results are so natural — exactly what I wanted. I've already booked my next appointment."</p>
+          <p class="review-author">— Sarah M., Lip Filler</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"As a doctor himself, Lee took the time to properly explain everything. I felt completely safe and the results are beautiful."</p>
+          <p class="review-author">— Priya K., Anti-Wrinkle</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"I was nervous about fillers but Dr Smith was so reassuring. The difference is subtle but makes such a big impact. Couldn't be happier."</p>
+          <p class="review-author">— Jess T., Tear Trough Filler</p>
+        </div>
+      </div>
+    </div>
+    <p class="note" style="background:var(--warm-white); padding:0.5rem;">New standalone embed — paste it between existing sections in Wix</p>
+  </div>
+</div>
+
+<!-- OPTION C -->
+<div class="option-wrapper" data-choice="c" onclick="toggleSelect(this)">
+  <div class="option-label">
+    <div class="option-letter">C</div>
+    <div class="option-info">
+      <h3>Upgraded "Why Choose Us" — adds trust bar + educator card</h3>
+      <p>Update the existing 09-why-choose-us.html. Adds review score inside the section + makes the educator credential its own standout card.</p>
+    </div>
+    <div class="option-check">✓</div>
+  </div>
+  <div class="option-preview">
+    <div class="why-section">
+      <div class="why-header">
+        <div>
+          <p class="eyebrow" style="font-size:0.68rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:0.7rem;margin-bottom:0.9rem;">
+            <span style="display:inline-block;width:26px;height:1px;background:var(--gold);"></span>Why Choose Us
+          </p>
+          <h2 class="why-title">The <em>Dr Smith Aesthetics</em><br/>Difference</h2>
+        </div>
+        <p class="why-sub">Trusted by patients across South London. Safe, ethical and deeply personal care from an NHS-trained doctor who also trains other medical professionals.</p>
+      </div>
+
+      <div class="trust-bar">
+        <div class="trust-item">
+          <span class="trust-item-stars">★★★★★</span>
+          <span>5.0 · Verified Patient Reviews</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">◆ GMC Registered Doctor</div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">◆ NHS-Trained Specialist</div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">◆ Industry Educator &amp; Trainer</div>
+      </div>
+
+      <div class="why-grid-5">
+        <div class="why-item">
+          <div class="why-dot">🩺</div>
+          <h4 class="why-item-title">NHS-Trained Doctor</h4>
+          <p class="why-item-desc">MBBS, BSc (Hons) with extensive NHS experience, bringing clinical rigour to every treatment.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-dot">✦</div>
+          <h4 class="why-item-title">Natural Results</h4>
+          <p class="why-item-desc">Enhancing your individual features. Never overdone, always tailored to you.</p>
+        </div>
+        <div class="why-item featured">
+          <span class="new-tag">Educator</span>
+          <div class="why-dot">🎓</div>
+          <h4 class="why-item-title">Trains Other Doctors</h4>
+          <p class="why-item-desc">Dr Smith teaches botox, filler and skin rejuvenation to doctors and nurses at Cosmetic Courses.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-dot">❋</div>
+          <h4 class="why-item-title">Personalised Care</h4>
+          <p class="why-item-desc">Thorough consultations, bespoke treatment plans, and full aftercare support.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-dot">★</div>
+          <h4 class="why-item-title">5-Star Reviews</h4>
+          <p class="why-item-desc">Consistently rated 5 stars by patients for natural results, safety, and experience.</p>
+        </div>
+      </div>
+    </div>
+    <p class="note" style="background:var(--teal);padding:0.5rem 1rem;">Replaces the current 09-why-choose-us.html — no new section needed</p>
+  </div>
+</div>
+
+<div class="cta-row">
+  <p class="cta-note">You can pick more than one — e.g. A + B, or B + C. Let me know in the chat what appeals to you.</p>
+</div>
+
+<script>
+function toggleSelect(el) {
+  el.classList.toggle('selected');
+  const choice = el.dataset.choice;
+  const isSelected = el.classList.contains('selected');
+  if (window.recordEvent) window.recordEvent({ type: 'click', choice, selected: isSelected, text: el.querySelector('h3').textContent });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dr Smith Aesthetics at Ink Beauty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --teal:       #0D3B4F;
+    --teal-mid:   #1A5068;
+    --gold:       #C9A96E;
+    --cream:      #F5F1EB;
+    --warm-white: #FDFAF6;
+    --muted:      #6B7280;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--teal); }
+
+  /* ── SHARED ── */
+  .eyebrow {
+    font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold);
+    display: flex; align-items: center; gap: 0.7rem;
+    margin-bottom: 0.9rem;
+  }
+  .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--gold); flex-shrink: 0; }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    font-size: 0.74rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--warm-white); background: var(--teal);
+    padding: 0.9rem 2.2rem; border-radius: 2px;
+    text-decoration: none; border: 1.5px solid var(--teal);
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .btn-primary:hover { background: transparent; color: var(--teal); transform: translateY(-2px); }
+
+  .btn-gold {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    font-size: 0.74rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--warm-white); background: var(--teal);
+    padding: 0.9rem 2.2rem; border-radius: 2px;
+    text-decoration: none; border: 1.5px solid var(--teal);
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .btn-gold:hover { background: var(--teal-mid); border-color: var(--teal-mid); transform: translateY(-2px); }
+
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    font-size: 0.74rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal); background: transparent;
+    padding: 0.9rem 2.2rem; border-radius: 2px;
+    text-decoration: none; border: 1.5px solid rgba(13,59,79,0.4);
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .btn-outline:hover { background: rgba(13,59,79,0.07); transform: translateY(-2px); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--warm-white);
+    padding: 3rem 5.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.4), transparent);
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+    gap: 5rem;
+    align-items: center;
+    position: relative; z-index: 1;
+  }
+
+  .hero-logo {
+    height: 500px; max-width: 100%; width: auto;
+    opacity: 0.95;
+    margin-bottom: 2rem;
+    display: block;
+    /* logo */
+  }
+
+  .hero-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 3.5vw, 3.8rem);
+    font-weight: 300; line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--teal);
+    margin-bottom: 1.4rem;
+  }
+  .hero-heading em { font-style: italic; font-weight: 400; color: var(--teal-mid); }
+
+  .hero-sub {
+    font-size: 0.92rem; line-height: 1.8; font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    max-width: 440px;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .hero-right {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+  }
+  .hero-right img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 12%;
+    display: block;
+  }
+  .hero-right::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(13,59,79,0.3) 0%, transparent 60%);
+  }
+  .hero-img-caption {
+    position: absolute; bottom: 1.5rem; left: 1.5rem;
+    z-index: 2;
+    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(253,250,246,0.7); font-weight: 400;
+    background: rgba(13,59,79,0.75);
+    backdrop-filter: blur(6px);
+    padding: 0.6rem 1rem;
+    border-left: 2px solid var(--gold);
+    max-width: calc(100% - 3rem);
+    white-space: nowrap;
+  }
+  .hero-img-caption span { color: var(--gold); }
+
+  /* ── STATS STRIP ── */
+  .stats-strip {
+    background: var(--cream);
+    padding: 3rem 5.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    border-bottom: 1px solid rgba(13,59,79,0.08);
+    position: relative;
+  }
+  .stats-strip::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.35), transparent);
+  }
+
+  .stat {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+    border-right: 1px solid rgba(13,59,79,0.1);
+  }
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem; font-weight: 300; line-height: 1;
+    color: var(--teal); letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+  }
+  .stat-num em { font-style: italic; font-size: 1.8rem; color: var(--gold); }
+
+  .stat-label {
+    font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 6rem 5.5rem;
+    background: var(--warm-white);
+  }
+  .about-content { max-width: 760px; margin: 0 auto; }
+
+  .about-img {
+    position: relative;
+    border-radius: 4px; overflow: hidden;
+    aspect-ratio: 3/4;
+  }
+  .about-img img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    display: block;
+  }
+  .about-img::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .about-img-badge {
+    position: absolute; bottom: 2rem; right: -1.5rem;
+    background: var(--teal);
+    color: var(--warm-white);
+    padding: 1rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(13,59,79,0.25);
+  }
+  .about-img-badge strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 300; font-style: italic;
+    display: block; color: var(--gold);
+  }
+  .about-img-badge span {
+    font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(253,250,246,0.65);
+  }
+
+  .about-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 2.8vw, 3rem);
+    font-weight: 300; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--teal);
+    margin-bottom: 1.5rem;
+  }
+  .about-content h2 em { font-style: italic; font-weight: 400; }
+
+  .about-content p {
+    font-size: 0.9rem; line-height: 1.85; font-weight: 300;
+    color: #4A5568;
+    margin-bottom: 1.1rem;
+  }
+
+  .about-quals {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    margin-top: 1.75rem; margin-bottom: 2rem;
+  }
+  .qual-tag {
+    font-size: 0.65rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal);
+    border: 1px solid rgba(13,59,79,0.2);
+    padding: 0.4rem 0.9rem; border-radius: 2px;
+    background: var(--cream);
+  }
+
+  /* ── TREATMENTS ── */
+  .treatments {
+    padding: 6rem 5.5rem;
+    background: var(--teal);
+    position: relative;
+  }
+  .treatments::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.4), transparent);
+  }
+
+  .treatments-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: end;
+    margin-bottom: 3.5rem;
+  }
+  .treatments-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 2.8vw, 3rem);
+    font-weight: 300; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--warm-white);
+  }
+  .treatments-header h2 em { font-style: italic; font-weight: 400; color: var(--gold); }
+  .treatments-header p {
+    font-size: 0.88rem; line-height: 1.8; font-weight: 300;
+    color: rgba(253,250,246,0.65);
+  }
+
+  .treatments-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .treatment-card {
+    background: rgba(253,250,246,0.06);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 4px;
+    padding: 2rem 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+  }
+  .treatment-card:hover {
+    background: rgba(201,169,110,0.1);
+    border-color: rgba(201,169,110,0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+  }
+  .treatment-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .treatment-card:hover::after { opacity: 1; }
+
+  .treatment-icon {
+    width: 40px; height: 40px;
+    background: rgba(201,169,110,0.12);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem;
+    color: var(--gold);
+  }
+
+  .treatment-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 400; font-style: italic;
+    color: var(--warm-white); margin-bottom: 0.6rem; line-height: 1.2;
+  }
+
+  .treatment-desc {
+    font-size: 0.82rem; line-height: 1.75; font-weight: 300;
+    color: rgba(253,250,246,0.6);
+  }
+
+  /* ── BRANDS MARQUEE ── */
+  .brands {
+    background: var(--warm-white);
+    padding: 3.5rem 0;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(13,59,79,0.07);
+    border-bottom: 1px solid rgba(13,59,79,0.07);
+  }
+  .brands-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding: 0 2rem;
+  }
+  .brands-header .eyebrow { justify-content: center; }
+  .brands-header p {
+    font-size: 0.82rem; font-weight: 300; color: var(--muted);
+    margin-top: 0.5rem; line-height: 1.7;
+  }
+  .brands::before, .brands::after {
+    content: '';
+    position: absolute; top: 0; bottom: 0; width: 120px;
+    z-index: 2; pointer-events: none;
+  }
+  .brands::before { left: 0; background: linear-gradient(to right, var(--warm-white), transparent); }
+  .brands::after  { right: 0; background: linear-gradient(to left, var(--warm-white), transparent); }
+
+  .marquee-outer { overflow: hidden; }
+  .marquee-track {
+    display: flex; align-items: center; gap: 4rem;
+    width: max-content;
+    animation: marquee-scroll 30s linear infinite;
+  }
+  .marquee-track:hover { animation-play-state: paused; }
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .brand-logo {
+    height: 40px; width: auto;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.55);
+    transition: filter 0.3s ease;
+    flex-shrink: 0;
+  }
+  .brand-logo:hover { filter: grayscale(0%) opacity(1); }
+  .brand-logo-invert { filter: invert(1) grayscale(100%) opacity(0.55); }
+  .brand-logo-invert:hover { filter: invert(1) grayscale(0%) opacity(1); }
+  .brand-logo-sculptra { height: 88px; }
+  @media (max-width: 768px) {
+    .brand-logo { height: 30px; }
+    .brand-logo-sculptra { height: 62px; }
+    .marquee-track { gap: 3rem; animation-duration: 22s; }
+  }
+
+  /* ── CTA ── */
+  .cta {
+    background: var(--cream);
+    padding: 5.5rem 5.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(201,169,110,0.1) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .cta-inner { position: relative; z-index: 1; }
+
+  .cta h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.2vw, 3.6rem);
+    font-weight: 300; line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--teal);
+    margin-bottom: 1.25rem;
+  }
+  .cta h2 em { font-style: italic; font-weight: 400; color: var(--gold); }
+
+  .cta p {
+    font-size: 0.9rem; line-height: 1.8; font-weight: 300;
+    color: var(--muted);
+    max-width: 520px; margin: 0 auto 2.5rem;
+  }
+
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* ── CONTACT STRIP ── */
+  .contact-strip {
+    background: var(--warm-white);
+    padding: 4rem 5.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    border-top: 1px solid rgba(13,59,79,0.07);
+  }
+
+  .contact-block {
+    display: flex; align-items: flex-start; gap: 1rem;
+  }
+  .contact-block svg { color: var(--gold); flex-shrink: 0; margin-top: 0.2rem; }
+  .contact-block-label {
+    font-size: 0.63rem; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.35rem;
+  }
+  .contact-block-value {
+    font-size: 0.86rem; font-weight: 300; line-height: 1.7;
+    color: #4A5568;
+  }
+  .contact-block-value a {
+    color: inherit; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-block-value a:hover { color: var(--teal); }
+
+  /* ── SOCIAL ── */
+  .social-row {
+    background: var(--cream);
+    padding: 3rem 5.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem;
+    border-top: 1px solid rgba(201,169,110,0.2);
+  }
+
+  .social-label {
+    font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .social-links {
+    display: flex; gap: 0.75rem;
+  }
+
+  .social-link {
+    display: flex; align-items: center; gap: 0.65rem;
+    font-size: 0.78rem; font-weight: 300;
+    color: var(--teal); text-decoration: none;
+    padding: 0.55rem 1.1rem;
+    border: 1px solid rgba(13,59,79,0.15);
+    border-radius: 2px;
+    background: var(--warm-white);
+    transition: border-color 0.25s, background 0.25s, color 0.25s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .social-link svg { color: var(--gold); flex-shrink: 0; }
+  .social-link:hover {
+    background: var(--teal); color: var(--warm-white);
+    border-color: var(--teal); transform: translateY(-2px);
+  }
+  .social-link:hover svg { color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .hero { padding: 4rem 3rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-right { aspect-ratio: 4/3; }
+    .hero-right img { object-position: center 12%; }
+    .stats-strip { padding: 3rem; grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(3) { border-right: 1px solid rgba(13,59,79,0.1); }
+    .about { padding: 5rem 3rem; gap: 3.5rem; }
+    .treatments { padding: 5rem 3rem; }
+    .cta { padding: 5rem 3rem; }
+    .contact-strip { padding: 3.5rem 3rem; }
+    .social-row { padding: 2.5rem 3rem; }
+  }
+
+  @media (max-width: 768px) {
+    .hero { padding: 3.5rem 1.5rem; }
+    .hero-img-caption { white-space: normal; font-size: 0.62rem; }
+    .hero-sub { max-width: 100%; }
+    .stats-strip { padding: 2.5rem 1.5rem; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .stat:nth-child(3) { border-right: none; }
+    .about { padding: 4rem 1.5rem; grid-template-columns: 1fr; gap: 3rem; }
+    .about-img-badge { right: 1rem; }
+    .treatments { padding: 4rem 1.5rem; }
+    .treatments-header { grid-template-columns: 1fr; gap: 1.25rem; }
+    .treatments-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .cta { padding: 4rem 1.5rem; }
+    .contact-strip { padding: 3rem 1.5rem; grid-template-columns: 1fr; gap: 1.75rem; }
+    .social-row { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+  }
+
+  @media (max-width: 480px) {
+    .treatments-grid { grid-template-columns: 1fr; }
+    .stats-strip { grid-template-columns: 1fr 1fr; }
+    .hero-actions { flex-direction: column; }
+    .hero-actions a { text-align: center; justify-content: center; }
+    .cta-actions { flex-direction: column; align-items: center; }
+    .social-links { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <img src="https://static.wixstatic.com/media/8d8b41_ae1b1653a7694393bad1802240636286~mv2.png" alt="Dr Smith Aesthetics" style="height:90px; width:auto; display:block; margin-bottom:1.5rem;" />
+        <p class="eyebrow">Resident Aesthetic Practitioner</p>
+        <h1 class="hero-heading">Dr Smith Aesthetics<br/><em>at Ink Beauty</em></h1>
+        <p class="hero-sub">Dr Smith Aesthetics offers a range of clinically proven aesthetic treatments right here at Ink Beauty Skin Clinic. Every treatment is delivered personally by Dr Lee Smith MBBS BSc (Hons), a fully qualified medical doctor.</p>
+        <div class="hero-actions">
+          <a href="https://www.lsmithaesthetics.com/" target="_blank" rel="noopener" class="btn-gold">Visit Dr Smith's Website</a>
+          <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" rel="noopener" class="btn-outline">Book a Treatment →</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img src="https://static.wixstatic.com/media/8d8b41_5d6cb24c6e8542b19773cd44e17a7d00~mv2.jpg" alt="Dr Lee Smith" />
+        <p class="hero-img-caption">Dr Smith Aesthetics <span>MBBS BSc (Hons)</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STATS ── -->
+  <div class="stats-strip">
+    <div class="stat">
+      <p class="stat-num">MBBS<em>&</em></p>
+      <p class="stat-label">BSc (Hons) Qualified</p>
+    </div>
+    <div class="stat">
+      <p class="stat-num">GMC</p>
+      <p class="stat-label">Registered Doctor</p>
+    </div>
+    <div class="stat">
+      <p class="stat-num" style="font-size:1.6rem; line-height:1.2;">Full<em> Range</em></p>
+      <p class="stat-label">Treatments Offered</p>
+    </div>
+    <div class="stat">
+      <p class="stat-num">100<em>%</em></p>
+      <p class="stat-label">Personally Performed</p>
+    </div>
+  </div>
+
+  <!-- ── ABOUT ── -->
+  <section class="about">
+    <div class="about-content">
+      <p class="eyebrow">Meet the Doctor</p>
+      <h2>Trusted <em>Expertise,</em><br/>Natural Results</h2>
+      <p>Dr Smith Aesthetics is led by Dr Lee Smith MBBS BSc (Hons), a fully qualified medical doctor with years of experience in aesthetic medicine. Practising from Ink Beauty Skin Clinic in Kennington, South London, Dr Smith Aesthetics combines clinical precision with an eye for natural, harmonious results.</p>
+      <p>Unlike many aesthetic clinics, every treatment is performed personally by Dr Lee Smith with no delegation. This ensures a consistently high standard of care and outcomes tailored to each individual patient.</p>
+      <p>The approach is holistic: thorough consultations, honest advice, and treatments designed to enhance your natural features without over-correction.</p>
+      <div class="about-quals">
+        <span class="qual-tag">MBBS</span>
+        <span class="qual-tag">BSc (Hons)</span>
+        <span class="qual-tag">Medical Doctor</span>
+        <span class="qual-tag">Aesthetic Practitioner</span>
+        <span class="qual-tag">South London</span>
+      </div>
+      <a href="https://www.lsmithaesthetics.com/" target="_blank" rel="noopener" class="btn-primary">Visit Dr Smith Aesthetics</a>
+    </div>
+  </section>
+
+  <!-- ── TREATMENTS ── -->
+  <section class="treatments">
+    <div class="treatments-header">
+      <div>
+        <p class="eyebrow">Treatments</p>
+        <h2>What <em>Dr Smith</em><br/><em>Aesthetics</em> Offers</h2>
+      </div>
+      <p>All treatments at Dr Smith Aesthetics are carried out personally by Dr Lee Smith at Ink Beauty Skin Clinic. Each one is tailored to your skin, your goals, and your anatomy with no one-size-fits-all approach.</p>
+    </div>
+
+    <div class="treatments-grid">
+
+      <div class="treatment-card">
+        <div class="treatment-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <p class="treatment-name">Anti-Wrinkle<br/>Injections</p>
+        <p class="treatment-desc">Botulinum toxin treatments to soften expression lines, forehead furrows, crow's feet, and more. Subtle, natural-looking results.</p>
+      </div>
+
+      <div class="treatment-card">
+        <div class="treatment-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <p class="treatment-name">Dermal<br/>Fillers</p>
+        <p class="treatment-desc">Hyaluronic acid fillers to restore volume, define contours, and rejuvenate the lips, cheeks, jawline, and tear trough area.</p>
+      </div>
+
+      <div class="treatment-card">
+        <div class="treatment-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <p class="treatment-name">Polynucleotides<br/>(PDRN)</p>
+        <p class="treatment-desc">Advanced skin regeneration using polynucleotide injections to stimulate collagen, reduce fine lines, and deeply hydrate the skin.</p>
+      </div>
+
+      <div class="treatment-card">
+        <div class="treatment-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <p class="treatment-name">PRP &amp;<br/>PRF</p>
+        <p class="treatment-desc">Platelet-rich plasma and fibrin treatments using your body's own growth factors to promote skin renewal and hair restoration.</p>
+      </div>
+
+      <div class="treatment-card">
+        <div class="treatment-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <p class="treatment-name">Microneedling</p>
+        <p class="treatment-desc">Collagen-induction therapy to improve skin texture, reduce scarring, tighten pores, and create a smoother, more even complexion.</p>
+      </div>
+
+      <div class="treatment-card">
+        <div class="treatment-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <p class="treatment-name">Skin Boosters<br/>&amp; Profhilo</p>
+        <p class="treatment-desc">Deep hydration and bio-remodelling treatments that restore skin laxity, radiance, and elasticity from within. Ideal for face, neck, and hands.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── BRANDS MARQUEE ── -->
+  <section class="brands">
+    <div class="brands-header">
+      <p class="eyebrow">Products We Use</p>
+      <p>We use only premium, clinically proven brands trusted by medical professionals worldwide.</p>
+    </div>
+    <div class="marquee-outer">
+      <div class="marquee-track">
+        <!-- First set -->
+        <img class="brand-logo" src="https://static.wixstatic.com/media/8d8b41_c624743f82854294a5e06d0147ded45a~mv2.png" alt="Juvéderm" />
+        <img class="brand-logo" src="https://static.wixstatic.com/media/8d8b41_48447470bd584e87bc260f57395d5e4a~mv2.png" alt="Skinvive by Juvéderm" />
+        <img class="brand-logo brand-logo-invert" src="https://static.wixstatic.com/media/8d8b41_998968f769f34a1a8f065d8c48400e6c~mv2.png" alt="Teoxane" />
+        <img class="brand-logo" src="https://static.wixstatic.com/media/8d8b41_8e94dfab18214a158ecc4ff72bf34c4e~mv2.png" alt="Dermapen 4" />
+        <img class="brand-logo" src="https://static.wixstatic.com/media/8d8b41_65373bb7f5ec4434bbe672886ee7742a~mv2.png" alt="Plinest by Mastelli" />
+        <img class="brand-logo" src="https://static.wixstatic.com/media/8d8b41_c18168ad1c09408b935b7a1b2125be1f~mv2.png" alt="Sunekos" />
+        <img class="brand-logo brand-logo-sculptra" src="https://static.wixstatic.com/media/0b63bc_e1cfa01e02874c878ec16385657d7de1~mv2.png" alt="Sculptra by Galderma" />
+        <!-- Duplicate for seamless loop -->
+        <img class="brand-logo" src="https://static.wixstatic.com/media/8d8b41_c624743f82854294a5e06d0147ded45a~mv2.png" alt="Juvéderm" />
+        <img class="brand-logo" src="https://static.wixstatic.com/media/8d8b41_48447470bd584e87bc260f57395d5e4a~mv2.png" alt="Skinvive by Juvéderm" />
+        <img class="brand-logo brand-logo-invert" src="https://static.wixstatic.com/media/8d8b41_998968f769f34a1a8f065d8c48400e6c~mv2.png" alt="Teoxane" />
+        <img class="brand-logo" src="https://static.wixstatic.com/media/8d8b41_8e94dfab18214a158ecc4ff72bf34c4e~mv2.png" alt="Dermapen 4" />
+        <img class="brand-logo" src="https://static.wixstatic.com/media/8d8b41_65373bb7f5ec4434bbe672886ee7742a~mv2.png" alt="Plinest by Mastelli" />
+        <img class="brand-logo" src="https://static.wixstatic.com/media/8d8b41_c18168ad1c09408b935b7a1b2125be1f~mv2.png" alt="Sunekos" />
+        <img class="brand-logo brand-logo-sculptra" src="https://static.wixstatic.com/media/0b63bc_e1cfa01e02874c878ec16385657d7de1~mv2.png" alt="Sculptra by Galderma" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta">
+    <div class="cta-inner">
+      <p class="eyebrow" style="justify-content:center;">Book With Dr Smith Aesthetics</p>
+      <h2>Ready to Start Your<br/><em>Aesthetic Journey?</em></h2>
+      <p>All Dr Smith Aesthetics treatments are available right here at Ink Beauty Skin Clinic, Kennington. Browse the full treatment menu, pricing, and booking options on the Dr Smith Aesthetics website.</p>
+      <div class="cta-actions">
+        <a href="https://www.lsmithaesthetics.com/" target="_blank" rel="noopener" class="btn-gold">Visit lsmithaesthetics.com</a>
+        <a href="https://www.lsmithaesthetics.com/pricelist" target="_blank" rel="noopener" class="btn-outline">View Prices &amp; Book →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <div class="contact-strip">
+    <div class="contact-block">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <div>
+        <p class="contact-block-label">Location</p>
+        <p class="contact-block-value">Ink Beauty Skin Clinic<br/>341 Kennington Road<br/>London, SE11 4QE</p>
+      </div>
+    </div>
+    <div class="contact-block">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <div>
+        <p class="contact-block-label">Opening Hours</p>
+        <p class="contact-block-value">Mon / Thu / Fri — 10:30–18:00<br/>Saturday — 10:30–17:00<br/>Sunday — 10:30–16:00<br/>Tue / Wed — Variable</p>
+      </div>
+    </div>
+    <div class="contact-block">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      <div>
+        <p class="contact-block-label">Get In Touch</p>
+        <p class="contact-block-value">
+          <a href="mailto:info@lsmithaesthetics.com">info@lsmithaesthetics.com</a><br/>
+          <a href="https://www.lsmithaesthetics.com/contact" target="_blank" rel="noopener">www.lsmithaesthetics.com</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SOCIAL ── -->
+  <div class="social-row">
+    <p class="social-label">Follow Dr Smith Aesthetics Online</p>
+    <div class="social-links">
+      <a href="https://www.instagram.com/drlsmithaesthetics/" target="_blank" rel="noopener" class="social-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @drlsmithaesthetics
+      </a>
+      <a href="https://www.tiktok.com/@drsmithaesthetics" target="_blank" rel="noopener" class="social-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+        @drsmithaesthetics
+      </a>
+      <a href="https://www.youtube.com/@drsmithaesthetics" target="_blank" rel="noopener" class="social-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        @drsmithaesthetics
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>
